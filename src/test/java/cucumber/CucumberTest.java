@@ -1,5 +1,4 @@
-package example.cucumber;
-
+package cucumber;
 
 import org.junit.runner.RunWith;
 

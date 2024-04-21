@@ -1,4 +1,4 @@
-package example.junit;
+package junit;
 
 /**
  * A test class to check which tests are run with which framework.
