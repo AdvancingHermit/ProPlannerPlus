@@ -9,7 +9,14 @@ public class HomeController extends StandardController {
 
     @FXML
     private void switchToLogin() throws IOException {
-        System.out.println(model.getCurrentEmployee().getInitials());
         App.setRoot("login");
+    }
+    @FXML
+    private void switchToCreateProject() throws IOException {
+        App.setRoot("createProject");
+    }
+    @FXML
+    private void switchToViewProjects() throws IOException {
+        App.setRoot("viewProjects");
     }
 }

@@ -17,4 +17,5 @@ public class DataModel {
     public final void setCurrentEmployee(Employee person) {
         currentEmployee.set(person);
     }
+
 }
