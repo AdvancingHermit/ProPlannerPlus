@@ -51,7 +51,7 @@
             <RowConstraints maxHeight="183.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="createProject" prefHeight="14.0" prefWidth="85.0" GridPane.columnIndex="2">
+            <TextField fx:id="createActivityName" prefHeight="14.0" prefWidth="85.0" GridPane.columnIndex="2">
                <GridPane.margin>
                   <Insets bottom="5.0" />
                </GridPane.margin></TextField>
@@ -64,7 +64,7 @@
                   <Insets bottom="5.0" />
                </padding>
             </Label>
-            <TextField fx:id="createProject1" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="createActivityHours" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Label text="Start week:" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <padding>
                   <Insets bottom="5.0" />
@@ -75,8 +75,8 @@
                   <Insets bottom="5.0" />
                </padding>
             </Label>
-            <DatePicker GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <DatePicker GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <DatePicker fx:id="createActivityStart" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <DatePicker fx:id="createActivityEnd" GridPane.columnIndex="2" GridPane.rowIndex="3" />
          </children>
       </GridPane>
       <StackPane prefHeight="52.0" prefWidth="600.0">

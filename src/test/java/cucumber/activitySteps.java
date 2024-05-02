@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -14,8 +15,8 @@ public class activitySteps {
     ProPlannerPlus proPlannerPlus;
     String activityName;
     int hoursPerWeek;
-    Date startDate;
-    Date endDate;
+    LocalDate startDate;
+    LocalDate endDate;
 
     public activitySteps(){ proPlannerPlus = new ProPlannerPlus(); }
 
@@ -25,8 +26,8 @@ public class activitySteps {
     public void the_info_of_an_activity() {
         activityName = "testAct";
         hoursPerWeek = 10;
-        startDate = new Date(2024, 05, 03);
-        endDate = new Date(2024, 06, 03);
+        startDate = LocalDate.of(2024, 05, 03);
+        endDate = LocalDate.of(2024, 06, 03);
     }
 
     @When("the employee creates a activity")

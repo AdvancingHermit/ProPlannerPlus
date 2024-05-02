@@ -5,7 +5,9 @@ import model.Employee;
 import model.Project;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.Year;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import java.util.Date;
@@ -68,10 +70,11 @@ public class ProPlannerPlus {
 
     }
 
-    public static void createActivity(String activityName, int hoursPerWeek, Date startDate, Date endDate){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        String start = sdf.format(startDate);
-        String end = sdf.format(endDate);
+    public static void createActivity(String activityName, int hoursPerWeek, LocalDate startDate, LocalDate endDate){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
+        String start = startDate.format(formatter);
+        String end = endDate.format(formatter);
+        System.out.println(start);
         String baseId = activityName + hoursPerWeek + start + end;
         int activityID = Math.abs(baseId.hashCode());
         activities.add(new Activity(activityName, hoursPerWeek, startDate, endDate, activityID));
