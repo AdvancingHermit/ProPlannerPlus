@@ -1,20 +1,26 @@
 package controllers;
 
+import model.Activity;
 import model.Employee;
 import model.Project;
 
+import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ProPlannerPlus {
     static ArrayList<Employee> employees;
     static ArrayList<Project> projects;
+    static ArrayList<Activity> activities;
     public static boolean loggedIn = false;
+
 
     public ProPlannerPlus() {
         employees = new ArrayList<Employee>();
         employees.add(new Employee("abe"));
         projects = new ArrayList<Project>();
+        activities = new ArrayList<Activity>();
     }
 
     public static ArrayList<Employee> getEmployees() {
@@ -44,10 +50,21 @@ public class ProPlannerPlus {
 
     }
 
+    public static void createActivity(String activityName, int hoursPerWeek, Date startDate, Date endDate){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String start = sdf.format(startDate);
+        String end = sdf.format(endDate);
+        String baseId = activityName + hoursPerWeek + start + end;
+        int activityID = Math.abs(baseId.hashCode());
+        activities.add(new Activity(activityName, hoursPerWeek, startDate, endDate, activityID));
+    }
+
 
     public static ArrayList<Project> getProjects() {
         return projects;
     }
+
+    public static ArrayList<Activity> getActivities() {return activities; }
 
     public static void assignProjectLeader(Project project, Employee employee) {
         project.setProjectLeader(employee);

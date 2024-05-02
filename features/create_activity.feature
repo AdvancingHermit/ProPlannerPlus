@@ -2,8 +2,6 @@ Feature: An employee creates an activity
   Actor: Employee
 
   Scenario: An employee creates an activity
-    Given the name of an activity
-    And the length of the activity in hours
-    And the start date
-    And the end date
-    Then the activity is created
+    Given the info of an activity
+    When the employee creates a activity
+    Then an activity is created
