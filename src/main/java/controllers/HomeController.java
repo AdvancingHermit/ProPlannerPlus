@@ -27,5 +27,9 @@ public class HomeController extends StandardController {
     private void switchToCreateActivity() throws IOException {
         App.setRoot("createActivity");
     }
+    @FXML
+    private void switchToRegisterTime() throws IOException {
+        App.setRoot("registerTime");
+    }
 
 }
