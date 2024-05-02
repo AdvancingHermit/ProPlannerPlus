@@ -70,7 +70,7 @@ public class ProPlannerPlus {
 
     }
 
-    public static void createActivity(String activityName, int hoursPerWeek, LocalDate startDate, LocalDate endDate){
+    public static void createActivity(String activityName, float hoursPerWeek, LocalDate startDate, LocalDate endDate){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
         String start = startDate.format(formatter);
         String end = endDate.format(formatter);

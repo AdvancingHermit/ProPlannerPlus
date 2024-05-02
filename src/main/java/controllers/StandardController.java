@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.scene.control.TextField;
 import model.DataModel;
 
 public abstract class StandardController {
@@ -16,9 +17,14 @@ public abstract class StandardController {
             throw new IllegalStateException("ProPlannerPlus can only be initialized once");
         }
         this.proPlannerPlus = proPlannerPlus ;
+    }
 
 
-
+    public float getNumber(String val){
+        if (val.matches("([0-9]+[.])?[0-9]+")){
+            return Float.parseFloat(val);
+        }
+        return -1;
     }
 
 }

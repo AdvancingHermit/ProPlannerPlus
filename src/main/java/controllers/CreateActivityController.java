@@ -33,10 +33,10 @@ public class CreateActivityController extends StandardController {
 
         if (!createActivityName.getText().isEmpty() || createActivityHours.getText().isEmpty() || start == null || end == null){
 
-            if (!createActivityHours.getText().matches("\\d*")) {
-                proPlannerPlus.createActivity(createActivityName.getText(), Integer.parseInt(createActivityHours.getText()), start, end);
+            if (getNumber(createActivityHours.getText()) != -1) {
+                proPlannerPlus.createActivity(createActivityName.getText(), Float.parseFloat(createActivityHours.getText()), start, end);
             }
-            
+
         }
         for (Activity activity : proPlannerPlus.getActivities()) {
             System.out.println(activity.getName());
