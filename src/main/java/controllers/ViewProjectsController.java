@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
 import model.DataModel;
+import model.Employee;
 import model.Project;
 
 import java.io.IOException;
@@ -21,13 +22,18 @@ public class ViewProjectsController extends StandardController {
     @FXML
     ComboBox<String> projectSelector;
 
+    @FXML
+    ComboBox<String> employeesSelector;
+
     public void initController(DataModel model, ProPlannerPlus proPlannerPlus) {
         super.initController(model, proPlannerPlus);
         setProjectDetails(false);
         List<String> projectNames = proPlannerPlus.getProjects().stream().map(Project::getName).toList();
+        List<String> employeeInitials = proPlannerPlus.getEmployees().stream().map(Employee::getInitials).toList();
+        ObservableList<String> employees = FXCollections.observableList(employeeInitials);
         ObservableList<String> projects = FXCollections.observableList(projectNames);
         projectSelector.setItems(projects);
-
+        employeesSelector.setItems(employees);
     }
 
 
