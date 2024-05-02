@@ -55,8 +55,8 @@
                </padding>
             </Label>
             <TextField fx:id="employeeText" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <ToggleButton fx:id="removeButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="78.0" text="Remove" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="RIGHT" />
-            <ToggleButton fx:id="addButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="Add" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" />
+            <ToggleButton fx:id="removeButton"  onAction="#toggleButtonsRemove" mnemonicParsing="false" prefHeight="25.0" prefWidth="78.0" text="Remove" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="RIGHT" />
+            <ToggleButton fx:id="addButton" onAction="#toggleButtonsAdd" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="Add" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" />
             <Label fx:id="errorText" textFill="RED" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="10.0" />
