@@ -1,14 +1,12 @@
 package cucumber;
 
+import controllers.OperationNotAllowedException;
 import controllers.ProPlannerPlus;
 import model.Employee;
 import model.Project;
-import io.cucumber.java.an.E;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
-import java.time.Year;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -41,9 +39,9 @@ public class projectSteps {
         proPlannerPlus.createProject("test");
     }
     @Given("an employee exists")
-    public void an_employee_exists() {
+    public void an_employee_exists() throws OperationNotAllowedException {
         employee = new Employee("test");
-        proPlannerPlus.addEmployees(employee);
+        proPlannerPlus.addEmployee(employee);
     }
     @When("employee is assigned as project leader")
     public void employee_is_assigned_as_project_leader() {

@@ -7,7 +7,10 @@ import model.Project;
 import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.ArrayList;
+
 import java.util.Date;
+
+import java.util.List;
 
 public class ProPlannerPlus {
     static ArrayList<Employee> employees;
@@ -27,8 +30,23 @@ public class ProPlannerPlus {
         return employees;
     }
 
-    public static void addEmployees(Employee employee) {
+    public static void addEmployee(Employee employee) throws OperationNotAllowedException {
+        if (!employees.stream().filter(e->e.getInitials().equals(employee.getInitials())).toList().isEmpty()) {
+            throw new OperationNotAllowedException("Employee already exist");
+        }
         employees.add(employee);
+    }
+
+
+
+
+    public static void removeEmployee(String initials) throws OperationNotAllowedException {
+        List<String> employeeInitials = ProPlannerPlus.getEmployees().stream().map(Employee::getInitials).toList();
+        if (!employeeInitials.contains(initials)){
+            throw new OperationNotAllowedException("Employee does not exist");
+        }
+        employees.remove(getEmployees().stream().filter(e -> e.getInitials().equals(initials)).toList().get(0));
+
     }
 
     public static boolean login(String initials) {

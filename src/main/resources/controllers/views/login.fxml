@@ -23,6 +23,8 @@
              GridPane.columnIndex="1" GridPane.rowIndex="2" style="-fx-text-fill: red"/>
       <Button fx:id="loginButton" text="Login"  onAction="#switchToHome"
               GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+      <Button fx:id="addEmployeeButton" text="Add Employee"  onAction="#switchToAddEmployee"
+              GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
    </children>
    <padding>

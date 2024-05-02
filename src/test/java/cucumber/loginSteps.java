@@ -3,6 +3,7 @@ package cucumber;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import controllers.OperationNotAllowedException;
 import controllers.ProPlannerPlus;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -16,8 +17,8 @@ public class loginSteps {
 	}
 
 	@Given("the employee is not logged in and the employee is registered with their initials")
-	public void the_employee_is_not_logged_in_and_the_employee_is_registered_with_their_initials() {
-		proPlannerPlus.addEmployees(new Employee("test"));
+	public void the_employee_is_not_logged_in_and_the_employee_is_registered_with_their_initials() throws OperationNotAllowedException {
+		proPlannerPlus.addEmployee(new Employee("test"));
 	}
 	@When("an employee logs in using their initials")
 	public void an_employee_logs_in_using_their_initials() {

@@ -31,11 +31,14 @@ public class LoginController extends StandardController {
             model.setCurrentEmployee(new Employee(initials));
             App.setRoot("home");
         } else {
-
             errorText.setText("Please enter valid initials!");
         }
 
 
+    }
+    @FXML
+    private void switchToAddEmployee() throws IOException {
+        App.setRoot("addEmployee");
     }
 
 
