@@ -29,8 +29,14 @@ public class CreateActivityController extends StandardController {
     private void createActivity() throws IOException {
         LocalDate start = createActivityStart.getValue();
         LocalDate end = createActivityEnd.getValue();
+
+
         if (!createActivityName.getText().isEmpty() || createActivityHours.getText().isEmpty() || start == null || end == null){
-            proPlannerPlus.createActivity(createActivityName.getText(), Integer.parseInt(createActivityHours.getText()), start, end);
+
+            if (!createActivityHours.getText().matches("\\d*")) {
+                proPlannerPlus.createActivity(createActivityName.getText(), Integer.parseInt(createActivityHours.getText()), start, end);
+            }
+            
         }
         for (Activity activity : proPlannerPlus.getActivities()) {
             System.out.println(activity.getName());
