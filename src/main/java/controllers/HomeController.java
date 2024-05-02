@@ -19,4 +19,13 @@ public class HomeController extends StandardController {
     private void switchToViewProjects() throws IOException {
         App.setRoot("viewProjects");
     }
+    @FXML
+    private void switchToManageEmployees() throws IOException {
+        App.setRoot("manageEmployees");
+    }
+    @FXML
+    private void switchToCreateActivity() throws IOException {
+        App.setRoot("createActivity");
+    }
+
 }
