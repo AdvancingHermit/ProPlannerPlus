@@ -20,6 +20,5 @@ public class ManageEmployeeController extends StandardController {
 
     @FXML
     private void addRemoveEmployee() throws IOException {
-        if
     }
 }
