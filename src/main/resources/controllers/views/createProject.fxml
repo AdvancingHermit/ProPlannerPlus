@@ -52,6 +52,8 @@
          <children>
             <TextField fx:id="createProject" GridPane.columnIndex="2" />
             <Label text="Project name:" GridPane.columnIndex="1" />
+             <Label fx:id="errorText" text=""
+                    GridPane.columnIndex="1" GridPane.rowIndex="3" style="-fx-text-fill: red"/>
          </children>
       </GridPane>
       <StackPane prefHeight="52.0" prefWidth="600.0">

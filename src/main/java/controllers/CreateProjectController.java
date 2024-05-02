@@ -1,6 +1,7 @@
 package controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.Project;
 import java.io.IOException;
@@ -10,6 +11,9 @@ public class CreateProjectController extends StandardController {
     @FXML
     private TextField createProject;
 
+    @FXML
+    private Label errorText;
+
 
     @FXML
     private void switchToHome() throws IOException {
@@ -18,10 +22,15 @@ public class CreateProjectController extends StandardController {
 
     @FXML
     private void createProject() throws IOException {
-        proPlannerPlus.createProject(createProject.getText());
-        for (Project project : proPlannerPlus.getProjects()) {
-            System.out.println(project.getName());
+        if (!createProject.getText().isEmpty()){
+            proPlannerPlus.createProject(createProject.getText());
+            for (Project project : proPlannerPlus.getProjects()) {
+                System.out.println(project.getName());
+            }
+            switchToHome();
+        } else{
+            errorText.setText("Please enter a name");
         }
-        switchToHome();
+
     }
 }
