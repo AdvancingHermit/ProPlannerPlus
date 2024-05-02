@@ -36,11 +36,6 @@ public class LoginController extends StandardController {
 
 
     }
-    @FXML
-    private void switchToAddEmployee() throws IOException {
-        App.setRoot("addEmployee");
-    }
-
 
 
 }
