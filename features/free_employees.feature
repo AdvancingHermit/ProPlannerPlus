@@ -3,6 +3,6 @@ Feature: Get Free Employees
   Actors: Project leader or employee.
 
   Scenario: Employee wants to see free employees
-    Given an employee wants to add a employee to an activity.
-    When the employee wants to see who is available.
+    Given at least 1 employee exists
+    When the employee requests a list of free employees.
     Then a list of free employees are given.
