@@ -157,16 +157,16 @@ public class ProPlannerPlus {
         Map<Employee, Integer> freeEmployeeMap;
         List<Employee> employeeList = new ArrayList<>(getEmployees().stream().filter(e -> e.getPersonalActivities().isEmpty()).toList());
 
+        for (Employee employee : employeeList){
+            overlapCounts.put(employee, 0);
+        }
+
         for (Activity activity : activities){
             if ((startDate.isBefore(activity.getEndDate()) || startDate.isEqual(activity.getEndDate())) && (endDate.isAfter(activity.getStartDate()) || endDate.isEqual(activity.getStartDate()))){
                 for (Employee employee : activity.getEmployees()){
                     if (employeeList.contains(employee)){
                         overlapCounts.put(employee, overlapCounts.getOrDefault(employee, 0) + 1);
                     }
-                }
-            } else {
-                for (Employee employee : employeeList){
-                    overlapCounts.put(employee, overlapCounts.getOrDefault(employee, 0));
                 }
             }
         }
