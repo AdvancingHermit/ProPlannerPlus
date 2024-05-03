@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import model.Activity;
 import model.DataModel;
@@ -36,6 +37,9 @@ public class ViewProjectsController extends StandardController {
     @FXML
     ComboBox<Employee> employeeActivitySelector;
 
+    @FXML
+    Label errorText;
+
     public void initController(DataModel model, ProPlannerPlus proPlannerPlus) {
         super.initController(model, proPlannerPlus);
         setProjectDetails(false);
@@ -43,6 +47,7 @@ public class ViewProjectsController extends StandardController {
         ObservableList<Employee> employees = FXCollections.observableList( proPlannerPlus.getEmployees() );
         ObservableList<Project> projects = FXCollections.observableList( proPlannerPlus.getProjects() );
         ObservableList<Activity> activities = FXCollections.observableList( proPlannerPlus.getActivities() );
+        errorText.setVisible(false);
 
         employeesSelector.setItems(employees);
         projectSelector.setItems(projects);
@@ -58,11 +63,18 @@ public class ViewProjectsController extends StandardController {
 
     @FXML
     private void viewProjectDetails() throws IOException {
-        setProjectDetails(true);
-        Employee projectLeader = projectSelector.getValue().getProjectLeader();
-        System.out.println(projectLeader);
-        if(projectLeader != null){
-            employeesSelector.getSelectionModel().select( projectLeader );
+        if (projectSelector.getValue() != null) {
+            errorText.setVisible(false);
+            setProjectDetails(true);
+            Employee projectLeader = projectSelector.getValue().getProjectLeader();
+            System.out.println(projectLeader);
+            if (projectLeader != null) {
+                employeesSelector.getSelectionModel().select(projectLeader);
+            }
+        }
+        else{
+            errorText.setVisible(true);
+            errorText.setText("No Project Selected");
         }
     }
 
