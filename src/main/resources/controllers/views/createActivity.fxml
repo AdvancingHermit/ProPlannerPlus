@@ -83,9 +83,17 @@
             <ComboBox fx:id="projectSelector" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <StackPane prefHeight="52.0" prefWidth="600.0">
+      <StackPane prefHeight="82.0" prefWidth="600.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#createActivity" text="Create Activity" />
+            <Button mnemonicParsing="false" onAction="#createActivity" text="Create Activity">
+               <StackPane.margin>
+                  <Insets top="5.0" />
+               </StackPane.margin></Button>
+            <Label fx:id="errorText" textFill="RED">
+               <StackPane.margin>
+                  <Insets bottom="50.0" />
+               </StackPane.margin>
+            </Label>
          </children>
       </StackPane>
    </children>

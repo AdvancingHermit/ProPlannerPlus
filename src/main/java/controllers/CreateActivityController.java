@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.Activity;
 import model.DataModel;
@@ -25,6 +26,8 @@ public class CreateActivityController extends StandardController {
     private DatePicker createActivityStart;
     @FXML
     private DatePicker createActivityEnd;
+    @FXML
+    private Label errorText;
 
     @FXML
     ComboBox<String> projectSelector;
@@ -47,17 +50,23 @@ public class CreateActivityController extends StandardController {
         LocalDate end = createActivityEnd.getValue();
         String projectName = projectSelector.getValue();
 
-        if (!createActivityName.getText().isEmpty() || createActivityHours.getText().isEmpty() || start == null || end == null){
+        String activityName = createActivityName.getText();
+        String activityHours = createActivityHours.getText();
 
-            if (getNumber(createActivityHours.getText()) != -1) {
+        if (!activityName.isEmpty() && !activityHours.isEmpty() && start != null && end != null && projectName != null){
+
+            if (getNumber(activityHours) != -1 && start.isBefore(end)) {
                 proPlannerPlus.createActivity(createActivityName.getText(), Float.parseFloat(createActivityHours.getText()), start, end, projectName);
+                App.setRoot("home");
 
+            } else {
+                errorText.setText("Please ensure a valid number of hours and the end date is after the start date");
             }
 
+        } else {
+            errorText.setText("Please fill out all fields.");
         }
-        for (Activity activity : proPlannerPlus.getActivities()) {
-            System.out.println(activity.getName());
-        }
+
 
     }
 
