@@ -173,10 +173,10 @@ public class ProPlannerPlus {
         }
 
         for (Activity activity : activities){
-            if ((startDate.isBefore(activity.getEndDate()) || startDate.isEqual(activity.getEndDate())) && (endDate.isAfter(activity.getStartDate()) || endDate.isEqual(activity.getStartDate()))){
+            if (startDate.compareTo(activity.getEndDate()) <= 0 && endDate.compareTo(activity.getStartDate()) >= 0){
                 for (Employee employee : activity.getEmployees()){
                     if (employeeList.contains(employee)){
-                        overlapCounts.put(employee, overlapCounts.getOrDefault(employee, 0) + 1);
+                        overlapCounts.put(employee, overlapCounts.get(employee) + 1);
                     }
                 }
             }
