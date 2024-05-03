@@ -16,4 +16,4 @@ Feature: Assign employee
   Scenario: Assign an already assigned employee to activity
     Given A free employee which is assigned to the activity
     When The employee is assigned to the activity
-    Then An error message "Employee already assigned" is given
+    Then the error message "Employee already assigned" is given

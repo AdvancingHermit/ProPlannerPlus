@@ -91,7 +91,7 @@ public class ProPlannerPlus {
         return projects;
     }
 
-    public static Project getProject(String name){
+    public static Project getProject(String name) {
         for (Project project : projects){
             if (project.getName().equals(name)){
                 return project;
@@ -107,6 +107,21 @@ public class ProPlannerPlus {
             }
         }
         return null;
+    }
+    public void addEmployeeToActivity(String activityName, Employee employee) throws OperationNotAllowedException {
+        // if (!employeeAvaviable){
+        // throw new OperationNotAllowedException("Employee not available");
+        // } else {
+
+        for (Activity activity : activities) {
+            if (activity.getName().equals(activityName)){
+                if (activity.getEmployees().contains(employee)){
+                    throw new OperationNotAllowedException("Employee already assigned");
+                } else {
+                    activity.addEmployee(employee);
+                }
+            }
+        }
     }
     public Activity getActivity(String test) {
         for (Activity activity : activities) {

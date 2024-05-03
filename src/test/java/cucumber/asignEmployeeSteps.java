@@ -9,6 +9,7 @@ import model.Employee;
 import java.time.LocalDate;
 
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class asignEmployeeSteps {
@@ -24,34 +25,39 @@ public class asignEmployeeSteps {
     @Given("A free employee which is not assigned to the activity")
     public void an_free_employee_which_is_not_assigned_to_the_activity() {
         // Write code here that turns the phrase above into concrete actions
-        proPlannerPlus.createProject("TestProjekt");
+        proPlannerPlus.createProject("TestProject");
         proPlannerPlus.createActivity("TestActivity",
                 4,
                 LocalDate.of(2002, 3, 2),
                 LocalDate.of(2003, 3, 2),
-                "TestProjekt");
+                "TestProject");
         employee = new Employee("TestEmployee");
     }
     @Given("A free employee which is assigned to the activity")
     public void aFreeEmployeeWhichIsAssignedToTheActivity() {
-        proPlannerPlus.createProject("TestProjekt");
+        proPlannerPlus.createProject("TestProject");
         proPlannerPlus.createActivity("TestActivity",
                 4,
                 LocalDate.of(2002, 3, 2),
                 LocalDate.of(2003, 3, 2),
-                "TestProjekt");
+                "TestProject");
         employee = new Employee("TestEmployee");
         proPlannerPlus.getActivity("TestActivity").addEmployee(employee);
     }
     @When("The employee is assigned to the activity")
-    public void The_employee_is_assigned_to_the_activity(){
+    public void The_employee_is_assigned_to_the_activity() throws OperationNotAllowedException{
 
         try {
-            proPlannerPlus.getActivity("TestActivity").addEmployee(employee);
+            proPlannerPlus.addEmployeeToActivity("TestActivity", employee);
         }
-        catch (Exception e) {
+        catch (OperationNotAllowedException e) {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
+
+    }
+    @Then("the error message {string} is given")
+    public void then_an_error_message_is_given(String errorMessage) {
+        assertEquals(errorMessage, this.errorMessageHolder.getErrorMessage());
 
     }
     @Then("The employee is now part of the activity")
