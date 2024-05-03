@@ -1,5 +1,6 @@
 package cucumber;
 
+import controllers.OperationNotAllowedException;
 import controllers.ProPlannerPlus;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -57,7 +58,7 @@ public class registerTimeSteps {
     }
 
     @When("an employee registers time on the personal activity")
-    public void an_employee_registers_time_on_the_personal_activity() {
+    public void an_employee_registers_time_on_the_personal_activity() throws OperationNotAllowedException {
         start = LocalDate.of(2024, 05, 03);
         end = LocalDate.of(2024, 06, 03);
         employee.addPersonalActivity(start, end, "sick");

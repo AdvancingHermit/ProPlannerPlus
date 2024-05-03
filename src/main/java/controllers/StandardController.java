@@ -1,11 +1,19 @@
 package controllers;
 
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.util.converter.DoubleStringConverter;
+import javafx.util.converter.FloatStringConverter;
+import javafx.util.converter.IntegerStringConverter;
 import model.DataModel;
+
+import java.util.function.UnaryOperator;
 
 public abstract class StandardController {
     DataModel model ;
     ProPlannerPlus proPlannerPlus;
+    TextFormatter doubleTextFormatter;
+
 
     public void initController(DataModel model, ProPlannerPlus proPlannerPlus) {
         if (this.model != null) {
@@ -17,6 +25,9 @@ public abstract class StandardController {
             throw new IllegalStateException("ProPlannerPlus can only be initialized once");
         }
         this.proPlannerPlus = proPlannerPlus ;
+
+        doubleTextFormatter = new TextFormatter<Double>(new DoubleStringConverter(), 0d, doubleFilter);
+
     }
 
 
@@ -26,5 +37,13 @@ public abstract class StandardController {
         }
         return -1;
     }
+    UnaryOperator<TextFormatter.Change> doubleFilter = change -> {
+        String newText = change.getControlNewText();
+        if (newText.matches("\\d+(\\.\\d*)?") || newText.isEmpty()) {
+            return change;
+        }
+        return null;
+    };
+
 
 }

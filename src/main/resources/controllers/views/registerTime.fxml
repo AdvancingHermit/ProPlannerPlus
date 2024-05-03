@@ -50,8 +50,8 @@
           <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="35.0" valignment="CENTER" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ToggleButton fx:id="personalButton" onAction="#toggleButtonsPersonal" mnemonicParsing="false" prefHeight="25.0" prefWidth="78.0" text="Personal" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="RIGHT" />
-            <ToggleButton fx:id="workButton"  onAction="#toggleButtonsWork" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" selected="true" text="Work" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" />
+            <ToggleButton fx:id="personalButton" mnemonicParsing="false" onAction="#toggleButtonsPersonal" prefHeight="25.0" prefWidth="78.0" text="Personal" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="RIGHT" />
+            <ToggleButton fx:id="workButton" mnemonicParsing="false" onAction="#toggleButtonsWork" prefHeight="25.0" prefWidth="63.0" selected="true" text="Work" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" />
          </children>
       </GridPane>
       <GridPane fx:id="workGrid" prefHeight="68.0" prefWidth="600.0">
@@ -110,9 +110,17 @@
             <TextField fx:id="reasonText" GridPane.columnIndex="2" />
          </children>
       </GridPane>
-      <StackPane prefHeight="37.0" prefWidth="600.0">
+      <StackPane prefHeight="51.0" prefWidth="600.0">
          <children>
-            <Button fx:id="confirmButton" mnemonicParsing="false" text="Confirm" />
+            <Button fx:id="confirmButton" onAction="#registerTime" mnemonicParsing="false" text="Confirm">
+               <StackPane.margin>
+                  <Insets top="10.0" />
+               </StackPane.margin></Button>
+            <Label fx:id="errorText" textFill="RED">
+               <StackPane.margin>
+                  <Insets bottom="35.0" />
+               </StackPane.margin>
+            </Label>
          </children>
       </StackPane>
    </children>
