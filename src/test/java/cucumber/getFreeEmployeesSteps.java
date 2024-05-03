@@ -30,7 +30,7 @@ public class getFreeEmployeesSteps {
     Map<Employee, Integer> freeEmployees;
 
     public getFreeEmployeesSteps(){ proPlannerPlus = new ProPlannerPlus(); }
-    @Given("at least {int} employee exists")
+    @Given("at least {int} free employee exists")
     public void at_least_employee_exists(Integer int1) throws OperationNotAllowedException {
         employee = new Employee("test");
         project = new Project("Test", 1);
@@ -39,14 +39,12 @@ public class getFreeEmployeesSteps {
         proPlannerPlus.addEmployee(employee);
         proPlannerPlus.createProject(project.getName());
         proPlannerPlus.createActivity(activity, project.getName());
-        proPlannerPlus.addEmployeeToActivity(activity.getName(), employee);
     }
     @When("the employee requests a list of free employees.")
     public void the_employee_requests_a_list_of_free_employees() {
         freeEmployees = proPlannerPlus.getFreeEmployees(proPlannerPlus.getProject(project.getName())
                 , activity.getStartDate()
-                , activity.getEndDate().plusDays(1));
-        System.out.println(freeEmployees.keySet().size());
+                , activity.getEndDate());
     }
     @Then("a list of free employees are given.")
     public void a_list_of_free_employees_are_given() {
