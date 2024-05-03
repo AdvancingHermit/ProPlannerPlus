@@ -196,6 +196,11 @@ public class ProPlannerPlus {
         project.setProjectLeader(employee);
     }
     public double getCompletionsStatus(Project projectName){
+
+        if (projectName.getActivityIDs().size() == 0){
+            return 0;
+        }
+
         LocalDate startDate = LocalDate.now();
         LocalDate endDate = startDate.plusWeeks(1);
         TemporalField woy = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
@@ -205,6 +210,7 @@ public class ProPlannerPlus {
         for (int id : projectName.getActivityIDs()){
             sum += getActivity(id).getCompletionStatus(startWeekNumber, endWeekNumber, woy);
         }
+
         return sum / projectName.activityIDs.size();
     }
 }

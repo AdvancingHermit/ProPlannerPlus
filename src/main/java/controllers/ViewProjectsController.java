@@ -40,6 +40,9 @@ public class ViewProjectsController extends StandardController {
     @FXML
     Label errorText;
 
+    @FXML
+    Label completionText;
+
     public void initController(DataModel model, ProPlannerPlus proPlannerPlus) {
         super.initController(model, proPlannerPlus);
         setProjectDetails(false);
@@ -100,5 +103,11 @@ public class ViewProjectsController extends StandardController {
 
     public void addEmployeeToActivity() {
         activitySelector.getValue().addEmployee(employeeActivitySelector.getValue());
+    }
+
+    public void showCompletionStatus() {
+        if (projectSelector.getValue() != null){
+            completionText.setText( String.valueOf(proPlannerPlus.getCompletionsStatus(projectSelector.getValue())) + "%");
+        }
     }
 }

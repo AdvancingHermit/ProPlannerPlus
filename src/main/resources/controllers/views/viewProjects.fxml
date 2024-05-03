@@ -83,11 +83,18 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" text="View Completion Status" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+            <Button mnemonicParsing="false" onAction="#showCompletionStatus" text="View Completion Status" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="10.0" top="20.0" />
                </GridPane.margin>
             </Button>
+
+             <Label text="" fx:id="completionText" GridPane.halignment="RIGHT" GridPane.rowIndex="1" >
+                 <GridPane.margin>
+                     <Insets left="100.0" top="20.0" />
+                 </GridPane.margin>
+             </Label>
+
             <ComboBox fx:id="employeesSelector" prefWidth="150.0" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets left="10.0" />
