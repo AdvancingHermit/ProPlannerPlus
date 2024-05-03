@@ -72,7 +72,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" text="Set Project leader" GridPane.halignment="RIGHT">
+            <Button mnemonicParsing="false" onAction="#setProjectLeader" text="Set Project leader" GridPane.halignment="RIGHT">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>

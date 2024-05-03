@@ -85,6 +85,24 @@ public class ProPlannerPlus {
         return projects;
     }
 
+    public static Project getProject(String name){
+        for (Project project : projects){
+            if (project.getName().equals(name)){
+                return project;
+            }
+        }
+        return null;
+    }
+
+    public static Employee getEmployee(String initials){
+        for (Employee employee : employees){
+            if (employee.getInitials().equals(initials)){
+                return employee;
+            }
+        }
+        return null;
+    }
+
     public static ArrayList<Activity> getActivities() {return activities; }
 
     public static void assignProjectLeader(Project project, Employee employee) {

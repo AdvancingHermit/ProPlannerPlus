@@ -45,11 +45,22 @@ public class ViewProjectsController extends StandardController {
     @FXML
     private void viewProjectDetails() throws IOException {
         setProjectDetails(true);
+        Employee projectLeader = proPlannerPlus.getProject(projectSelector.getValue()).getProjectLeader();
+        System.out.println(projectLeader);
+        if(projectLeader != null){
+            System.out.println("Yo");
+            employeesSelector.getSelectionModel().select(projectLeader.getInitials());
+        }
     }
 
     private void setProjectDetails(boolean visible) {
         projectDetails.setManaged(visible);
         projectDetails.setVisible(visible);
+    }
+
+    @FXML
+    private void setProjectLeader(){
+        proPlannerPlus.getProject(projectSelector.getValue()).setProjectLeader(proPlannerPlus.getEmployee(employeesSelector.getValue()));
     }
 
 }
