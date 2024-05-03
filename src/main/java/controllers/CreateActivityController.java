@@ -56,7 +56,7 @@ public class CreateActivityController extends StandardController {
         if (!activityName.isEmpty() && !activityHours.isEmpty() && start != null && end != null && projectName != null){
 
             if (getNumber(activityHours) != -1 && start.isBefore(end)) {
-                proPlannerPlus.createActivity(createActivityName.getText(), Float.parseFloat(createActivityHours.getText()), start, end, projectName);
+                proPlannerPlus.createActivity(createActivityName.getText(), getNumber(activityHours), start, end, projectName);
                 App.setRoot("home");
 
             } else {

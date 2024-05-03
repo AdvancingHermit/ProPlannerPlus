@@ -20,9 +20,9 @@ public abstract class StandardController {
     }
 
 
-    public float getNumber(String val){
+    public double getNumber(String val){
         if (val.matches("([0-9]+[.])?[0-9]+")){
-            return Float.parseFloat(val);
+            return Double.parseDouble(val);
         }
         return -1;
     }
