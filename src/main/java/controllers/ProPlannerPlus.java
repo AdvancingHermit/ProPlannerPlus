@@ -4,23 +4,23 @@ import model.Activity;
 import model.Employee;
 import model.Project;
 
-import java.text.SimpleDateFormat;
+
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
-<<<<<<< Updated upstream
+
 import java.util.*;
 
-=======
+
 import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 
-import java.util.Date;
+
 
 import java.util.List;
 import java.util.Locale;
->>>>>>> Stashed changes
+
 import java.util.stream.Collectors;
 
 public class ProPlannerPlus {

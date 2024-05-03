@@ -1,11 +1,9 @@
 package model;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalField;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Activity {
@@ -35,7 +33,6 @@ public class Activity {
     public int getActivityID() {
         return activityID;
     }
-<<<<<<< Updated upstream
     public LocalDate getStartDate()  {
         return startDate;
     }
@@ -44,10 +41,8 @@ public class Activity {
     }
 
 
-=======
     public void setCompletion(Boolean complete) {this.complete = complete;}
-    
->>>>>>> Stashed changes
+
     @Override
     public String toString() {
         return activityName;
