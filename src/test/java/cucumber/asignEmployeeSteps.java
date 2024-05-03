@@ -7,6 +7,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import model.Employee;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 
 
 import static org.junit.Assert.assertEquals;
@@ -23,8 +25,7 @@ public class asignEmployeeSteps {
     }
     Employee employee;
     @Given("A free employee which is not assigned to the activity")
-    public void an_free_employee_which_is_not_assigned_to_the_activity() {
-        // Write code here that turns the phrase above into concrete actions
+    public void an_free_employee_which_is_not_assigned_to_the_activity() throws OperationNotAllowedException {
         proPlannerPlus.createProject("TestProject");
         proPlannerPlus.createActivity("TestActivity",
                 4,
@@ -32,9 +33,10 @@ public class asignEmployeeSteps {
                 LocalDate.of(2003, 3, 2),
                 "TestProject");
         employee = new Employee("TestEmployee");
+        proPlannerPlus.addEmployee(employee);
     }
     @Given("A free employee which is assigned to the activity")
-    public void aFreeEmployeeWhichIsAssignedToTheActivity() {
+    public void aFreeEmployeeWhichIsAssignedToTheActivity() throws OperationNotAllowedException {
         proPlannerPlus.createProject("TestProject");
         proPlannerPlus.createActivity("TestActivity",
                 4,
@@ -42,13 +44,13 @@ public class asignEmployeeSteps {
                 LocalDate.of(2003, 3, 2),
                 "TestProject");
         employee = new Employee("TestEmployee");
+        proPlannerPlus.addEmployee(employee);
         proPlannerPlus.getActivity("TestActivity").addEmployee(employee);
     }
     @When("The employee is assigned to the activity")
     public void The_employee_is_assigned_to_the_activity() throws OperationNotAllowedException{
-
         try {
-            proPlannerPlus.addEmployeeToActivity("TestActivity", employee);
+            proPlannerPlus.addEmployeeToActivity("TestActivity", employee, proPlannerPlus.getProject("TestProject"));
         }
         catch (OperationNotAllowedException e) {
             errorMessageHolder.setErrorMessage(e.getMessage());
@@ -66,7 +68,17 @@ public class asignEmployeeSteps {
     }
 
     @Given("An non-free employee which is not assigned to the activity")
-    public void anOccupiedEmployeeWhichIsNotAssignedToTheActivity() {
+    public void anOccupiedEmployeeWhichIsNotAssignedToTheActivity() throws OperationNotAllowedException {
+        proPlannerPlus.createProject("TestProject");
+        proPlannerPlus.createActivity("TestActivity",
+                4,
+                LocalDate.of(2002, 3, 2),
+                LocalDate.of(2003, 3, 2),
+                "TestProject");
+        employee = new Employee("TestEmployee");
+        proPlannerPlus.addEmployee(employee);
+        employee.addPersonalActivity(LocalDate.of(2002, 3, 2),
+                LocalDate.of(2003, 3, 3), "sick");
     }
 
 

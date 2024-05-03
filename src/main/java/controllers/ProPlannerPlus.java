@@ -121,17 +121,18 @@ public class ProPlannerPlus {
         }
         return null;
     }
-    public static void addEmployeeToActivity(String activityName, Employee employee) throws OperationNotAllowedException {
-        // if (!employeeAvaviable){
-        // throw new OperationNotAllowedException("Employee not available");
-        // } else {
+    public static void addEmployeeToActivity(String activityName, Employee employee, Project project) throws OperationNotAllowedException {
+        if (!getFreeEmployees(project, getActivity(activityName).getStartDate(), getActivity(activityName).getEndDate()).keySet().contains(employee)) {
+            throw new OperationNotAllowedException("Employee not available");
+        } else {
 
-        for (Activity activity : activities) {
-            if (activity.getName().equals(activityName)){
-                if (activity.getEmployees().contains(employee)){
-                    throw new OperationNotAllowedException("Employee already assigned");
-                } else {
-                    activity.addEmployee(employee);
+            for (Activity activity : activities) {
+                if (activity.getName().equals(activityName)) {
+                    if (activity.getEmployees().contains(employee)) {
+                        throw new OperationNotAllowedException("Employee already assigned");
+                    } else {
+                        activity.addEmployee(employee);
+                    }
                 }
             }
         }
