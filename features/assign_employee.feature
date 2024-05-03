@@ -7,8 +7,8 @@ Feature: Assign employee
     When The employee is assigned to the activity
     Then The employee is now part of the activity
 
-  Scenario: Assign occupied employee to activity
-    Given An occupied employee which is not assigned to the activity
+  Scenario: Assign non-free employee to activity
+    Given An non-free employee which is not assigned to the activity
     When The employee is assigned to the activity
     Then An error message "Employee not available" is given
 

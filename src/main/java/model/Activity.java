@@ -2,10 +2,11 @@ package model;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Activity {
-
+    ArrayList<Employee> employees = new ArrayList<Employee>();
     String activityName;
     double hoursPerWeek;
     LocalDate startDate;
@@ -23,6 +24,9 @@ public class Activity {
     public String getName(){
         return activityName;
     }
+    public void addEmployee(Employee employee){
+        employees.add(employee);}
+    public ArrayList<Employee> getEmployees(){return employees;}
 
     public int getActivityID() {
         return activityID;

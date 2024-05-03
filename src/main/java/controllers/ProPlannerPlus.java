@@ -108,6 +108,14 @@ public class ProPlannerPlus {
         }
         return null;
     }
+    public Activity getActivity(String test) {
+        for (Activity activity : activities) {
+            if (activity.getName().equals(test)) {
+                return activity;
+            }
+        }
+        return null;
+    }
 
     public static ArrayList<Activity> getActivities() {return activities; }
 
