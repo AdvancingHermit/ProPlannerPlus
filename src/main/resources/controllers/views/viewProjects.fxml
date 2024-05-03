@@ -87,14 +87,14 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </ComboBox>
-            <Button mnemonicParsing="false" text="Show Activities" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+            <Button mnemonicParsing="false" text="Show Activities" onAction="#viewActivityDetails" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets right="10.0" top="20.0" />
                </GridPane.margin>
             </Button>
          </children>
       </GridPane>
-      <GridPane prefHeight="142.0" prefWidth="600.0">
+      <GridPane prefHeight="142.0" fx:id="activityDetails" prefWidth="600.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -105,17 +105,17 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ComboBox fx:id="employeeActivitySelector"  prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
             </ComboBox>
-            <Button mnemonicParsing="false" text="Add Employee" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+            <Button mnemonicParsing="false" onAction="#addEmployeeToActivity" text="Add Employee" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </Button>
-            <ComboBox prefWidth="150.0" GridPane.columnIndex="1">
+            <ComboBox prefWidth="150.0" fx:id="activitySelector"  GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>

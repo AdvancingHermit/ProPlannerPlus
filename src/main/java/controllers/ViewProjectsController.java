@@ -2,9 +2,11 @@ package controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
+import model.Activity;
 import model.DataModel;
 import model.Employee;
 import model.Project;
@@ -20,20 +22,32 @@ public class ViewProjectsController extends StandardController {
     GridPane projectDetails;
 
     @FXML
-    ComboBox<String> projectSelector;
+    GridPane activityDetails;
 
     @FXML
-    ComboBox<String> employeesSelector;
+    ComboBox<Project> projectSelector;
+
+    @FXML
+    ComboBox<Employee> employeesSelector;
+
+    @FXML
+    ComboBox<Activity> activitySelector;
+
+    @FXML
+    ComboBox<Employee> employeeActivitySelector;
 
     public void initController(DataModel model, ProPlannerPlus proPlannerPlus) {
         super.initController(model, proPlannerPlus);
         setProjectDetails(false);
-        List<String> projectNames = proPlannerPlus.getProjects().stream().map(Project::getName).toList();
-        List<String> employeeInitials = proPlannerPlus.getEmployees().stream().map(Employee::getInitials).toList();
-        ObservableList<String> employees = FXCollections.observableList(employeeInitials);
-        ObservableList<String> projects = FXCollections.observableList(projectNames);
-        projectSelector.setItems(projects);
+        setActivityDetails(false);
+        ObservableList<Employee> employees = FXCollections.observableList( proPlannerPlus.getEmployees() );
+        ObservableList<Project> projects = FXCollections.observableList( proPlannerPlus.getProjects() );
+        ObservableList<Activity> activities = FXCollections.observableList( proPlannerPlus.getActivities() );
+
         employeesSelector.setItems(employees);
+        projectSelector.setItems(projects);
+        activitySelector.setItems(activities);
+        employeeActivitySelector.setItems(employees);
     }
 
 
@@ -45,12 +59,16 @@ public class ViewProjectsController extends StandardController {
     @FXML
     private void viewProjectDetails() throws IOException {
         setProjectDetails(true);
-        Employee projectLeader = proPlannerPlus.getProject(projectSelector.getValue()).getProjectLeader();
+        Employee projectLeader = projectSelector.getValue().getProjectLeader();
         System.out.println(projectLeader);
         if(projectLeader != null){
-            System.out.println("Yo");
-            employeesSelector.getSelectionModel().select(projectLeader.getInitials());
+            employeesSelector.getSelectionModel().select( projectLeader );
         }
+    }
+
+    @FXML
+    private void viewActivityDetails() throws IOException {
+        setActivityDetails(true);
     }
 
     private void setProjectDetails(boolean visible) {
@@ -58,9 +76,17 @@ public class ViewProjectsController extends StandardController {
         projectDetails.setVisible(visible);
     }
 
-    @FXML
-    private void setProjectLeader(){
-        proPlannerPlus.getProject(projectSelector.getValue()).setProjectLeader(proPlannerPlus.getEmployee(employeesSelector.getValue()));
+    private void setActivityDetails(boolean visible) {
+        activityDetails.setManaged(visible);
+        activityDetails.setVisible(visible);
     }
 
+    @FXML
+    private void setProjectLeader(){
+        projectSelector.getValue().setProjectLeader(employeesSelector.getValue());
+    }
+
+    public void addEmployeeToActivity() {
+        activitySelector.getValue().addEmployee(employeeActivitySelector.getValue());
+    }
 }

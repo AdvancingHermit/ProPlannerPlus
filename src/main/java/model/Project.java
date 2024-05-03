@@ -38,4 +38,8 @@ public class Project {
     public void addActivity(int activityID) {
         this.activityIDs.add(activityID);
     }
+
+    public String toString(){
+        return name;
+    }
 }

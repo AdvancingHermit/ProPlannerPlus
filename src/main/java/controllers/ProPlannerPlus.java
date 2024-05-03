@@ -163,6 +163,7 @@ public class ProPlannerPlus {
         return employeeList;
     }
 
+
     public static ArrayList<Activity> getActivities() {return activities; }
 
     public static void assignProjectLeader(Project project, Employee employee) {
