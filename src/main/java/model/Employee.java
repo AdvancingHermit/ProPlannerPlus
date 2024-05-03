@@ -1,5 +1,7 @@
 package model;
 
+import controllers.OperationNotAllowedException;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +22,7 @@ public class Employee {
         return initials;
     }
 
-    public void registerTime(int activityID, double time){
+    public void registerTime(int activityID, double time) {
         double currTemp = 0;
 
         if (schedule.containsKey(activityID)){
@@ -30,7 +32,10 @@ public class Employee {
         schedule.put(activityID, currTemp + time);
     }
 
-    public void addPersonalActivity(LocalDate start, LocalDate end, String reason){
+    public void addPersonalActivity(LocalDate start, LocalDate end, String reason) throws OperationNotAllowedException {
+        if (start == null || end == null || start.isAfter(end)){
+            throw new OperationNotAllowedException("Please input valid dates");
+        }
         personalActivities.add(new PersonalActivity(start, end, reason));
     }
 
