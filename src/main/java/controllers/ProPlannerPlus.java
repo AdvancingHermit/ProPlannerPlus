@@ -153,19 +153,20 @@ public class ProPlannerPlus {
 
     public static Map<Employee, Integer> getFreeEmployees(Project project, LocalDate startDate, LocalDate endDate){
         List<Activity> activities = getActivitiesFromProject(project);
-        List<Employee> employeeList = new ArrayList<>();
         Map<Employee, Integer> overlapCounts = new HashMap<Employee, Integer>();
         Map<Employee, Integer> freeEmployeeMap;
+        List<Employee> employeeList = new ArrayList<>(getEmployees().stream().filter(e -> e.getPersonalActivities().isEmpty()).toList());
 
         for (Activity activity : activities){
-            employeeList.addAll(activity.getEmployees().stream().filter(e -> e.getPersonalActivities().isEmpty()).toList());
-        }
-        for (Activity activity : activities){
-            if (activity.getStartDate().isAfter(startDate) && activity.getEndDate().isBefore(endDate)){
+            if ((startDate.isBefore(activity.getEndDate()) || startDate.isEqual(activity.getEndDate())) && (endDate.isAfter(activity.getStartDate()) || endDate.isEqual(activity.getStartDate()))){
                 for (Employee employee : activity.getEmployees()){
                     if (employeeList.contains(employee)){
                         overlapCounts.put(employee, overlapCounts.getOrDefault(employee, 0) + 1);
                     }
+                }
+            } else {
+                for (Employee employee : employeeList){
+                    overlapCounts.put(employee, overlapCounts.getOrDefault(employee, 0));
                 }
             }
         }

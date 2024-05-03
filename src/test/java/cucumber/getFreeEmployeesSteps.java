@@ -12,6 +12,7 @@ import org.junit.Assert;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertTrue;
 
@@ -26,7 +27,7 @@ public class getFreeEmployeesSteps {
 
     Activity activity;
 
-    List<Employee> freeEmployees;
+    Map<Employee, Integer> freeEmployees;
 
     public getFreeEmployeesSteps(){ proPlannerPlus = new ProPlannerPlus(); }
     @Given("at least {int} employee exists")
@@ -38,14 +39,16 @@ public class getFreeEmployeesSteps {
         proPlannerPlus.addEmployee(employee);
         proPlannerPlus.createProject(project.getName());
         proPlannerPlus.createActivity(activity, project.getName());
-        proPlannerPlus.addEmployeeToActivity(activity.getName(), employee);
     }
     @When("the employee requests a list of free employees.")
     public void the_employee_requests_a_list_of_free_employees() {
-        freeEmployees = proPlannerPlus.getFreeEmployees(proPlannerPlus.getProject(project.getName()));
+        freeEmployees = proPlannerPlus.getFreeEmployees(proPlannerPlus.getProject(project.getName())
+                , activity.getStartDate()
+                , activity.getEndDate());
+        System.out.println(freeEmployees.keySet().size());
     }
     @Then("a list of free employees are given.")
     public void a_list_of_free_employees_are_given() {
-        assertTrue(freeEmployees.contains(employee));
+        assertTrue(freeEmployees.containsKey(employee));
     }
 }
