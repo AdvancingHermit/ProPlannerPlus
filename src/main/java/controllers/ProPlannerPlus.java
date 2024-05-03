@@ -8,8 +8,19 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
+<<<<<<< Updated upstream
 import java.util.*;
 
+=======
+import java.time.temporal.TemporalField;
+import java.time.temporal.WeekFields;
+import java.util.ArrayList;
+
+import java.util.Date;
+
+import java.util.List;
+import java.util.Locale;
+>>>>>>> Stashed changes
 import java.util.stream.Collectors;
 
 public class ProPlannerPlus {
@@ -187,5 +198,17 @@ public class ProPlannerPlus {
 
     public static void assignProjectLeader(Project project, Employee employee) {
         project.setProjectLeader(employee);
+    }
+    public double getCompletionsStatus(Project projectName){
+        LocalDate startDate = LocalDate.now();
+        LocalDate endDate = startDate.plusWeeks(1);
+        TemporalField woy = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
+        int startWeekNumber = startDate.get(woy);
+        int endWeekNumber = endDate.get(woy);
+        double sum = 0;
+        for (int id : projectName.getActivityIDs()){
+            sum += getActivity(id).getCompletionStatus(startWeekNumber, endWeekNumber, woy);
+        }
+        return sum / projectName.activityIDs.size();
     }
 }
