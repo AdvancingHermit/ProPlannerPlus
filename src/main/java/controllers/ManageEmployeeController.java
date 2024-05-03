@@ -34,8 +34,6 @@ public class ManageEmployeeController extends StandardController {
     }
 
 
-
-
     @FXML
     private void switchToHome() throws IOException {
         App.setRoot("home");
