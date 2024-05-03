@@ -46,5 +46,9 @@ public class Employee {
     public ArrayList<PersonalActivity> getPersonalActivities() {
         return personalActivities;
     }
+
+    public String toString(){
+        return initials;
+    }
 }
 
