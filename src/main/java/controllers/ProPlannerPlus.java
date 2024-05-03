@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProPlannerPlus {
     static ArrayList<Employee> employees;
@@ -81,6 +82,10 @@ public class ProPlannerPlus {
         activities.add(activity);
         addActivityToProject(getProject(projectName), activityID);
     }
+    public static void createActivity(Activity activity, String projectName){
+        activities.add(activity);
+        addActivityToProject(getProject(projectName), activity.getActivityID());
+    }
 
     public static void addActivityToProject(Project project, int activityID){
         project.addActivity(activityID);
@@ -108,7 +113,7 @@ public class ProPlannerPlus {
         }
         return null;
     }
-    public void addEmployeeToActivity(String activityName, Employee employee) throws OperationNotAllowedException {
+    public static void addEmployeeToActivity(String activityName, Employee employee) throws OperationNotAllowedException {
         // if (!employeeAvaviable){
         // throw new OperationNotAllowedException("Employee not available");
         // } else {
@@ -123,13 +128,39 @@ public class ProPlannerPlus {
             }
         }
     }
-    public Activity getActivity(String test) {
+    public static Activity getActivity(String name) {
         for (Activity activity : activities) {
-            if (activity.getName().equals(test)) {
+            if (activity.getName().equals(name)) {
                 return activity;
             }
         }
         return null;
+    }
+
+    public static Activity getActivity(int id) {
+        for (Activity activity : activities) {
+            if (activity.getActivityID() == id) {
+                return activity;
+            }
+        }
+        return null;
+    }
+
+    public static List<Activity> getActivitiesFromProject(Project project){
+        List<Activity> activities = new ArrayList<>();
+        for (int activityID : project.getActivityIDs()){
+            activities.add(getActivity(activityID));
+        }
+        return activities;
+    }
+
+    public static List<Employee> getFreeEmployees(Project project){
+        List<Activity> activities = getActivitiesFromProject(project);
+        List<Employee> employeeList = new ArrayList<>();
+        for (Activity activity : activities){
+            employeeList.addAll(activity.getEmployees().stream().filter(e -> e.getPersonalActivities().isEmpty()).toList());
+        }
+        return employeeList;
     }
 
     public static ArrayList<Activity> getActivities() {return activities; }

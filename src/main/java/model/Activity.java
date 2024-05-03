@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Activity {
     ArrayList<Employee> employees = new ArrayList<Employee>();
@@ -26,9 +27,11 @@ public class Activity {
     }
     public void addEmployee(Employee employee){
         employees.add(employee);}
-    public ArrayList<Employee> getEmployees(){return employees;}
+    public List<Employee> getEmployees(){return employees;}
 
     public int getActivityID() {
         return activityID;
     }
+
+
 }
