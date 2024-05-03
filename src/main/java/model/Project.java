@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Project {
 
@@ -8,9 +9,12 @@ public class Project {
     private String name;
     private Employee projectLeader;
 
+    private List<Integer> activityIDs;
+
     public Project(String name, int id) {
         this.name = name;
         this.id = id;
+        activityIDs = new ArrayList<>();
     }
 
     public int getId() {
@@ -25,5 +29,13 @@ public class Project {
     }
     public Employee getProjectLeader() {
         return projectLeader;
+    }
+
+    public List<Integer> getActivityIDs() {
+        return activityIDs;
+    }
+
+    public void addActivity(int activityID) {
+        this.activityIDs.add(activityID);
     }
 }

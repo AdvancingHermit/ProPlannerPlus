@@ -24,5 +24,7 @@ public class Activity {
         return activityName;
     }
 
-
+    public int getActivityID() {
+        return activityID;
+    }
 }

@@ -80,6 +80,10 @@ public class ProPlannerPlus {
         activities.add(new Activity(activityName, hoursPerWeek, startDate, endDate, activityID));
     }
 
+    public static void addActivityToProject(Project project, int activityID){
+        project.addActivity(activityID);
+    }
+
 
     public static ArrayList<Project> getProjects() {
         return projects;
