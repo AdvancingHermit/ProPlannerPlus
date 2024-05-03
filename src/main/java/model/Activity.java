@@ -32,7 +32,14 @@ public class Activity {
     public int getActivityID() {
         return activityID;
     }
-    
+    public LocalDate getStartDate()  {
+        return startDate;
+    }
+    public LocalDate getEndDate()  {
+        return endDate;
+    }
+
+
     @Override
     public String toString() {
         return activityName;

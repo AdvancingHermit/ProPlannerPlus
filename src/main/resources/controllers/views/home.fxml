@@ -50,10 +50,10 @@
             <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" onAction="#switchToCreateProject" text="Create Project" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onAction="#switchToCreateProject" text="Create Project" GridPane.columnIndex="1" />
             <Button mnemonicParsing="false" onAction="#switchToViewProjects" text="View Projects" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Button mnemonicParsing="false" onAction="#switchToManageEmployees" text="Manage Employees" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" onAction="#switchToCreateActivity" text="Create Activity" GridPane.columnIndex="1" />
+            <Button mnemonicParsing="false" onAction="#switchToCreateActivity" text="Create Activity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" onAction="#switchToRegisterTime" text="Register Time" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>

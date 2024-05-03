@@ -8,11 +8,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.*;
 
-import java.util.Date;
-
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProPlannerPlus {
@@ -154,13 +151,29 @@ public class ProPlannerPlus {
         return activities;
     }
 
-    public static List<Employee> getFreeEmployees(Project project){
+    public static Map<Employee, Integer> getFreeEmployees(Project project, LocalDate startDate, LocalDate endDate){
         List<Activity> activities = getActivitiesFromProject(project);
         List<Employee> employeeList = new ArrayList<>();
+        Map<Employee, Integer> overlapCounts = new HashMap<Employee, Integer>();
+        Map<Employee, Integer> freeEmployeeMap;
+
         for (Activity activity : activities){
             employeeList.addAll(activity.getEmployees().stream().filter(e -> e.getPersonalActivities().isEmpty()).toList());
         }
-        return employeeList;
+        for (Activity activity : activities){
+            if (activity.getStartDate().isAfter(startDate) && activity.getEndDate().isBefore(endDate)){
+                for (Employee employee : activity.getEmployees()){
+                    if (employeeList.contains(employee)){
+                        overlapCounts.put(employee, overlapCounts.getOrDefault(employee, 0) + 1);
+                    }
+                }
+            }
+        }
+        freeEmployeeMap = overlapCounts.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+
+        return freeEmployeeMap;
     }
 
     public static ArrayList<Activity> getActivities() {return activities; }
