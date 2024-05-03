@@ -174,6 +174,11 @@ public class ProPlannerPlus {
                 .sorted(Map.Entry.comparingByValue())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
+        for (Employee employee :freeEmployeeMap.keySet()){
+            System.out.println(employee.getInitials() + " " + freeEmployeeMap.get(employee));
+        }
+
+
         return freeEmployeeMap;
     }
 
