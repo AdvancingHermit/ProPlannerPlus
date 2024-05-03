@@ -70,14 +70,16 @@ public class ProPlannerPlus {
 
     }
 
-    public static void createActivity(String activityName, float hoursPerWeek, LocalDate startDate, LocalDate endDate){
+    public static void createActivity(String activityName, float hoursPerWeek, LocalDate startDate, LocalDate endDate, String projectName){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
         String start = startDate.format(formatter);
         String end = endDate.format(formatter);
         System.out.println(start);
         String baseId = activityName + hoursPerWeek + start + end;
         int activityID = Math.abs(baseId.hashCode());
-        activities.add(new Activity(activityName, hoursPerWeek, startDate, endDate, activityID));
+        Activity activity = new Activity(activityName, hoursPerWeek, startDate, endDate, activityID);
+        activities.add(activity);
+        addActivityToProject(getProject(projectName), activityID);
     }
 
     public static void addActivityToProject(Project project, int activityID){

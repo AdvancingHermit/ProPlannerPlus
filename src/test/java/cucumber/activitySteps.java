@@ -17,6 +17,7 @@ public class activitySteps {
     int hoursPerWeek;
     LocalDate startDate;
     LocalDate endDate;
+    String projectName;
 
     public activitySteps(){ proPlannerPlus = new ProPlannerPlus(); }
 
@@ -28,11 +29,14 @@ public class activitySteps {
         hoursPerWeek = 10;
         startDate = LocalDate.of(2024, 05, 03);
         endDate = LocalDate.of(2024, 06, 03);
+        projectName = "testPro";
+        proPlannerPlus.createProject(projectName);
+
     }
 
     @When("the employee creates a activity")
     public void the_employee_creates_a_activity() {
-        proPlannerPlus.createActivity(activityName, hoursPerWeek, startDate, endDate);
+        proPlannerPlus.createActivity(activityName, hoursPerWeek, startDate, endDate, projectName);
     }
 
     @Then("an activity is created")

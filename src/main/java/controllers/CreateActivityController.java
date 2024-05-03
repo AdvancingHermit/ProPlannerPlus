@@ -45,12 +45,13 @@ public class CreateActivityController extends StandardController {
     private void createActivity() throws IOException {
         LocalDate start = createActivityStart.getValue();
         LocalDate end = createActivityEnd.getValue();
-
+        String projectName = projectSelector.getValue();
 
         if (!createActivityName.getText().isEmpty() || createActivityHours.getText().isEmpty() || start == null || end == null){
 
             if (getNumber(createActivityHours.getText()) != -1) {
-                proPlannerPlus.createActivity(createActivityName.getText(), Float.parseFloat(createActivityHours.getText()), start, end);
+                proPlannerPlus.createActivity(createActivityName.getText(), Float.parseFloat(createActivityHours.getText()), start, end, projectName);
+
             }
 
         }
