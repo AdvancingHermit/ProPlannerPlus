@@ -40,6 +40,10 @@ public class ProPlannerPlus {
         }
     }
 
+    public static void clearEmployees(){
+        employees.clear();
+    }
+
     public static ArrayList<Employee> getEmployees() {
         return employees;
     }
@@ -155,6 +159,14 @@ public class ProPlannerPlus {
         }
         return null;
     }
+    public static void addEmployeeDirectlyToActivity(int activityID, Employee employee){
+        for (Activity activity : activities) {
+            if (activity.getActivityID() == activityID) {
+                activity.addEmployee(employee);
+            }
+
+        }
+    }
     public static void addEmployeeToActivity(int activityID, Employee employee, Project project) throws OperationNotAllowedException {
         if (!getFreeEmployees(project, getActivity(activityID).getStartDate(), getActivity(activityID).getEndDate()).keySet().contains(employee)) {
             throw new OperationNotAllowedException("Employee not available");
@@ -189,24 +201,24 @@ public class ProPlannerPlus {
         return activities;
     }
 
-    public static Map<Employee, Integer> getFreeEmployees(Project project, LocalDate startDate, LocalDate endDate) throws OperationNotAllowedException {
+    public static Map<Employee, Integer> getFreeEmployees(Project project, LocalDate startDate, LocalDate endDate)
+            throws OperationNotAllowedException {
         List<Activity> activities = getActivitiesFromProject(project);
         Map<Employee, Integer> overlapCounts = new HashMap<Employee, Integer>();
         Map<Employee, Integer> freeEmployeeMap;
-        List<Employee> employeeList = new ArrayList<>(getEmployees().stream().filter(e -> e.getPersonalActivities().isEmpty()).toList());
+        List<Employee> employeeList = new ArrayList<>(getEmployees().stream().filter(e -> e.getPersonalActivities()
+                                                                                           .isEmpty()).toList());
 
-        for (Employee employee : employeeList){
+        for (Employee employee : employeeList){ //1
             overlapCounts.put(employee, 0);
         }
-
-        if (activities.isEmpty()){
-            throw new OperationNotAllowedException("No activities exist");
+        if (activities.isEmpty()){ //2
+            throw new OperationNotAllowedException("No activities exist"); // 3
         }
-
-        for (Activity activity : activities){
-            if (startDate.compareTo(activity.getEndDate()) <= 0 && endDate.compareTo(activity.getStartDate()) >= 0){
-                for (Employee employee : activity.getEmployees()){
-                    if (employeeList.contains(employee)){
+        for (Activity activity : activities){ // 4
+            if (startDate.compareTo(activity.getEndDate()) <= 0 && endDate.compareTo(activity.getStartDate()) >= 0){// 5
+                for (Employee employee : activity.getEmployees()){ // 6
+                    if (employeeList.contains(employee)){ // 7
                         overlapCounts.put(employee, overlapCounts.get(employee) + 1);
                     }
                 }
