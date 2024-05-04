@@ -166,7 +166,7 @@ public class ProPlannerPlus {
         return activities;
     }
 
-    public static Map<Employee, Integer> getFreeEmployees(Project project, LocalDate startDate, LocalDate endDate){
+    public static Map<Employee, Integer> getFreeEmployees(Project project, LocalDate startDate, LocalDate endDate) throws OperationNotAllowedException {
         List<Activity> activities = getActivitiesFromProject(project);
         Map<Employee, Integer> overlapCounts = new HashMap<Employee, Integer>();
         Map<Employee, Integer> freeEmployeeMap;
@@ -174,6 +174,10 @@ public class ProPlannerPlus {
 
         for (Employee employee : employeeList){
             overlapCounts.put(employee, 0);
+        }
+
+        if (activities.isEmpty()){
+            throw new OperationNotAllowedException("No activities exist");
         }
 
         for (Activity activity : activities){

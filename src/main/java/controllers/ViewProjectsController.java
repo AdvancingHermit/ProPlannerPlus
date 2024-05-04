@@ -97,7 +97,7 @@ public class ViewProjectsController extends StandardController {
 
 
     @FXML
-    private void viewActivityDetails() throws IOException {
+    private void viewActivityDetails() throws IOException, OperationNotAllowedException {
         if(activitySelector.getValue() != null){
             setActivityDetails(true);
             updateEmployeeList();
@@ -119,21 +119,21 @@ public class ViewProjectsController extends StandardController {
         projectSelector.getValue().setProjectLeader(employeesSelector.getValue());
     }
 
-    public void addEmployeeToActivity() {
+    public void addEmployeeToActivity() throws OperationNotAllowedException {
         for (FreeEmployee employeeEntry : employeeListSelector.getSelectionModel().getSelectedItems()) {
             activitySelector.getValue().addEmployee(employeeEntry.employee());
         }
         updateEmployeeList();
     }
     @FXML
-    public void removeEmployeeFromActivity() {
+    public void removeEmployeeFromActivity() throws OperationNotAllowedException {
         for (FreeEmployee employeeEntry : currentEmployeeSelector.getSelectionModel().getSelectedItems()) {
             activitySelector.getValue().removeEmployee(employeeEntry.employee());
         }
         updateEmployeeList();
     }
 
-    private void updateEmployeeList() {
+    private void updateEmployeeList() throws OperationNotAllowedException {
         Project project = projectSelector.getValue();
         Activity activity = activitySelector.getValue();
         LocalDate startDate = activity.getStartDate();

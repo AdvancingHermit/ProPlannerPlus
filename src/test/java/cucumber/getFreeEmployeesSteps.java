@@ -41,7 +41,7 @@ public class getFreeEmployeesSteps {
         proPlannerPlus.createActivity(activity, project.getName());
     }
     @When("the employee requests a list of free employees.")
-    public void the_employee_requests_a_list_of_free_employees() {
+    public void the_employee_requests_a_list_of_free_employees() throws OperationNotAllowedException {
         freeEmployees = proPlannerPlus.getFreeEmployees(proPlannerPlus.getProject(project.getName())
                 , activity.getStartDate()
                 , activity.getEndDate());
