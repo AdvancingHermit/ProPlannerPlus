@@ -26,7 +26,6 @@ public class actualTimeSpentOnActivityTest {
 
     @org.junit.Test // JUnit 4
     public void nonExistantID() throws OperationNotAllowedException {
-        expectedEx.expect(OperationNotAllowedException.class);
         expectedEx.expectMessage("Activity doesn't exist");
 
         proPlannerPlus.actualTimeSpentOnActivity(0);

@@ -215,7 +215,7 @@ public class ProPlannerPlus {
         freeEmployeeMap = overlapCounts.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-        
+
         return freeEmployeeMap;
     }
 
@@ -250,6 +250,11 @@ public class ProPlannerPlus {
 
 
     public double actualTimeSpentOnActivity(int activityID) throws OperationNotAllowedException {
+        // Preconditions
+        assert activityID >= 0 : "Activity ID must be non-negative";
+        assert activities != null : "Activities list cannot be null";
+        assert employees != null : "Employees list cannot be null";
+
         if ( activities.stream().noneMatch(p -> p.getActivityID() == activityID) ){
             throw new OperationNotAllowedException("Activity doesn't exist");
         }
@@ -260,6 +265,8 @@ public class ProPlannerPlus {
             }
             amount += employee.getTimeUsed(activityID);
         }
+        // Postconditions
+        assert amount >= 0 : "Total time spent cannot be negative";
         return amount;
     }
 
