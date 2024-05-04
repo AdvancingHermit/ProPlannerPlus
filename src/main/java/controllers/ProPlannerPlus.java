@@ -139,6 +139,7 @@ public class ProPlannerPlus {
             }
         }
     }
+
     public static Activity getActivity(String name) {
         for (Activity activity : activities) {
             if (activity.getName().equals(name)) {
@@ -216,7 +217,10 @@ public class ProPlannerPlus {
         return sum / projectName.activityIDs.size();
     }
 
-    public double actualTimeSpentOnActivity(int activityID){
+    public double actualTimeSpentOnActivity(int activityID) throws OperationNotAllowedException {
+        if ( activities.stream().anyMatch(p -> p.getActivityID() == activityID) ){
+            throw new OperationNotAllowedException("Activity doesn't exist");
+        }
         double amount = 0;
         for (Employee employee : employees){
             amount += employee.getTimeUsed(activityID);

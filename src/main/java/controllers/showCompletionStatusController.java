@@ -54,7 +54,13 @@ public class showCompletionStatusController extends StandardController {
         expectedTimeColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty( cellData.getValue().getTotalTime()).asObject() );
 
         TableColumn<Activity, Double> actualTimeColumn = new TableColumn<>("Actual Time");
-        actualTimeColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty( proPlannerPlus.actualTimeSpentOnActivity(cellData.getValue().getActivityID())).asObject() );
+        actualTimeColumn.setCellValueFactory(cellData -> {
+            try {
+                return new SimpleDoubleProperty( proPlannerPlus.actualTimeSpentOnActivity(cellData.getValue().getActivityID())).asObject();
+            } catch (OperationNotAllowedException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         TableColumn<Activity, Boolean> completionStatusColumn = new TableColumn<>("Is completed");
         completionStatusColumn.setCellValueFactory(cellData -> new SimpleBooleanProperty( cellData.getValue().getComplete()) );
