@@ -218,13 +218,13 @@ public class ProPlannerPlus {
     }
 
     public double actualTimeSpentOnActivity(int activityID) throws OperationNotAllowedException {
-        if ( activities.stream().anyMatch(p -> p.getActivityID() == activityID) ){
+        if ( activities.stream().noneMatch(p -> p.getActivityID() == activityID) ){
             throw new OperationNotAllowedException("Activity doesn't exist");
         }
         double amount = 0;
         for (Employee employee : employees){
             if ( employee.getTimeUsed(activityID) < 0 ){
-                throw new OperationNotAllowedException("Cant have negative time spent");
+                throw new OperationNotAllowedException("Can't have negative time spent");
             }
             amount += employee.getTimeUsed(activityID);
         }
@@ -233,7 +233,7 @@ public class ProPlannerPlus {
 
     public void registerTime(int activityID, String initials, double time) throws OperationNotAllowedException {
         if ( time < 0 ){
-            throw new OperationNotAllowedException("Cant have negative time spent");
+            throw new OperationNotAllowedException("Can't have negative time spent");
         }
         getEmployee(initials).registerTime(activityID, time);
     }
