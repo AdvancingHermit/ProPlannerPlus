@@ -40,6 +40,7 @@ public class Employee {
     }
 
     public double getTimeUsed(int activityID){
+        if ( !schedule.containsKey(activityID)){ return 0; }
         return schedule.get(activityID);
     }
 

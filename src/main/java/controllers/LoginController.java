@@ -25,7 +25,6 @@ public class LoginController extends StandardController {
 
     @FXML
     private void switchToHome() throws IOException {
-        System.out.println(model);
         String initials = initialsField.getText();
         if (ProPlannerPlus.login(initials)) {
             model.setCurrentEmployee(new Employee(initials));

@@ -86,7 +86,6 @@ public class ProPlannerPlus {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
         String start = startDate.format(formatter);
         String end = endDate.format(formatter);
-        System.out.println(start);
         String baseId = activityName + hoursPerWeek + start + end;
         int activityID = Math.abs(baseId.hashCode());
         Activity activity = new Activity(activityName, hoursPerWeek, startDate, endDate, activityID);
@@ -215,5 +214,20 @@ public class ProPlannerPlus {
         }
 
         return sum / projectName.activityIDs.size();
+    }
+
+    public double actualTimeSpentOnActivity(int activityID){
+        double amount = 0;
+        for (Employee employee : employees){
+            amount += employee.getTimeUsed(activityID);
+        }
+        return amount;
+    }
+
+    public void registerTime(int activityID, String initials, double time){
+        getEmployee(initials).registerTime(activityID, time);
+    }
+    public void addPersonalActivity(String initials, LocalDate start, LocalDate end, String reason) throws OperationNotAllowedException {
+        getEmployee(initials).addPersonalActivity(start, end, reason);
     }
 }

@@ -24,9 +24,6 @@ public class CreateProjectController extends StandardController {
     private void createProject() throws IOException {
         if (!createProject.getText().isEmpty()){
             proPlannerPlus.createProject(createProject.getText());
-            for (Project project : proPlannerPlus.getProjects()) {
-                System.out.println(project.getName());
-            }
             switchToHome();
         } else{
             errorText.setText("Please enter a name");

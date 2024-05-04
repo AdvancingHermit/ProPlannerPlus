@@ -85,7 +85,6 @@ public class ViewProjectsController extends StandardController {
             errorText.setVisible(false);
             setProjectDetails(true);
             Employee projectLeader = projectSelector.getValue().getProjectLeader();
-            System.out.println(projectLeader);
             if (projectLeader != null) {
                 employeesSelector.getSelectionModel().select(projectLeader);
             }
@@ -177,10 +176,9 @@ public class ViewProjectsController extends StandardController {
 
     }
     @FXML
-    public void showCompletionStatus() {
-        if (projectSelector.getValue() != null){
-            completionText.setText( String.valueOf(proPlannerPlus.getCompletionsStatus(projectSelector.getValue())) + "%");
-        }
+    public void showCompletionStatus() throws IOException {
+        model.setCurrProject(projectSelector.getValue());
+        App.setRoot("completionStatus");
     }
 
     private record FreeEmployee(Employee employee, int overlapCount) {

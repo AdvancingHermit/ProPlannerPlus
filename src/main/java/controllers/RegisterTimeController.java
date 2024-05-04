@@ -101,13 +101,13 @@ public class RegisterTimeController extends StandardController {
             if  (activity == null) {
                 error = "Please select a valid activity";
             } else  {
-            currentEmployee.registerTime(activity.getActivityID(), Double.parseDouble(hoursText));
+            proPlannerPlus.registerTime(activity.getActivityID(), currentEmployee.getInitials(), Double.parseDouble(hoursText));
             App.setRoot("home");
             }
             errorText.setText(error);
         } else {
             try {
-                currentEmployee.addPersonalActivity(startDatePicker.getValue(), endDatePicker.getValue(), reasonText.getText());
+                proPlannerPlus.addPersonalActivity(currentEmployee.getInitials(), startDatePicker.getValue(), endDatePicker.getValue(), reasonText.getText());
                 App.setRoot("home");
             } catch (Exception e) {
                 errorText.setText(e.getMessage());

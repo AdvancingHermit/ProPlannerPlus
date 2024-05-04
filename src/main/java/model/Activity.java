@@ -44,8 +44,12 @@ public class Activity {
         return endDate;
     }
 
+    public double getTotalTime(){ return (int)totalTime; }
+
 
     public void setCompletion(Boolean complete) {this.complete = complete;}
+
+    public Boolean getComplete(){ return complete; }
 
     @Override
     public String toString() {

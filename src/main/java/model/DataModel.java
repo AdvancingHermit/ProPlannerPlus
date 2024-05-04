@@ -4,7 +4,17 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 public class DataModel {
-    
+
+    Project currProject;
+
+    public void setCurrProject(Project currProject) {
+        this.currProject = currProject;
+    }
+
+    public Project getCurrProject() {
+        return currProject;
+    }
+
     private final ObjectProperty<Employee> currentEmployee = new SimpleObjectProperty<>(null);
 
     public ObjectProperty<Employee> currentPersonProperty() {
