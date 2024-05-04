@@ -1,10 +1,12 @@
 package cucumber;
 
+import controllers.OperationNotAllowedException;
 import controllers.ProPlannerPlus;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import model.Activity;
 import model.Employee;
 import model.Project;
 import static org.junit.Assert.assertTrue;
@@ -23,15 +25,19 @@ public class viewTimeSteps {
     }
 
     @And("a project exist")
-    public void aProjectExist() {
+    public void aProjectExist() throws OperationNotAllowedException {
         proPlannerPlus.createProject("TestProject");
-        proPlannerPlus.createActivity("Hej",50,
+        Activity activity1 = new Activity(
+                "Hej",50,
                 LocalDate.of(2003, 2, 3),
-        LocalDate.of(2003, 2, 16), "TestProject");
-        proPlannerPlus.createActivity("Med",25,
+                LocalDate.of(2003, 2, 16), 0);
+        proPlannerPlus.createActivity(activity1, "TestProject");
+        Activity activity2 = new Activity(
+                "Med",25,
                 LocalDate.of(2003, 3, 3),
-                LocalDate.of(2003, 4, 16), "TestProject");
-        proPlannerPlus.getActivity("Med").setCompletion(true);
+                LocalDate.of(2003, 4, 16), 1);
+        proPlannerPlus.createActivity(activity2, "TestProject");
+        proPlannerPlus.getActivity(activity1.getActivityID()).setCompletion(true);
     }
     double testRun = 0;
     @When("The employee views time status for the project")

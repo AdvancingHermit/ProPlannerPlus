@@ -62,7 +62,7 @@ public class showCompletionStatusController extends StandardController {
             }
         });
 
-        TableColumn<Activity, Boolean> completionStatusColumn = new TableColumn<>("Is completed");
+        TableColumn<Activity, Boolean> completionStatusColumn = new TableColumn<>("Completed");
         completionStatusColumn.setCellValueFactory(cellData -> new SimpleBooleanProperty( cellData.getValue().getComplete()) );
 
         statusOfActivities.getColumns().addAll(activityNamesColumn, expectedTimeColumn, actualTimeColumn, completionStatusColumn);

@@ -33,7 +33,7 @@ public class registerTimeSteps {
 
 
     @Given("an activity exists")
-    public void an_activity_exists() {
+    public void an_activity_exists() throws OperationNotAllowedException {
 
         String activityName = "testAct";
         int hoursPerWeek = 10;

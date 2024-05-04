@@ -37,6 +37,12 @@ public class CreateActivityController extends StandardController {
         List<String> projectNames = proPlannerPlus.getProjects().stream().map(Project::getName).toList();
         ObservableList<String> projects = FXCollections.observableList(projectNames);
         projectSelector.setItems(projects);
+        createActivityHours.setTextFormatter(doubleTextFormatter);
+        createActivityHours.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal && createActivityHours.getText().isEmpty()) {
+                createActivityHours.setText("0");
+            }
+        });
     }
 
     @FXML
@@ -53,18 +59,11 @@ public class CreateActivityController extends StandardController {
         String activityName = createActivityName.getText();
         String activityHours = createActivityHours.getText();
 
-        if (!activityName.isEmpty() && !activityHours.isEmpty() && start != null && end != null && projectName != null){
-
-            if (getNumber(activityHours) != -1 && start.isBefore(end)) {
-                proPlannerPlus.createActivity(createActivityName.getText(), getNumber(activityHours), start, end, projectName);
-                App.setRoot("home");
-
-            } else {
-                errorText.setText("Please ensure a valid number of hours and the end date is after the start date");
-            }
-
-        } else {
-            errorText.setText("Please fill out all fields.");
+        try {
+            proPlannerPlus.createActivity(activityName, getNumber(activityHours), start, end, projectName);
+            App.setRoot("home");
+        } catch (Exception e) {
+            errorText.setText(e.getMessage());
         }
 
 

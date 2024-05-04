@@ -33,6 +33,21 @@ public class Activity {
     }
     public List<Employee> getEmployees(){return employees;}
 
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
+    public void setTotalTime(double totalTime) {
+        this.totalTime = totalTime;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
 
     public int getActivityID() {
         return activityID;

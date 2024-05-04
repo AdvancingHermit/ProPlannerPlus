@@ -80,15 +80,23 @@ public class ProPlannerPlus {
         int projectID = Integer.parseInt((Year.now().getValue() - 2000) + serialNumber);
         projects.add(new Project(name, projectID));
 
+
     }
 
-    public static void createActivity(String activityName, double hoursPerWeek, LocalDate startDate, LocalDate endDate, String projectName){
+    public static void createActivity(String activityName, double totalTime, LocalDate startDate, LocalDate endDate, String projectName, int activityID) throws OperationNotAllowedException {
+        checkActivityDetails(activityName, startDate, endDate, projectName);
+        Activity activity = new Activity(activityName, totalTime, startDate, endDate, activityID);
+        activities.add(activity);
+        addActivityToProject(getProject(projectName), activityID);
+    }
+    public static void createActivity(String activityName, double totalTime, LocalDate startDate, LocalDate endDate, String projectName) throws OperationNotAllowedException {
+        checkActivityDetails(activityName, startDate, endDate, projectName);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
         String start = startDate.format(formatter);
         String end = endDate.format(formatter);
-        String baseId = activityName + hoursPerWeek + start + end;
+        String baseId = activityName + totalTime + start + end;
         int activityID = Math.abs(baseId.hashCode());
-        Activity activity = new Activity(activityName, hoursPerWeek, startDate, endDate, activityID);
+        Activity activity = new Activity(activityName, totalTime, startDate, endDate, activityID);
         activities.add(activity);
         addActivityToProject(getProject(projectName), activityID);
     }
@@ -96,6 +104,30 @@ public class ProPlannerPlus {
         activities.add(activity);
         addActivityToProject(getProject(projectName), activity.getActivityID());
     }
+
+    public static void checkActivityDetails(String activityName, LocalDate startDate, LocalDate endDate, String projectName) throws OperationNotAllowedException {
+        if (activityName.isEmpty()  || startDate == null || endDate == null || projectName.isEmpty()){
+            throw new OperationNotAllowedException("Not all fields are filled out correctly");
+        }
+        if (startDate.isAfter(endDate)) {
+            throw new OperationNotAllowedException("The start date is after the end date");
+        }
+    }
+
+    public static void modifyActivity(int activityID, String activityName, double totalTime, LocalDate startDate, LocalDate endDate, String projectName, boolean completed) throws OperationNotAllowedException {
+        checkActivityDetails(activityName, startDate, endDate, projectName);
+        Activity activity = getActivity(activityID);
+        activity.setActivityName(activityName);
+        activity.setTotalTime(totalTime);
+        activity.setStartDate(startDate);
+        activity.setEndDate(endDate);
+        activity.setCompletion(completed);
+
+
+
+    }
+
+
 
     public static void addActivityToProject(Project project, int activityID){
         project.addActivity(activityID);
@@ -123,13 +155,13 @@ public class ProPlannerPlus {
         }
         return null;
     }
-    public static void addEmployeeToActivity(String activityName, Employee employee, Project project) throws OperationNotAllowedException {
-        if (!getFreeEmployees(project, getActivity(activityName).getStartDate(), getActivity(activityName).getEndDate()).keySet().contains(employee)) {
+    public static void addEmployeeToActivity(int activityID, Employee employee, Project project) throws OperationNotAllowedException {
+        if (!getFreeEmployees(project, getActivity(activityID).getStartDate(), getActivity(activityID).getEndDate()).keySet().contains(employee)) {
             throw new OperationNotAllowedException("Employee not available");
         } else {
 
             for (Activity activity : activities) {
-                if (activity.getName().equals(activityName)) {
+                if (activity.getActivityID() == activityID) {
                     if (activity.getEmployees().contains(employee)) {
                         throw new OperationNotAllowedException("Employee already assigned");
                     } else {
@@ -138,15 +170,6 @@ public class ProPlannerPlus {
                 }
             }
         }
-    }
-
-    public static Activity getActivity(String name) {
-        for (Activity activity : activities) {
-            if (activity.getName().equals(name)) {
-                return activity;
-            }
-        }
-        return null;
     }
 
     public static Activity getActivity(int id) {
