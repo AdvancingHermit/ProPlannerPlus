@@ -93,7 +93,7 @@ public class RegisterTimeController extends StandardController {
 
 
     @FXML
-    private void registerTime() throws IOException {
+    private void registerTime() throws IOException, OperationNotAllowedException {
         if (workButton.isSelected()){
             String error = "";
             Activity activity = activitySelector.getValue();

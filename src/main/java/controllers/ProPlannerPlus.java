@@ -223,12 +223,18 @@ public class ProPlannerPlus {
         }
         double amount = 0;
         for (Employee employee : employees){
+            if ( employee.getTimeUsed(activityID) < 0 ){
+                throw new OperationNotAllowedException("Cant have negative time spent");
+            }
             amount += employee.getTimeUsed(activityID);
         }
         return amount;
     }
 
-    public void registerTime(int activityID, String initials, double time){
+    public void registerTime(int activityID, String initials, double time) throws OperationNotAllowedException {
+        if ( time < 0 ){
+            throw new OperationNotAllowedException("Cant have negative time spent");
+        }
         getEmployee(initials).registerTime(activityID, time);
     }
     public void addPersonalActivity(String initials, LocalDate start, LocalDate end, String reason) throws OperationNotAllowedException {
