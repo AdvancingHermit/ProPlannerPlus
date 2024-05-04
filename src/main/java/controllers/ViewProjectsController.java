@@ -98,9 +98,10 @@ public class ViewProjectsController extends StandardController {
 
     @FXML
     private void viewActivityDetails() throws IOException {
-        setActivityDetails(true);
-        updateEmployeeList();
-
+        if(activitySelector.getValue() != null){
+            setActivityDetails(true);
+            updateEmployeeList();
+        }
     }
 
     private void setProjectDetails(boolean visible) {
