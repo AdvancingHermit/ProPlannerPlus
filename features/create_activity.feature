@@ -15,3 +15,8 @@ Feature: An employee creates an activity
     Given the end date is before the start date
     When the employee creates a activity
     Then the error message "The start date is after the end date" is given
+
+  Scenario: modify activity
+    Given an activity in the project
+    When the employee modifies the activity
+    Then the activity is now modified

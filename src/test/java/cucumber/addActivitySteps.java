@@ -1,5 +1,6 @@
 package cucumber;
 
+import controllers.OperationNotAllowedException;
 import controllers.ProPlannerPlus;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -32,12 +33,15 @@ public class addActivitySteps {
                 LocalDate.of(2024, 06, 03), 1);
 
     }
-    @When("the employee ads the activity to the project")
-    public void the_employee_ads_the_activity_to_the_project() {
+    @When("the employee adds the activity to the project")
+    public void the_employee_adds_the_activity_to_the_project() {
         ProPlannerPlus.addActivityToProject(project,activity.getActivityID());
     }
     @Then("the activity is now under the project")
     public void the_activity_is_now_under_the_project() {
         assertTrue(project.getActivityIDs().contains(activity.getActivityID()));
     }
+
+
+
 }

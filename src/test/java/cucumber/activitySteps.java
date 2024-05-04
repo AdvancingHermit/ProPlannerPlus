@@ -6,10 +6,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import model.Activity;
+import model.Project;
+import org.junit.Assert;
+
 
 import java.time.LocalDate;
 import java.util.Date;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class activitySteps {
@@ -20,6 +24,8 @@ public class activitySteps {
     LocalDate startDate;
     LocalDate endDate;
     String projectName;
+    Activity activity;
+    Activity activity2;
 
     private ErrorMessageHolder errorMessageHolder;
     public activitySteps(ErrorMessageHolder errorMessageHolder) {
@@ -73,6 +79,35 @@ public class activitySteps {
     @Then("an activity is created")
     public void an_activity_is_created() {
         assertTrue(proPlannerPlus.getActivities().stream().anyMatch(p -> p.getName().equals(activityName)));
+    }
+
+    @When("the employee modifies the activity")
+    public void theEmployeeModifiesTheActivity() throws OperationNotAllowedException {
+        activity2 = new Activity("testAct2", 20,LocalDate.of(2025, 05, 03),
+                LocalDate.of(2025, 06, 03), 1);
+
+        proPlannerPlus.modifyActivity(activity.getActivityID(), activity2.getName(), activity2.getTotalTime(),
+                activity2.getStartDate(), activity2.getEndDate(), projectName, activity2.getComplete());
+
+    }
+
+    @Then("the activity is now modified")
+    public void theActivityIsNowModified() {
+        Activity finalActivity = proPlannerPlus.getActivity(activity.getActivityID());
+        assertEquals(activity2.getActivityID(), finalActivity.getActivityID());
+        assertEquals(activity2.getStartDate(), finalActivity.getStartDate());
+        assertEquals(activity2.getEndDate(), finalActivity.getEndDate());
+        assertEquals(activity2.getTotalTime(), finalActivity.getTotalTime(), 0.0);
+        assertEquals(activity2.getComplete(), finalActivity.getComplete());
+
+    }
+    @Given("an activity in the project")
+    public void anActivityInTheProject() throws OperationNotAllowedException {
+        projectName = "testPro";
+        proPlannerPlus.createProject(projectName);
+        activity = new Activity("testAct1", 10,LocalDate.of(2024, 05, 03),
+                LocalDate.of(2024, 06, 03), 1);
+        proPlannerPlus.createActivity(activity.getName(), activity.getTotalTime(), activity.getStartDate(), activity.getEndDate(), projectName, 1);
     }
 
 
