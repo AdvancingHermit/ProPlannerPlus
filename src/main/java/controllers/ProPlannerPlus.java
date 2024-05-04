@@ -231,18 +231,23 @@ public class ProPlannerPlus {
             return 0;
         }
 
-        LocalDate startDate = LocalDate.now();
-        LocalDate endDate = startDate.plusWeeks(1);
-        TemporalField woy = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
-        int startWeekNumber = startDate.get(woy);
-        int endWeekNumber = endDate.get(woy);
-        double sum = 0;
-        for (int id : projectName.getActivityIDs()){
-            sum += getActivity(id).getCompletionStatus(startWeekNumber, endWeekNumber, woy);
-        }
+        double sumTotal = 0;
+        double sumUsed = 0;
 
-        return sum / projectName.activityIDs.size();
+        for (int id : projectName.getActivityIDs()){
+            for (Employee employee : getActivity(id).getEmployees()){
+                if(getActivity(id).getComplete()){
+                    sumTotal += employee.getTimeUsed(id);
+                    sumUsed += employee.getTimeUsed(id);
+                }
+            }
+            if(!getActivity(id).getComplete()){
+                sumTotal += getActivity(id).getTotalTime();
+            }
+        }
+        return sumTotal / sumUsed;
     }
+
 
     public double actualTimeSpentOnActivity(int activityID) throws OperationNotAllowedException {
         if ( activities.stream().noneMatch(p -> p.getActivityID() == activityID) ){
