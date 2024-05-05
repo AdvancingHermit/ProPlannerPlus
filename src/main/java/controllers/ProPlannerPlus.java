@@ -216,6 +216,7 @@ public class ProPlannerPlus {
         assert !startDate.isAfter(endDate) : "Start date can not be after end date";
         assert activities != null : "Activities list cannot be null";
         assert employees != null : "Employees list cannot be null";
+        assert !activities.isEmpty() : "No activities exist";
 
         Map<Employee, Integer> overlapCounts = new HashMap<Employee, Integer>();
         Map<Employee, Integer> freeEmployeeMap;
