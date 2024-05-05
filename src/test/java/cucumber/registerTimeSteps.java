@@ -25,9 +25,10 @@ public class registerTimeSteps {
     LocalDate start;
     LocalDate end;
 
-    public registerTimeSteps(){
+    public registerTimeSteps() throws OperationNotAllowedException {
         proPlannerPlus = new ProPlannerPlus();
         employee = new Employee("yo");
+        proPlannerPlus.addEmployee(employee);
 
     }
 
