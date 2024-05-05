@@ -20,8 +20,11 @@ public class manageProjectSteps {
     String project = new String("testP");
 
     double status;
-    public manageProjectSteps() {
+
+    private ErrorMessageHolder errorMessageHolder;
+    public manageProjectSteps(ErrorMessageHolder errorMessageHolder) {
         proPlannerPlus = new ProPlannerPlus();
+        this.errorMessageHolder = errorMessageHolder;
     }
     @Given("an employee exist")
     public void anEmployeeExist() throws OperationNotAllowedException {
@@ -69,9 +72,15 @@ public class manageProjectSteps {
         proPlannerPlus.getActivity(int1).setTotalTime(int2);
         proPlannerPlus.getActivity(int1).setCompletion(false);
     }
+
     @When("the employee views completion status")
     public void theEmployeeViewsCompletionStatus() {
-        status = proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject(project));
+        try {
+            status = proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject(project));
+        }catch (NullPointerException e) {
+            errorMessageHolder.setErrorMessage(e.getMessage());
+        }
+
     }
 
     @Then("the status is {double}")

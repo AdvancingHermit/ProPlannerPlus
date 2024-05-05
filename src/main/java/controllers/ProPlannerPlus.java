@@ -180,7 +180,6 @@ public class ProPlannerPlus {
                 .contains(employee)) {
             throw new OperationNotAllowedException("Employee not available");
         } else {
-
             for (Activity activity : activities) {
                 if (activity.getActivityID() == activityID) {
                     if (activity.getEmployees().contains(employee)) {
@@ -268,7 +267,7 @@ public class ProPlannerPlus {
         if (sumUsed == 0) {                                                     //6
             return 0;                                                           //7
         }
-        return sumTotal / sumUsed;                                              //8
+        return sumUsed / sumTotal;                                              //8
     }
 
     public double actualTimeSpentOnActivity(int activityID) throws OperationNotAllowedException {
