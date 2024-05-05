@@ -240,8 +240,8 @@ public class ProPlannerPlus {
         double sumUsed = 0;
 
         for (int id : project.getActivityIDs()){                            //3
-            if(getActivity(id).getComplete()) {
-                for (Employee employee : getActivity(id).getEmployees()) {  //4
+            if(getActivity(id).getComplete()) {                             //4
+                for (Employee employee : getActivity(id).getEmployees()) {  //5
                     sumTotal += employee.getTimeUsed(id);
                     sumUsed += employee.getTimeUsed(id);
                 }
@@ -249,7 +249,10 @@ public class ProPlannerPlus {
                 sumTotal += getActivity(id).getTotalTime();
             }
         }
-        return sumTotal / sumUsed;                                          //5
+        if (sumUsed == 0) {                                                 //6
+            return 0;
+        }
+        return sumTotal / sumUsed;                                          //7
     }
 
 
