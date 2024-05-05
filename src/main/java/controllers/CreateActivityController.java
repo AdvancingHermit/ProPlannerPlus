@@ -30,12 +30,11 @@ public class CreateActivityController extends StandardController {
     private Label errorText;
 
     @FXML
-    ComboBox<String> projectSelector;
+    ComboBox<Project> projectSelector;
 
     public void initController(DataModel model, ProPlannerPlus proPlannerPlus) {
         super.initController(model, proPlannerPlus);
-        List<String> projectNames = proPlannerPlus.getProjects().stream().map(Project::getName).toList();
-        ObservableList<String> projects = FXCollections.observableList(projectNames);
+        ObservableList<Project> projects = FXCollections.observableList(proPlannerPlus.getProjects());
         projectSelector.setItems(projects);
         createActivityHours.setTextFormatter(doubleTextFormatter);
         createActivityHours.focusedProperty().addListener((obs, oldVal, newVal) -> {
@@ -54,13 +53,13 @@ public class CreateActivityController extends StandardController {
     private void createActivity() throws IOException {
         LocalDate start = createActivityStart.getValue();
         LocalDate end = createActivityEnd.getValue();
-        String projectName = projectSelector.getValue();
+        int projectID = projectSelector.getValue().getId();
 
         String activityName = createActivityName.getText();
         String activityHours = createActivityHours.getText();
 
         try {
-            proPlannerPlus.createActivity(activityName, getNumber(activityHours), start, end, projectName);
+            proPlannerPlus.createActivity(activityName, getNumber(activityHours), start, end, projectID);
             App.setRoot("home");
         } catch (Exception e) {
             errorText.setText(e.getMessage());

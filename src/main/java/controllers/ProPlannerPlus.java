@@ -93,16 +93,16 @@ public class ProPlannerPlus {
     }
 
     public static void createActivity(String activityName, double totalTime, LocalDate startDate, LocalDate endDate,
-            String projectName, int activityID) throws OperationNotAllowedException {
-        checkActivityDetails(activityName, startDate, endDate, projectName);
+            Integer projectID, int activityID) throws OperationNotAllowedException {
+        checkActivityDetails(activityName, startDate, endDate, projectID);
         Activity activity = new Activity(activityName, totalTime, startDate, endDate, activityID);
         activities.add(activity);
-        addActivityToProject(getProject(projectName), activityID);
+        addActivityToProject(getProject(projectID), activityID);
     }
 
     public static void createActivity(String activityName, double totalTime, LocalDate startDate, LocalDate endDate,
-            String projectName) throws OperationNotAllowedException {
-        checkActivityDetails(activityName, startDate, endDate, projectName);
+            Integer projectID) throws OperationNotAllowedException {
+        checkActivityDetails(activityName, startDate, endDate, projectID);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
         String start = startDate.format(formatter);
         String end = endDate.format(formatter);
@@ -110,17 +110,17 @@ public class ProPlannerPlus {
         int activityID = Math.abs(baseId.hashCode());
         Activity activity = new Activity(activityName, totalTime, startDate, endDate, activityID);
         activities.add(activity);
-        addActivityToProject(getProject(projectName), activityID);
+        addActivityToProject(getProject(projectID), activityID);
     }
 
-    public static void createActivity(Activity activity, String projectName) {
+    public static void createActivity(Activity activity, int projectID) {
         activities.add(activity);
-        addActivityToProject(getProject(projectName), activity.getActivityID());
+        addActivityToProject(getProject(projectID), activity.getActivityID());
     }
 
     public static void checkActivityDetails(String activityName, LocalDate startDate, LocalDate endDate,
-            String projectName) throws OperationNotAllowedException {
-        if (activityName.isEmpty() || startDate == null || endDate == null || projectName.isEmpty()) {
+            Integer projectID) throws OperationNotAllowedException {
+        if (activityName.isEmpty() || startDate == null || endDate == null || projectID == null) {
             throw new OperationNotAllowedException("Not all fields are filled out correctly");
         }
         if (startDate.isAfter(endDate)) {
@@ -129,8 +129,8 @@ public class ProPlannerPlus {
     }
 
     public static void modifyActivity(int activityID, String activityName, double totalTime, LocalDate startDate,
-            LocalDate endDate, String projectName, boolean completed) throws OperationNotAllowedException {
-        checkActivityDetails(activityName, startDate, endDate, projectName);
+            LocalDate endDate, int projectID, boolean completed) throws OperationNotAllowedException {
+        checkActivityDetails(activityName, startDate, endDate, projectID);
         Activity activity = getActivity(activityID);
         activity.setActivityName(activityName);
         activity.setTotalTime(totalTime);
@@ -248,15 +248,20 @@ public class ProPlannerPlus {
 
     public double getCompletionStatus(Project project) throws NullPointerException {
 
-        if (project.getActivityIDs().size() == 0) {                            // 1
-            throw new NullPointerException("No activities exists in project"); // 2
+        //Preconditions
+        assert project != null : "Project cannot be null";
+        assert project.getActivityIDs().size() != 0 : "No activity assigned";
+
+
+        if (project.getActivityIDs().size() == 0) {
+            throw new NullPointerException("No activities exists in project");
         }
         double sumTotal = 0;
         double sumUsed = 0;
 
-        for (int id : project.getActivityIDs()){                                //3
-            if(getActivity(id).getComplete()) {                                 //4
-                for (Employee employee : getEmployees()) {                      //5
+        for (int id : project.getActivityIDs()){
+            if(getActivity(id).getComplete()) {
+                for (Employee employee : getEmployees()) {
                     sumTotal += employee.getTimeUsed(id);
                     sumUsed += employee.getTimeUsed(id);
                 }
@@ -264,10 +269,13 @@ public class ProPlannerPlus {
                 sumTotal += getActivity(id).getTotalTime();
             }
         }
-        if (sumTotal == 0) {                                                    //6
-            return 1;                                                           //7
+        if (sumTotal == 0) {
+            return 1;
         }
-        return sumUsed / sumTotal;                                              //8
+
+        //post conditions
+
+        return sumUsed / sumTotal;
     }
 
     public double actualTimeSpentOnActivity(int activityID) throws OperationNotAllowedException {

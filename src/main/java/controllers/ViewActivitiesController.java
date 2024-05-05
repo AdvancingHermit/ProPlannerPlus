@@ -142,13 +142,13 @@ public class ViewActivitiesController extends StandardController {
         Activity activity = activitySelector.getValue();
         LocalDate start = activityStartDate.getValue();
         LocalDate end = activityEndDate.getValue();
-        String projectName = model.getCurrProject().getName();
+        int projectID = model.getCurrProject().getId();
         String activityName = activityNameField.getText();
         String activityHours = activityHourField.getText();
         boolean completed = completedToggle.isSelected();
 
         try {
-            proPlannerPlus.modifyActivity(activity.getActivityID(), activityName, getNumber(activityHours), start, end, projectName, completed);
+            proPlannerPlus.modifyActivity(activity.getActivityID(), activityName, getNumber(activityHours), start, end, projectID, completed);
             App.setRoot("home");
         } catch (Exception e) {
             errorText.setText(e.getMessage());
