@@ -15,8 +15,6 @@ class ActualTimeDBC {
 
     private ProPlannerPlus proPlannerPlus;
     private Employee employee1;
-    private Employee employee2;
-    private Activity activity;
 
     @BeforeEach
     void setUp() {
@@ -33,6 +31,12 @@ class ActualTimeDBC {
     @Test
     void testNullEmployees() {
         proPlannerPlus.setEmployees(null);
+        AssertionError assertionError = assertThrows(AssertionError.class, () -> proPlannerPlus.actualTimeSpentOnActivity(0));
+        Assertions.assertEquals("Employees list cannot be null", assertionError.getMessage());
+    }
+    @Test
+    void negativeTimeSpent() {
+
         AssertionError assertionError = assertThrows(AssertionError.class, () -> proPlannerPlus.actualTimeSpentOnActivity(0));
         Assertions.assertEquals("Employees list cannot be null", assertionError.getMessage());
     }

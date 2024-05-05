@@ -56,9 +56,14 @@ public class ViewProjectsController extends StandardController {
             errorText.setVisible(false);
             setProjectDetails(true);
             Employee projectLeader = projectSelector.getValue().getProjectLeader();
-            if (projectLeader != null) {
-                employeesSelector.getSelectionModel().select(projectLeader);
-            }
+
+            projectSelector.focusedProperty().addListener((obs, oldVal, newVal) -> {
+                if( projectLeader != null){
+                    employeesSelector.getSelectionModel().select(projectLeader);
+                } else{
+                    employeesSelector.getSelectionModel().select(projectLeader);
+                }
+            });
         }
         else{
             errorText.setVisible(true);

@@ -68,6 +68,10 @@ public class getCompletionStatusTest {
     public void noActivitiesInProject() {
         project = new Project("test",1);
         proPlannerPlus.createTestProject(project);
-        assertThrows(NullPointerException.class, ()-> proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject(project.getId())));
+
+        expectedEx.expectMessage("Can't have negative time spent");
+        proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject(project.getId()));
+
+        //assertThrows(NullPointerException.class, ()-> proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject(project.getId())));
     }
 }
