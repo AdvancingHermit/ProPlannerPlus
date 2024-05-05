@@ -5,12 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import controllers.OperationNotAllowedException;
 import controllers.ProPlannerPlus;
+import model.Activity;
 import model.Employee;
 import model.Project;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.time.LocalDate;
+import java.util.stream.Collectors;
 
 
 public class addEmployeeToActivityDBC {
@@ -18,32 +21,30 @@ public class addEmployeeToActivityDBC {
     private Employee employee;
 
     private Project project;
-
-    private LocalDate startDate;
-
-    private LocalDate endDate;
-
+    private Activity activity;
 
     @BeforeEach
     void setUp() throws OperationNotAllowedException {
         proPlannerPlus = new ProPlannerPlus();
         employee = new Employee("test");
+        proPlannerPlus.addEmployee(employee);
         project = new Project("test",1);
         proPlannerPlus.createTestProject(project);
-        proPlannerPlus.clearEmployees();
-        proPlannerPlus.addEmployee(employee);
-        proPlannerPlus.createActivity("testAct", 10,LocalDate.of(2024,05,03),
-                LocalDate.of(2024,05,04), project.getId());
-        proPlannerPlus.addActivityToProject(project,proPlannerPlus.getActivities().get(0).getActivityID());
-        proPlannerPlus.addEmployeeDirectlyToActivity(proPlannerPlus.getActivities().get(0).getActivityID(), employee);
+        activity = new Activity("testAct", 10,LocalDate.of(2024,05,03),
+                LocalDate.of(2024,05,04), 10);
+        proPlannerPlus.createActivity( activity, project.getId());
+        proPlannerPlus.addActivityToProject(project,activity.getActivityID());
+
     }
     @Test
-    void employeeIsAdded() {
-
+    void employeeIsAdded() throws OperationNotAllowedException {
+        proPlannerPlus.addEmployeeToActivity(activity.getActivityID(), employee);
+        Assertions.assertTrue(proPlannerPlus.getActivity(activity.getActivityID()).getEmployees().contains(employee));
     }
     @Test
     void noMatchingActivitiesForID(){
-
+        AssertionError assertionError = assertThrows(AssertionError.class, () -> proPlannerPlus.addEmployeeToActivity(0, employee));
+        Assertions.assertEquals("No matching activity for the ID", assertionError.getMessage());
     }
 }
 
