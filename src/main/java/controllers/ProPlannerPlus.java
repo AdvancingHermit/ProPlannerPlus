@@ -264,7 +264,7 @@ public class ProPlannerPlus {
         if (sumUsed == 0) {                                                     //6
             return 0;                                                           //7
         }
-        return sumTotal / sumUsed;                                              //8
+        return sumUsed / sumTotal;                                              //8
     }
 
     public double actualTimeSpentOnActivity(int activityID) throws OperationNotAllowedException {
