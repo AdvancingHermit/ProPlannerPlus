@@ -55,15 +55,20 @@ public class ViewProjectsController extends StandardController {
         if (projectSelector.getValue() != null) {
             errorText.setVisible(false);
             setProjectDetails(true);
-            Employee projectLeader = projectSelector.getValue().getProjectLeader();
 
-            projectSelector.focusedProperty().addListener((obs, oldVal, newVal) -> {
-                if( projectLeader != null){
-                    employeesSelector.getSelectionModel().select(projectLeader);
-                } else{
-                    employeesSelector.getSelectionModel().select(projectLeader);
+            projectSelector.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+                if (newVal != null) {
+
+                    if (projectSelector.getValue().getProjectLeader() != null) {
+                        employeesSelector.getSelectionModel().select(projectSelector.getValue().getProjectLeader());
+                    }
+
+                    else {
+                        employeesSelector.getSelectionModel().select(null);
+                    }
                 }
             });
+
         }
         else{
             errorText.setVisible(true);
