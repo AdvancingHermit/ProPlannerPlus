@@ -157,7 +157,7 @@ public class ViewActivitiesController extends StandardController {
 
         addedEmployees = FXCollections.observableList(new ArrayList<>());
 
-        Map<Employee, Integer> temp = proPlannerPlus.getFreeEmployees(ProPlannerPlus.getProject(projectName), startDate, endDate);
+        Map<Employee, Integer> temp = proPlannerPlus.getFreeEmployees(startDate, endDate);
 
         for (Map.Entry<Employee, Integer> entry : temp.entrySet()) {
             if (!activity.getEmployees().contains(entry.getKey())) {

@@ -29,7 +29,7 @@ public class getFreeEmployeeTest {
     @org.junit.Test // JUnit 4
     public void noActivities() throws OperationNotAllowedException{
         expectedEx.expectMessage("No activities exist");
-        proPlannerPlus.getFreeEmployees(new Project("test",1),
+        proPlannerPlus.getFreeEmployees(
                 LocalDate.of(2024,05,03),
                 LocalDate.of(2024,05,03));
     }
@@ -53,7 +53,7 @@ public class getFreeEmployeeTest {
 
         Map<Employee, Integer> freeEmployees = new LinkedHashMap<>();
 
-        assertEquals(freeEmployees, proPlannerPlus.getFreeEmployees(project,startDate,endDate));
+        assertEquals(freeEmployees, proPlannerPlus.getFreeEmployees(startDate,endDate));
 
     }
 
@@ -77,7 +77,7 @@ public class getFreeEmployeeTest {
 
         Map<Employee, Integer> freeEmployees = new LinkedHashMap<>();
 
-        assertEquals(freeEmployees, proPlannerPlus.getFreeEmployees(project,startDate,endDate));
+        assertEquals(freeEmployees, proPlannerPlus.getFreeEmployees(startDate,endDate));
 
     }
 
@@ -101,7 +101,7 @@ public class getFreeEmployeeTest {
         freeEmployees.put(employee,0);
 
 
-        assertEquals(freeEmployees, proPlannerPlus.getFreeEmployees(project,startDate,endDate));
+        assertEquals(freeEmployees, proPlannerPlus.getFreeEmployees(startDate,endDate));
 
     }
     @org.junit.Test // JUnit 4
@@ -123,7 +123,7 @@ public class getFreeEmployeeTest {
         Map<Employee, Integer> freeEmployees = new LinkedHashMap<>();
         freeEmployees.put(employee,1);
 
-        assertEquals(freeEmployees, proPlannerPlus.getFreeEmployees(project,startDate,endDate));
+        assertEquals(freeEmployees, proPlannerPlus.getFreeEmployees(startDate,endDate));
 
     }
 

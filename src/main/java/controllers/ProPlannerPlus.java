@@ -168,7 +168,7 @@ public class ProPlannerPlus {
         }
     }
     public static void addEmployeeToActivity(int activityID, Employee employee, Project project) throws OperationNotAllowedException {
-        if (!getFreeEmployees(project, getActivity(activityID).getStartDate(), getActivity(activityID).getEndDate()).keySet().contains(employee)) {
+        if (!getFreeEmployees(getActivity(activityID).getStartDate(), getActivity(activityID).getEndDate()).keySet().contains(employee)) {
             throw new OperationNotAllowedException("Employee not available");
         } else {
 
@@ -201,9 +201,8 @@ public class ProPlannerPlus {
         return activities;
     }
 
-    public static Map<Employee, Integer> getFreeEmployees(Project project, LocalDate startDate, LocalDate endDate)
+    public static Map<Employee, Integer> getFreeEmployees(LocalDate startDate, LocalDate endDate)
             throws OperationNotAllowedException {
-        List<Activity> activities = getActivitiesFromProject(project);
         Map<Employee, Integer> overlapCounts = new HashMap<Employee, Integer>();
         Map<Employee, Integer> freeEmployeeMap;
         List<Employee> employeeList = new ArrayList<>(getEmployees().stream().filter(e -> e.getPersonalActivities()
