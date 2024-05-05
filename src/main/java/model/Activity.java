@@ -70,24 +70,5 @@ public class Activity {
     public String toString() {
         return activityName;
     }
-
-    public double getCompletionStatus(int startWeekNumber, int endWeekNumber, TemporalField woy) {
-        int weekAmount;
-        if (complete){
-            return 100.0;
-        }
-        if (startDate.getYear() == endDate.getYear()
-                && (startDate.get(woy) >= startWeekNumber && startDate.get(woy) <= endWeekNumber)
-                || (endDate.get(woy) >= startWeekNumber && endDate.get(woy) <= endWeekNumber)){
-            weekAmount = endDate.get(woy) - startDate.get(woy);
-            double weeklyTime = totalTime /  weekAmount;
-            return weeklyTime;
-        } else if ((startDate.get(woy) >= startWeekNumber && startDate.get(woy) <= endWeekNumber)
-                || (endDate.get(woy) >= startWeekNumber && endDate.get(woy) <= endWeekNumber)){
-            weekAmount = (int) startDate.until(endDate, ChronoUnit.WEEKS);
-            double weeklyTime = totalTime /  weekAmount;
-            return weeklyTime;
-        }
-        return 0.0;
-    }
+    
 }

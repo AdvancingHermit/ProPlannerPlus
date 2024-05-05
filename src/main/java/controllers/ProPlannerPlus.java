@@ -176,6 +176,7 @@ public class ProPlannerPlus {
     }
 
     public static void addEmployeeToActivity(int activityID, Employee employee) throws OperationNotAllowedException {
+        assert getActivities().stream().anyMatch(p -> p.getActivityID() == activityID) : "No matching activity for the ID";
         if (!getFreeEmployees(getActivity(activityID).getStartDate(), getActivity(activityID).getEndDate()).keySet()
                 .contains(employee)) {
             throw new OperationNotAllowedException("Employee not available");
@@ -190,6 +191,7 @@ public class ProPlannerPlus {
                 }
             }
         }
+        assert getActivity(activityID).getEmployees().contains(employee);
     }
 
     public static Activity getActivity(int id) {
