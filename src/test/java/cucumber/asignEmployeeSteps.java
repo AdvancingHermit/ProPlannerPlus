@@ -53,7 +53,7 @@ public class asignEmployeeSteps {
     @When("The employee is assigned to the activity")
     public void The_employee_is_assigned_to_the_activity() throws OperationNotAllowedException{
         try {
-            proPlannerPlus.addEmployeeToActivity(activity.getActivityID(), employee, proPlannerPlus.getProject("TestProject"));
+            proPlannerPlus.addEmployeeToActivity(activity.getActivityID(), employee);
         }
         catch (OperationNotAllowedException e) {
             errorMessageHolder.setErrorMessage(e.getMessage());

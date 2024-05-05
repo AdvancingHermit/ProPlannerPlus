@@ -167,7 +167,7 @@ public class ProPlannerPlus {
 
         }
     }
-    public static void addEmployeeToActivity(int activityID, Employee employee, Project project) throws OperationNotAllowedException {
+    public static void addEmployeeToActivity(int activityID, Employee employee) throws OperationNotAllowedException {
         if (!getFreeEmployees(getActivity(activityID).getStartDate(), getActivity(activityID).getEndDate()).keySet().contains(employee)) {
             throw new OperationNotAllowedException("Employee not available");
         } else {
