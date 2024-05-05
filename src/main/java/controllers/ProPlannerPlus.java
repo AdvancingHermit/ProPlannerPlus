@@ -136,6 +136,9 @@ public class ProPlannerPlus {
 
     public static void modifyActivity(int activityID, String activityName, double totalTime, LocalDate startDate,
             LocalDate endDate, Integer projectID, boolean completed) throws OperationNotAllowedException {
+        if (startDate.isAfter(endDate)){
+            throw new OperationNotAllowedException("Invalid dates");
+        }
         checkActivityDetails(activityName, startDate, endDate, projectID);
         Activity activity = getActivity(activityID);
         activity.setActivityName(activityName);
