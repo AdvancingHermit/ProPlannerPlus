@@ -34,12 +34,12 @@ public class manageProjectSteps {
 
     @Given("a project with no activities")
     public void aProjectWithNoActivities() {
-        proPlannerPlus.createProject(project.getName());
+        proPlannerPlus.createTestProject(project);
     }
     @Given("a project contains {int} activites")
     public void aProjectContainsActivites(Integer int1) {
 
-        proPlannerPlus.createProject(project.getName());
+        proPlannerPlus.createTestProject(project);
 
         Activity activity;
 
