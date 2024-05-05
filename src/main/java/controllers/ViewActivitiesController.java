@@ -155,6 +155,7 @@ public class ViewActivitiesController extends StandardController {
             App.setRoot("home");
         } catch (Exception e) {
             errorText.setText(e.getMessage());
+            errorText.setVisible(true);
         }
     }
 
