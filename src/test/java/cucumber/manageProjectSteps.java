@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
 public class manageProjectSteps {
     ProPlannerPlus proPlannerPlus;
     Employee employee;
-    String project = new String("testP");
+    Project project = new Project("testP",1);
 
     double status;
 
@@ -34,12 +34,12 @@ public class manageProjectSteps {
 
     @Given("a project with no activities")
     public void aProjectWithNoActivities() {
-        proPlannerPlus.createProject(project);
+        proPlannerPlus.createProject(project.getName());
     }
     @Given("a project contains {int} activites")
     public void aProjectContainsActivites(Integer int1) {
 
-        proPlannerPlus.createProject(project);
+        proPlannerPlus.createProject(project.getName());
 
         Activity activity;
 
@@ -49,7 +49,7 @@ public class manageProjectSteps {
                     LocalDate.of(2024, 06, 03),
                     i);
 
-            proPlannerPlus.createActivity(activity, project);
+            proPlannerPlus.createActivity(activity, project.getId());
         }
     }
     @Given("an activity with {int} hours is completed is in the project")
@@ -76,7 +76,7 @@ public class manageProjectSteps {
     @When("the employee views completion status")
     public void theEmployeeViewsCompletionStatus() {
         try {
-            status = proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject(project));
+            status = proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject(project.getId()));
         }catch (NullPointerException e) {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
