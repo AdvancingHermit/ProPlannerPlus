@@ -32,7 +32,11 @@ public class showCompletionStatusController extends StandardController {
         statusOfActivities.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         statusOfActivities.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        completionAmount.setText( String.valueOf(proPlannerPlus.getCompletionStatus(model.getCurrProject())) + "%");
+        try {
+            completionAmount.setText( String.valueOf(proPlannerPlus.getCompletionStatus(model.getCurrProject())) + "%");
+        } catch (Exception e){
+            completionAmount.setText("No activities found");
+        }
 
         createActivityList();
     }
