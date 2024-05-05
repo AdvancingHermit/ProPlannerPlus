@@ -28,7 +28,7 @@ public class manageProjectSteps {
     }
     @Given("an employee exist")
     public void anEmployeeExist() throws OperationNotAllowedException {
-        employee = new Employee("testE");
+        employee = new Employee("test");
         proPlannerPlus.addEmployee(employee);
     }
 

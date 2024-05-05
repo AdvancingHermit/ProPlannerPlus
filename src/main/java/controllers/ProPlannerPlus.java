@@ -43,6 +43,9 @@ public class ProPlannerPlus {
     }
 
     public static void addEmployee(Employee employee) throws OperationNotAllowedException {
+        if (employee.getInitials().length()== 0 ||employee.getInitials().length()>4){
+            throw new OperationNotAllowedException("Initials can only be 4 letters long");
+        }
         if (!employees.stream().filter(e -> e.getInitials().equals(employee.getInitials())).toList().isEmpty()) {
             throw new OperationNotAllowedException("Employee already exist");
         }

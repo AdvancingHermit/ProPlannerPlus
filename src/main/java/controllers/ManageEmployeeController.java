@@ -61,8 +61,16 @@ public class ManageEmployeeController extends StandardController {
 
     @FXML
     private void addRemoveEmployee() throws IOException, OperationNotAllowedException {
+        if (employeeText.getText().length() > 4){
+            errorText.setText("Initials can only be up to 4 letters");
+            return;
+        }
+        if (employeeText.getText().isEmpty()){
+            errorText.setText("Please enter a name");
+            return;
+        }
+
         if (addButton.isSelected()){
-            if (!employeeText.getText().isEmpty()){
                 List<String> employeeInitials = ProPlannerPlus.getEmployees().stream().map(Employee::getInitials).toList();
                 if (!employeeInitials.contains(employeeText.getText())) {
                     ProPlannerPlus.addEmployee(new Employee(employeeText.getText()));
@@ -70,12 +78,9 @@ public class ManageEmployeeController extends StandardController {
                 } else {
                     errorText.setText("Employee already exist");
                 }
-            } else{
-                errorText.setText("Please enter a name");
             }
-        }
+
         if (removeButton.isSelected()) {
-            if (!employeeText.getText().isEmpty()) {
                 List<String> employeeInitials = ProPlannerPlus.getEmployees().stream().map(Employee::getInitials).toList();
                 if (employeeInitials.contains(employeeText.getText())) {
                     ProPlannerPlus.removeEmployee(employeeText.getText());
@@ -83,13 +88,7 @@ public class ManageEmployeeController extends StandardController {
                 } else {
                     errorText.setText("The employee doesn't exist");
                 }
-            } else {
-                errorText.setText("Please enter a name");
             }
-        }
-
-
-
     }
 
 

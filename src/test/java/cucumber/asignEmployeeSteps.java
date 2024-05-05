@@ -35,7 +35,7 @@ public class asignEmployeeSteps {
                 LocalDate.of(2003, 3, 2),
                 42);
         proPlannerPlus.createActivity(activity, "TestProject");
-        employee = new Employee("TestEmployee");
+        employee = new Employee("test");
         proPlannerPlus.addEmployee(employee);
     }
     @Given("A free employee which is assigned to the activity")
@@ -46,7 +46,7 @@ public class asignEmployeeSteps {
                 LocalDate.of(2003, 3, 2),
                 42);
         proPlannerPlus.createActivity(activity, "TestProject");
-        employee = new Employee("TestEmployee");
+        employee = new Employee("test");
         proPlannerPlus.addEmployee(employee);
         proPlannerPlus.getActivity(activity.getActivityID()).addEmployee(employee);
     }
@@ -79,7 +79,7 @@ public class asignEmployeeSteps {
                 LocalDate.of(2003, 3, 2),
                 42);
         proPlannerPlus.createActivity(activity,"TestProject");
-        employee = new Employee("TestEmployee");
+        employee = new Employee("test");
         proPlannerPlus.addEmployee(employee);
         employee.addPersonalActivity(LocalDate.of(2002, 3, 2),
                 LocalDate.of(2003, 3, 3), "sick");
