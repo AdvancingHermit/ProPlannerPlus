@@ -264,8 +264,8 @@ public class ProPlannerPlus {
                 sumTotal += getActivity(id).getTotalTime();
             }
         }
-        if (sumUsed == 0) {                                                     //6
-            return 0;                                                           //7
+        if (sumTotal == 0) {                                                    //6
+            return 1;                                                           //7
         }
         return sumUsed / sumTotal;                                              //8
     }
