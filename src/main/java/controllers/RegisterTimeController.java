@@ -21,6 +21,8 @@ public class RegisterTimeController extends StandardController {
     @FXML
     private GridPane workGrid;
     @FXML
+    private GridPane projectGrid;
+    @FXML
     private GridPane personalGrid;
     @FXML
     private ComboBox<Activity> activitySelector;
@@ -38,15 +40,29 @@ public class RegisterTimeController extends StandardController {
     private Label errorText;
     @FXML
     private TextField reasonText;
+    @FXML
+    private ComboBox<Project> projectSelector;
     Employee currentEmployee;
+
 
 
     public void initController(DataModel model, ProPlannerPlus proPlannerPlus) {
         super.initController(model, proPlannerPlus);
         ObservableList<Activity> activities = FXCollections.observableList(proPlannerPlus.getActivities());
         activitySelector.setItems(activities);
+        ObservableList<Project> projects = FXCollections.observableList(proPlannerPlus.getProjects());
+        projectSelector.setItems(projects);
         personalGrid.setManaged(false);
         personalGrid.setVisible(false);
+        workGrid.setManaged(false);
+        workGrid.setVisible(false);
+        projectSelector.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null && workButton.isSelected()) {
+                workGrid.setManaged(true);
+                workGrid.setVisible(true);
+            }
+
+        });
         currentEmployee = model.getCurrentEmployee();
         hourInput.setTextFormatter(doubleTextFormatter);
         hourInput.focusedProperty().addListener((obs, oldVal, newVal) -> {
@@ -84,10 +100,15 @@ public class RegisterTimeController extends StandardController {
     }
 
     private void changeActiveGrid() {
+
         personalGrid.setManaged(!personalGrid.isManaged());
         personalGrid.setVisible(!personalGrid.isVisible());
-        workGrid.setManaged(!workGrid.isManaged());
-        workGrid.setVisible(!workGrid.isVisible());
+        projectGrid.setManaged(!projectGrid.isManaged());
+        projectGrid.setVisible(!projectGrid.isVisible());
+        if (projectSelector.getValue() != null) {
+            workGrid.setManaged(!workGrid.isManaged());
+            workGrid.setVisible(!workGrid.isVisible());
+        }
         errorText.setText("");
     }
 
@@ -116,10 +137,4 @@ public class RegisterTimeController extends StandardController {
 
     }
 
-    public void setActivityToCompleted() {
-        if (activitySelector.getValue() != null){
-            activitySelector.getValue().setCompletion(true);
-        }
-
-    }
 }
