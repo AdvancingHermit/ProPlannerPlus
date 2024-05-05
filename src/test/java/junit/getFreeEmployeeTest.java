@@ -37,13 +37,13 @@ public class getFreeEmployeeTest {
     public void personalActivitiesWithNoOverlap() throws OperationNotAllowedException {
         Project project = new Project("testProj",1);
         Employee employee = new Employee("test");
-        proPlannerPlus.createProject(project.getName());
+        proPlannerPlus.createTestProject(project);
         proPlannerPlus.clearEmployees();
         proPlannerPlus.addEmployee(employee);
         proPlannerPlus.getEmployees().get(0).addPersonalActivity(LocalDate.of(2024,05,02),
                 LocalDate.of(2024,05,10), "sick");
         proPlannerPlus.createActivity("testAct", 10,LocalDate.of(2024,05,03),
-                LocalDate.of(2024,05,04), "testProj");
+                LocalDate.of(2024,05,04), project.getId());
         proPlannerPlus.addActivityToProject(project,proPlannerPlus.getActivities().get(0).getActivityID());
         proPlannerPlus.addEmployeeDirectlyToActivity(proPlannerPlus.getActivities().get(0).getActivityID(), employee);
 
@@ -61,13 +61,13 @@ public class getFreeEmployeeTest {
     public void personalActivitiesWithOverlap() throws OperationNotAllowedException {
         Project project = new Project("testProj",1);
         Employee employee = new Employee("test");
-        proPlannerPlus.createProject(project.getName());
+        proPlannerPlus.createTestProject(project);
         proPlannerPlus.clearEmployees();
         proPlannerPlus.addEmployee(employee);
         proPlannerPlus.getEmployees().get(0).addPersonalActivity(LocalDate.of(2024,05,02),
                 LocalDate.of(2024,05,10), "sick");
         proPlannerPlus.createActivity("testAct", 10,LocalDate.of(2024,05,03),
-                LocalDate.of(2024,05,04), "testProj");
+                LocalDate.of(2024,05,04), project.getId());
         proPlannerPlus.addActivityToProject(project,proPlannerPlus.getActivities().get(0).getActivityID());
         proPlannerPlus.addEmployeeDirectlyToActivity(proPlannerPlus.getActivities().get(0).getActivityID(), employee);
 
@@ -85,11 +85,11 @@ public class getFreeEmployeeTest {
     public void noPersonalActivitiesWithNoOverlap() throws OperationNotAllowedException {
         Project project = new Project("testProj",1);
         Employee employee = new Employee("test");
-        proPlannerPlus.createProject(project.getName());
+        proPlannerPlus.createTestProject(project);
         proPlannerPlus.clearEmployees();
         proPlannerPlus.addEmployee(employee);
         proPlannerPlus.createActivity("testAct", 10,LocalDate.of(2024,05,03),
-                LocalDate.of(2024,05,04), "testProj");
+                LocalDate.of(2024,05,04), project.getId());
         proPlannerPlus.addActivityToProject(project,proPlannerPlus.getActivities().get(0).getActivityID());
         proPlannerPlus.addEmployeeDirectlyToActivity(proPlannerPlus.getActivities().get(0).getActivityID(), employee);
 
@@ -108,11 +108,11 @@ public class getFreeEmployeeTest {
     public void noPersonalActivitiesWithOverlap() throws OperationNotAllowedException {
         Project project = new Project("testProj",1);
         Employee employee = new Employee("test");
-        proPlannerPlus.createProject(project.getName());
+        proPlannerPlus.createTestProject(project);
         proPlannerPlus.clearEmployees();
         proPlannerPlus.addEmployee(employee);
         proPlannerPlus.createActivity("testAct", 10,LocalDate.of(2024,05,03),
-                LocalDate.of(2024,05,04), "testProj");
+                LocalDate.of(2024,05,04), project.getId());
         proPlannerPlus.addActivityToProject(project,proPlannerPlus.getActivities().get(0).getActivityID());
         proPlannerPlus.addEmployeeDirectlyToActivity(proPlannerPlus.getActivities().get(0).getActivityID(), employee);
 

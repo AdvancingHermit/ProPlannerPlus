@@ -92,6 +92,12 @@ public class ProPlannerPlus {
 
     }
 
+    public static void createTestProject(Project project) {
+        projects.add(project);
+
+    }
+
+
     public static void createActivity(String activityName, double totalTime, LocalDate startDate, LocalDate endDate,
             Integer projectID, int activityID) throws OperationNotAllowedException {
         checkActivityDetails(activityName, startDate, endDate, projectID);

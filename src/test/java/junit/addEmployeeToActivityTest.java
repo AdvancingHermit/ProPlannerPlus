@@ -4,6 +4,7 @@ import controllers.OperationNotAllowedException;
 import controllers.ProPlannerPlus;
 import model.Activity;
 import model.Employee;
+import model.Project;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 
@@ -20,6 +21,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class addEmployeeToActivityTest {
 
+	private Project project;
 	ProPlannerPlus proPlannerPlus;
 	@Rule
 	public ExpectedException expectedEx = ExpectedException.none();
@@ -37,18 +39,20 @@ public class addEmployeeToActivityTest {
 		proPlannerPlus.addEmployee(employee);
 		Activity activity = new Activity("TestAc", 10, LocalDate.of(2024, 4,5),
 				LocalDate.of(2025, 4, 5), 3);
-		proPlannerPlus.createProject("TestPro");
-		proPlannerPlus.createActivity(activity, "TestPro");
+		project = new Project("test",1);
+		proPlannerPlus.createTestProject(project);
+		proPlannerPlus.createActivity(activity, project.getId());
 		proPlannerPlus.addEmployeeToActivity(3, employee);
 	}
 	@org.junit.Test // JUnit 4
 	public void addsEmployee() throws OperationNotAllowedException {
 		Employee employee = new Employee("test");
 		proPlannerPlus.addEmployee(employee);
-		proPlannerPlus.createProject("TestPro");
+		project = new Project("test",1);
+		proPlannerPlus.createTestProject(project);
 		Activity activity = new Activity("TestAc", 10, LocalDate.of(2024, 4,5),
 				LocalDate.of(2025, 4, 5), 3);
-		proPlannerPlus.createActivity(activity, "TestPro");
+		proPlannerPlus.createActivity(activity, project.getId());
 		proPlannerPlus.addEmployeeToActivity(3, employee);
 		assertTrue(proPlannerPlus.getActivity(activity.getActivityID()).getEmployees().contains(employee));
 	}
@@ -57,10 +61,11 @@ public class addEmployeeToActivityTest {
 		expectedEx.expectMessage("Employee already assigned");
 		Employee employee = new Employee("test");
 		proPlannerPlus.addEmployee(employee);
-		proPlannerPlus.createProject("TestPro");
+		project = new Project("test",1);
+		proPlannerPlus.createTestProject(project);
 		Activity activity = new Activity("TestAc", 10, LocalDate.of(2024, 4,5),
 				LocalDate.of(2025, 4, 5), 3);
-		proPlannerPlus.createActivity(activity, "TestPro");
+		proPlannerPlus.createActivity(activity, project.getId());
 		proPlannerPlus.addEmployeeDirectlyToActivity(3, employee);
 		proPlannerPlus.addEmployeeToActivity(3, employee);
 		proPlannerPlus.getActivity(activity.getActivityID()).getEmployees().contains(employee);

@@ -15,6 +15,7 @@ import static org.junit.Assert.assertEquals;
 public class actualTimeSpentOnActivityTest {
 
     ProPlannerPlus proPlannerPlus;
+    private Project project;
 
     @Rule
     public ExpectedException expectedEx = ExpectedException.none();
@@ -34,13 +35,13 @@ public class actualTimeSpentOnActivityTest {
     @org.junit.Test // JUnit 4
     public void employeesSizeZero() throws OperationNotAllowedException {
 
-        String project = "test";
+        project = new Project("test",1);
+        proPlannerPlus.createTestProject(project);
 
         Activity activity = new Activity("testAct", 10, LocalDate.of(2024, 05, 03),
                 LocalDate.of(2024, 06, 03), 1);
 
-        proPlannerPlus.createProject(project);
-        ProPlannerPlus.createActivity(activity, project);
+        ProPlannerPlus.createActivity(activity, project.getId());
 
         assertEquals(0.0, proPlannerPlus.actualTimeSpentOnActivity(activity.getActivityID()), 0.0);
     }
@@ -48,13 +49,14 @@ public class actualTimeSpentOnActivityTest {
     @org.junit.Test // JUnit 4
     public void negativeTimeUsed () throws OperationNotAllowedException {
 
-        String project = "test";
+        project = new Project("test",1);
+        proPlannerPlus.createTestProject(project);
 
         Activity activity = new Activity("testAct", 10, LocalDate.of(2024, 05, 03),
                 LocalDate.of(2024, 06, 03), 1);
 
-        proPlannerPlus.createProject(project);
-        ProPlannerPlus.createActivity(activity, project);
+
+        ProPlannerPlus.createActivity(activity, project.getId());
 
         expectedEx.expect(OperationNotAllowedException.class);
         expectedEx.expectMessage("Can't have negative time spent");
@@ -65,13 +67,12 @@ public class actualTimeSpentOnActivityTest {
     @org.junit.Test // JUnit 4
     public void positiveTimeUsed () throws OperationNotAllowedException {
 
-        String project = "test";
-
+        project = new Project("test",1);
+        proPlannerPlus.createTestProject(project);
         Activity activity = new Activity("testAct", 10, LocalDate.of(2024, 05, 03),
                 LocalDate.of(2024, 06, 03), 1);
 
-        proPlannerPlus.createProject(project);
-        ProPlannerPlus.createActivity(activity, project);
+        ProPlannerPlus.createActivity(activity, project.getId());
 
         proPlannerPlus.registerTime(activity.getActivityID(), "abe", 1);
         assertEquals(1.0, proPlannerPlus.actualTimeSpentOnActivity(activity.getActivityID()), 0.0);

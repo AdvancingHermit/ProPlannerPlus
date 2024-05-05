@@ -3,6 +3,7 @@ package junit;
 import controllers.ProPlannerPlus;
 import model.Activity;
 import model.Employee;
+import model.Project;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 
@@ -10,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class getCompletionStatusTest {
 
-
+    private Project project;
     ProPlannerPlus proPlannerPlus;
 
     @Rule
@@ -23,45 +24,50 @@ public class getCompletionStatusTest {
 
     @org.junit.Test //
     public void allActivitiesFinishedWithTimeSpent() {
-        proPlannerPlus.createProject("test");
+        project = new Project("test",1);
+        proPlannerPlus.createTestProject(project);
         Activity activity = new Activity("testActivity", 1, null, null, 0);
         activity.setCompletion(true);
         Employee employee = new Employee("test");
         activity.addEmployee(employee);
         employee.registerTime(0, 1);
-        proPlannerPlus.createActivity(activity, "test");
-        assertEquals(proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject("test")), 1.0, 0.0);
+        proPlannerPlus.createActivity(activity, project.getId());
+        assertEquals(proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject(project.getId())), 1.0, 0.0);
     }
     @org.junit.Test //
     public void allActivitiesFinishedNoTimeSpent() {
-        proPlannerPlus.createProject("test");
+        project = new Project("test",1);
+        proPlannerPlus.createTestProject(project);
         Activity activity = new Activity("testActivity", 1, null, null, 0);
         activity.setCompletion(true);
         Employee employee = new Employee("test");
         activity.addEmployee(employee);
         employee.registerTime(0, 0);
-        proPlannerPlus.createActivity(activity, "test");
-        assertEquals(proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject("test")), 1.0, 0.0);
+        proPlannerPlus.createActivity(activity, project.getId());
+        assertEquals(proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject(project.getId())), 1.0, 0.0);
     }
     @org.junit.Test //
     public void activitiesNotFinishedTotalTime0() {
-        proPlannerPlus.createProject("test");
+        project = new Project("test",1);
+        proPlannerPlus.createTestProject(project);
         Activity activity = new Activity("testActivity", 1, null, null, 0);
         activity.setCompletion(false);
-        proPlannerPlus.createActivity(activity, "test");
-        assertEquals(proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject("test")), 0.0, 0.0);
+        proPlannerPlus.createActivity(activity, project.getId());
+        assertEquals(proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject(project.getId())), 0.0, 0.0);
     }
     @org.junit.Test //
     public void activitiesNotFinishedTotalTime1() {
-        proPlannerPlus.createProject("test");
+        project = new Project("test",1);
+        proPlannerPlus.createTestProject(project);
         Activity activity = new Activity("testActivity", 0, null, null, 0);
         activity.setCompletion(false);
-        proPlannerPlus.createActivity(activity, "test");
-        assertEquals(proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject("test")), 1.0, 0.0);
+        proPlannerPlus.createActivity(activity, project.getId());
+        assertEquals(proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject(project.getId())), 1.0, 0.0);
     }
     @org.junit.Test
     public void noActivitiesInProject() {
-        proPlannerPlus.createProject("test");
-        assertThrows(NullPointerException.class, ()-> proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject("test")));
+        project = new Project("test",1);
+        proPlannerPlus.createTestProject(project);
+        assertThrows(NullPointerException.class, ()-> proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject(project.getId())));
     }
 }

@@ -30,11 +30,11 @@ public class getFreeEmployeesDBC {
         proPlannerPlus = new ProPlannerPlus();
         project = new Project("testProj",1);
         employee = new Employee("test");
-        proPlannerPlus.createProject(project.getName());
+        proPlannerPlus.createTestProject(project);
         proPlannerPlus.clearEmployees();
         proPlannerPlus.addEmployee(employee);
         proPlannerPlus.createActivity("testAct", 10,LocalDate.of(2024,05,03),
-                LocalDate.of(2024,05,04), "testProj");
+                LocalDate.of(2024,05,04), project.getId());
         proPlannerPlus.addActivityToProject(project,proPlannerPlus.getActivities().get(0).getActivityID());
         proPlannerPlus.addEmployeeDirectlyToActivity(proPlannerPlus.getActivities().get(0).getActivityID(), employee);
 

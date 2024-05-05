@@ -23,15 +23,17 @@ public class addEmployeeToActivityDBC {
 
     private LocalDate endDate;
 
+
     @BeforeEach
     void setUp() throws OperationNotAllowedException {
         proPlannerPlus = new ProPlannerPlus();
         employee = new Employee("test");
-        proPlannerPlus.createProject("testProject");
+        project = new Project("test",1);
+        proPlannerPlus.createTestProject(project);
         proPlannerPlus.clearEmployees();
         proPlannerPlus.addEmployee(employee);
         proPlannerPlus.createActivity("testAct", 10,LocalDate.of(2024,05,03),
-                LocalDate.of(2024,05,04), "testProject");
+                LocalDate.of(2024,05,04), project.getId());
         proPlannerPlus.addActivityToProject(project,proPlannerPlus.getActivities().get(0).getActivityID());
         proPlannerPlus.addEmployeeDirectlyToActivity(proPlannerPlus.getActivities().get(0).getActivityID(), employee);
     }

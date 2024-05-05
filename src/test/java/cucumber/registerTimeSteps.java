@@ -22,6 +22,8 @@ public class registerTimeSteps {
 
     private Employee employee;
 
+    private Project project;
+
     LocalDate start;
     LocalDate end;
 
@@ -40,12 +42,12 @@ public class registerTimeSteps {
         int hoursPerWeek = 10;
         LocalDate start = LocalDate.of(2024, 05, 03);
         LocalDate end = LocalDate.of(2024, 06, 03);
-        String projectName = "testPro";
-        proPlannerPlus.createProject(projectName);
+        project = new Project("test",1);
+        proPlannerPlus.createTestProject(project);
 
-        proPlannerPlus.createActivity(activityName, hoursPerWeek, start, end, projectName);
+        proPlannerPlus.createActivity(activityName, hoursPerWeek, start, end, project.getId());
 
-        activityID = proPlannerPlus.getProject(projectName).getActivityIDs().get(0);
+        activityID = proPlannerPlus.getProject(project.getId()).getActivityIDs().get(0);
     }
 
     @When("an employee registers a {double} hours for the activity")

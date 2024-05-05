@@ -37,8 +37,8 @@ public class getFreeEmployeesSteps {
         activity = new Activity("testAct", 10, LocalDate.of(2024, 05, 03),
                 LocalDate.of(2024, 06, 03), 1);
         proPlannerPlus.addEmployee(employee);
-        proPlannerPlus.createProject(project.getName());
-        proPlannerPlus.createActivity(activity, project.getName());
+        proPlannerPlus.createTestProject(project);
+        proPlannerPlus.createActivity(activity, project.getId());
     }
     @When("the employee requests a list of free employees.")
     public void the_employee_requests_a_list_of_free_employees() throws OperationNotAllowedException {

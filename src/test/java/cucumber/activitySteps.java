@@ -27,6 +27,8 @@ public class activitySteps {
     Activity activity;
     Activity activity2;
 
+    private Project project;
+
     private ErrorMessageHolder errorMessageHolder;
     public activitySteps(ErrorMessageHolder errorMessageHolder) {
         proPlannerPlus = new ProPlannerPlus();
@@ -40,8 +42,8 @@ public class activitySteps {
         hoursPerWeek = 10;
         startDate = LocalDate.of(2024, 05, 03);
         endDate = LocalDate.of(2024, 06, 03);
-        projectName = "testPro";
-        proPlannerPlus.createProject(projectName);
+        project = new Project("test",1);
+        proPlannerPlus.createTestProject(project);
 
     }
     @Given("missing info for the activity")
@@ -50,8 +52,8 @@ public class activitySteps {
         hoursPerWeek = 0;
         startDate = null;
         endDate = null;
-        projectName = "";
-        proPlannerPlus.createProject("testProject");
+        project = new Project("test",1);
+        proPlannerPlus.createTestProject(project);
     }
 
     @Given("the end date is before the start date")
@@ -60,8 +62,8 @@ public class activitySteps {
         hoursPerWeek = 10;
         startDate = LocalDate.of(2024, 05, 03);
         endDate = LocalDate.of(2023, 05, 03);
-        projectName = "testPro";
-        proPlannerPlus.createProject(projectName);
+        project = new Project("test",1);
+        proPlannerPlus.createTestProject(project);
 
     }
 
@@ -69,7 +71,7 @@ public class activitySteps {
     @When("the employee creates a activity")
     public void the_employee_creates_a_activity() throws OperationNotAllowedException {
         try {
-            proPlannerPlus.createActivity(activityName, hoursPerWeek, startDate, endDate, projectName);
+            proPlannerPlus.createActivity(activityName, hoursPerWeek, startDate, endDate, project.getId());
         } catch (OperationNotAllowedException e) {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
@@ -87,7 +89,7 @@ public class activitySteps {
                 LocalDate.of(2025, 06, 03), 1);
 
         proPlannerPlus.modifyActivity(activity.getActivityID(), activity2.getName(), activity2.getTotalTime(),
-                activity2.getStartDate(), activity2.getEndDate(), projectName, activity2.getComplete());
+                activity2.getStartDate(), activity2.getEndDate(), project.getId(), activity2.getComplete());
 
     }
 
@@ -103,11 +105,11 @@ public class activitySteps {
     }
     @Given("an activity in the project")
     public void anActivityInTheProject() throws OperationNotAllowedException {
-        projectName = "testPro";
-        proPlannerPlus.createProject(projectName);
+        project = new Project("test",1);
+        proPlannerPlus.createTestProject(project);
         activity = new Activity("testAct1", 10,LocalDate.of(2024, 05, 03),
                 LocalDate.of(2024, 06, 03), 1);
-        proPlannerPlus.createActivity(activity.getName(), activity.getTotalTime(), activity.getStartDate(), activity.getEndDate(), projectName, 1);
+        proPlannerPlus.createActivity(activity.getName(), activity.getTotalTime(), activity.getStartDate(), activity.getEndDate(), project.getId(), 1);
     }
 
 
