@@ -309,7 +309,7 @@ public class ProPlannerPlus {
             amount += employee.getTimeUsed(activityID);
         }
         // Postconditions
-        assert amount >= 0 : "Total time spent cannot be negative";
+        assert amount >= 0 : "Can't have negative time spent";
         return amount;
     }
 
