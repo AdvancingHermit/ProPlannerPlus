@@ -14,6 +14,7 @@ import model.Employee;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class ViewActivitiesController extends StandardController {
@@ -39,7 +40,9 @@ public class ViewActivitiesController extends StandardController {
     public void initController(DataModel model, ProPlannerPlus proPlannerPlus) {
         super.initController(model, proPlannerPlus);
         setActivityDetails(false);
-        ObservableList<Activity> activities = FXCollections.observableList( proPlannerPlus.getActivities() );
+        List<Integer> activitieIDs = model.getCurrProject().getActivityIDs();
+        List<Activity> activityList = activitieIDs.stream().map(a -> proPlannerPlus.getActivity(a)).toList();
+        ObservableList<Activity> activities = FXCollections.observableList(activityList);
         errorText.setVisible(false);
 
         activitySelector.valueProperty().addListener((observable, oldValue, newValue) -> {

@@ -15,6 +15,7 @@ public class Project {
     public Project(String name, int id) {
         this.name = name;
         activityIDs = new ArrayList<>();
+        this.id = id;
     }
 
     public int getId() {
