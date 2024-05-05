@@ -289,6 +289,8 @@ public class ProPlannerPlus {
         }
 
         //post conditions
+        assert sumUsed / sumTotal >= 0 && sumUsed / sumTotal <= 1;
+
 
         return sumUsed / sumTotal;
     }
