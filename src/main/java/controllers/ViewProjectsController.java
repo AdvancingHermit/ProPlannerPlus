@@ -1,21 +1,15 @@
 package controllers;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import model.Activity;
 import model.DataModel;
 import model.Employee;
 import model.Project;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Map;
 
 public class ViewProjectsController extends StandardController {
 
@@ -39,7 +33,8 @@ public class ViewProjectsController extends StandardController {
         setProjectDetails(false);
         ObservableList<Employee> employees = FXCollections.observableList( proPlannerPlus.getEmployees() );
         ObservableList<Project> projects = FXCollections.observableList( proPlannerPlus.getProjects() );
-        errorText.setVisible(false);
+        setErrorText(false);
+
         employeesSelector.setItems(employees);
         projectSelector.setItems(projects);
     }
@@ -53,7 +48,7 @@ public class ViewProjectsController extends StandardController {
     @FXML
     private void viewProjectDetails() throws IOException {
         if (projectSelector.getValue() != null) {
-            errorText.setVisible(false);
+            setErrorText(false);
             setProjectDetails(true);
 
             employeesSelector.getSelectionModel().select(projectSelector.getValue().getProjectLeader());
@@ -73,7 +68,7 @@ public class ViewProjectsController extends StandardController {
 
         }
         else{
-            errorText.setVisible(true);
+            setErrorText(true);
             errorText.setText("No Project Selected");
         }
     }
@@ -83,6 +78,11 @@ public class ViewProjectsController extends StandardController {
     private void setProjectDetails(boolean visible) {
         projectDetails.setManaged(visible);
         projectDetails.setVisible(visible);
+    }
+
+    private void setErrorText(boolean visible) {
+        errorText.setManaged(visible);
+        errorText.setVisible(visible);
     }
 
 
