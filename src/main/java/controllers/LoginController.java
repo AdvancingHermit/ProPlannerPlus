@@ -26,10 +26,13 @@ public class LoginController extends StandardController {
     @FXML
     private void switchToHome() throws IOException {
         String initials = initialsField.getText();
-        if (ProPlannerPlus.login(initials)) {
-            model.setCurrentEmployee(new Employee(initials));
+        ProPlannerPlus.login(initials);
+        if (proPlannerPlus.loggedIn) {
+            model.setCurrentEmployee(proPlannerPlus.getEmployee(initials));
             App.setRoot("home");
-        } else {
+        } else if (proPlannerPlus.adminLoggedIn) {
+            App.setRoot("manageEmployees");
+        } else  {
             errorText.setText("Please enter valid initials!");
         }
 

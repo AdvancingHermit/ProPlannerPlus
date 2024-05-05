@@ -1,15 +1,11 @@
 package controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import model.DataModel;
 import model.Employee;
-import model.Project;
 
 import java.io.IOException;
 import java.util.List;
@@ -35,8 +31,14 @@ public class ManageEmployeeController extends StandardController {
 
 
     @FXML
-    private void switchToHome() throws IOException {
-        App.setRoot("home");
+    private void switchToAway() throws IOException {
+        if (!proPlannerPlus.adminLoggedIn) {
+            App.setRoot("home");
+        } else {
+            proPlannerPlus.loggedIn = false;
+            proPlannerPlus.adminLoggedIn = false;
+            App.setRoot("login");
+        }
     }
 
     @FXML
@@ -64,7 +66,7 @@ public class ManageEmployeeController extends StandardController {
                 List<String> employeeInitials = ProPlannerPlus.getEmployees().stream().map(Employee::getInitials).toList();
                 if (!employeeInitials.contains(employeeText.getText())) {
                     ProPlannerPlus.addEmployee(new Employee(employeeText.getText()));
-                    switchToHome();
+                    switchToAway();
                 } else {
                     errorText.setText("Employee already exist");
                 }
@@ -77,7 +79,7 @@ public class ManageEmployeeController extends StandardController {
                 List<String> employeeInitials = ProPlannerPlus.getEmployees().stream().map(Employee::getInitials).toList();
                 if (employeeInitials.contains(employeeText.getText())) {
                     ProPlannerPlus.removeEmployee(employeeText.getText());
-                    switchToHome();
+                    switchToAway();
                 } else {
                     errorText.setText("The employee doesn't exist");
                 }

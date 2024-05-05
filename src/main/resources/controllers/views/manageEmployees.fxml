@@ -16,7 +16,7 @@
    <children>
       <VBox prefHeight="38.0" prefWidth="600.0">
          <children>
-            <Button fx:id="homeButton" mnemonicParsing="false" onAction="#switchToHome" text="Home" />
+            <Button fx:id="homeButton" mnemonicParsing="false" onAction="#switchToAway" text="Home" />
          </children>
          <VBox.margin>
             <Insets />

@@ -22,6 +22,8 @@ public class ProPlannerPlus {
     static ArrayList<Activity> activities;
     public static boolean loggedIn = false;
 
+    public static boolean adminLoggedIn = false;
+
     public ProPlannerPlus() {
         employees = new ArrayList<Employee>();
         employees.add(new Employee("abe"));
@@ -57,6 +59,10 @@ public class ProPlannerPlus {
     }
 
     public static boolean login(String initials) {
+        if (initials.equals("admin")){
+            adminLoggedIn = true;
+            return true;
+        }
         for (Employee employee : ProPlannerPlus.getEmployees()) {
             if (employee.getInitials().equals(initials)) {
                 loggedIn = true;
@@ -195,6 +201,11 @@ public class ProPlannerPlus {
 
     public static Map<Employee, Integer> getFreeEmployees(LocalDate startDate, LocalDate endDate)
             throws OperationNotAllowedException {
+        // Preconditions
+        assert !startDate.isAfter(endDate) : "Start date can not be after end date";
+        assert activities != null : "Activities list cannot be null";
+        assert employees != null : "Employees list cannot be null";
+
         Map<Employee, Integer> overlapCounts = new HashMap<Employee, Integer>();
         Map<Employee, Integer> freeEmployeeMap;
         List<Employee> employeeList = new ArrayList<>(getEmployees().stream().filter(e -> e.getPersonalActivities()
@@ -215,10 +226,12 @@ public class ProPlannerPlus {
                 }
             }
         }
+
         freeEmployeeMap = overlapCounts.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-
+        //Postconditions
+        assert freeEmployeeMap.getClass().equals(LinkedHashMap.class);
         return freeEmployeeMap;
     }
 
