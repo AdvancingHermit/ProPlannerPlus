@@ -14,7 +14,6 @@ public class Project {
 
     public Project(String name, int id) {
         this.name = name;
-        this.id = id;
         activityIDs = new ArrayList<>();
     }
 

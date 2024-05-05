@@ -148,9 +148,9 @@ public class ProPlannerPlus {
         return projects;
     }
 
-    public static Project getProject(String name) {
+    public static Project getProject(int id) {
         for (Project project : projects) {
-            if (project.getName().equals(name)) {
+            if (project.getId() == id) {
                 return project;
             }
         }
