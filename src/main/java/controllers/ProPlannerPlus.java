@@ -272,7 +272,6 @@ public class ProPlannerPlus {
 
     public double actualTimeSpentOnActivity(int activityID) throws OperationNotAllowedException {
         // Preconditions
-        assert activityID >= 0 : "Activity ID must be non-negative";
         assert activities != null : "Activities list cannot be null";
         assert employees != null : "Employees list cannot be null";
 
