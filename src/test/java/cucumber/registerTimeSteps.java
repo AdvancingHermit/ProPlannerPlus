@@ -61,7 +61,7 @@ public class registerTimeSteps {
     public void an_employee_registers_time_on_the_personal_activity() throws OperationNotAllowedException {
         start = LocalDate.of(2024, 05, 03);
         end = LocalDate.of(2024, 06, 03);
-        employee.addPersonalActivity(start, end, "sick");
+        proPlannerPlus.addPersonalActivity(employee.getInitials(), start, end, "sick");
     }
 
     @Then("that amount of time has been registered for the personal activity for employee")
