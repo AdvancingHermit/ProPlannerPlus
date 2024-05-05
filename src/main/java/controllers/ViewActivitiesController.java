@@ -142,7 +142,7 @@ public class ViewActivitiesController extends StandardController {
         Activity activity = activitySelector.getValue();
         LocalDate start = activityStartDate.getValue();
         LocalDate end = activityEndDate.getValue();
-        int projectID = model.getCurrProject().getId();
+        Integer projectID = model.getCurrProject().getId();
         String activityName = activityNameField.getText();
         String activityHours = activityHourField.getText();
         boolean completed = completedToggle.isSelected();

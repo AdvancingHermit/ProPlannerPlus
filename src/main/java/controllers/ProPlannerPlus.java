@@ -129,7 +129,7 @@ public class ProPlannerPlus {
     }
 
     public static void modifyActivity(int activityID, String activityName, double totalTime, LocalDate startDate,
-            LocalDate endDate, int projectID, boolean completed) throws OperationNotAllowedException {
+            LocalDate endDate, Integer projectID, boolean completed) throws OperationNotAllowedException {
         checkActivityDetails(activityName, startDate, endDate, projectID);
         Activity activity = getActivity(activityID);
         activity.setActivityName(activityName);

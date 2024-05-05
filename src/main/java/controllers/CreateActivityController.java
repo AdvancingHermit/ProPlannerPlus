@@ -53,7 +53,7 @@ public class CreateActivityController extends StandardController {
     private void createActivity() throws IOException {
         LocalDate start = createActivityStart.getValue();
         LocalDate end = createActivityEnd.getValue();
-        int projectID = projectSelector.getValue().getId();
+        Integer projectID = projectSelector.getValue().getId();
 
         String activityName = createActivityName.getText();
         String activityHours = createActivityHours.getText();
