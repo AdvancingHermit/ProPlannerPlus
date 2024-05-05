@@ -172,7 +172,6 @@ public class ProPlannerPlus {
                 .contains(employee)) {
             throw new OperationNotAllowedException("Employee not available");
         } else {
-
             for (Activity activity : activities) {
                 if (activity.getActivityID() == activityID) {
                     if (activity.getEmployees().contains(employee)) {
