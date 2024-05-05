@@ -42,6 +42,14 @@ public class ViewActivitiesController extends StandardController {
         ObservableList<Activity> activities = FXCollections.observableList( proPlannerPlus.getActivities() );
         errorText.setVisible(false);
 
+        activitySelector.valueProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                updateEmployeeList();
+            } catch (OperationNotAllowedException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         employeeListSelector.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         currentEmployeeSelector.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         activitySelector.setItems(activities);
@@ -59,6 +67,7 @@ public class ViewActivitiesController extends StandardController {
                 activityHourField.setText("0");
             }
         });
+
     }
 
     @FXML
@@ -72,7 +81,7 @@ public class ViewActivitiesController extends StandardController {
     }
 
     @FXML
-    private void viewActivityDetails(){
+    private void viewActivityDetails() {
         if(activitySelector.getValue() != null){
             if (!activityDetailsButton.isSelected()){
                 activityDetailsButton.setSelected(true);

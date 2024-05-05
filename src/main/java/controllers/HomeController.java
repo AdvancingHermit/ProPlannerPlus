@@ -9,6 +9,8 @@ public class HomeController extends StandardController {
 
     @FXML
     private void switchToLogin() throws IOException {
+        proPlannerPlus.loggedIn = false;
+        proPlannerPlus.adminLoggedIn = false;
         App.setRoot("login");
     }
     @FXML
