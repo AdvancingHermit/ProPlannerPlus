@@ -258,7 +258,7 @@ public class ProPlannerPlus {
 
         //Preconditions
         assert project != null : "Project cannot be null";
-        assert project.getActivityIDs().size() != 0 : "No activity assigned";
+        assert project.getActivityIDs().size() != 0 : "No activities exists in project";
 
 
         if (project.getActivityIDs().size() == 0) {
