@@ -233,25 +233,23 @@ public class ProPlannerPlus {
     }
     public double getCompletionStatus(Project project){
 
-        if (project.getActivityIDs().size() == 0){                      //1
-            return 0;                                                   //2
+        if (project.getActivityIDs().size() == 0){                          //1
+            return 0;                                                       //2
         }
-
         double sumTotal = 0;
         double sumUsed = 0;
 
-        for (int id : project.getActivityIDs()){                        //3
-            for (Employee employee : getActivity(id).getEmployees()){   //4
-                if(getActivity(id).getComplete()){                      //5
+        for (int id : project.getActivityIDs()){                            //3
+            if(getActivity(id).getComplete()) {
+                for (Employee employee : getActivity(id).getEmployees()) {  //4
                     sumTotal += employee.getTimeUsed(id);
                     sumUsed += employee.getTimeUsed(id);
                 }
-            }
-            if(!getActivity(id).getComplete()){                         //6
+            } else {
                 sumTotal += getActivity(id).getTotalTime();
             }
         }
-        return sumTotal / sumUsed;                                      //7
+        return sumTotal / sumUsed;                                          //5
     }
 
 
