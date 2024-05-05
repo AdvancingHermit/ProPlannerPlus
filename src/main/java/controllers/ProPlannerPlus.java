@@ -12,14 +12,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
-import java.time.temporal.TemporalField;
-import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 
 
 
 import java.util.List;
-import java.util.Locale;
 
 import java.util.stream.Collectors;
 
@@ -126,8 +123,6 @@ public class ProPlannerPlus {
         activity.setStartDate(startDate);
         activity.setEndDate(endDate);
         activity.setCompletion(completed);
-
-
 
     }
 
@@ -236,27 +231,27 @@ public class ProPlannerPlus {
     public static void assignProjectLeader(Project project, Employee employee) {
         project.setProjectLeader(employee);
     }
-    public double getCompletionsStatus(Project projectName){
+    public double getCompletionStatus(Project project){
 
-        if (projectName.getActivityIDs().size() == 0){
-            return 0;
+        if (project.getActivityIDs().size() == 0){                      //1
+            return 0;                                                   //2
         }
 
         double sumTotal = 0;
         double sumUsed = 0;
 
-        for (int id : projectName.getActivityIDs()){
-            for (Employee employee : getActivity(id).getEmployees()){
-                if(getActivity(id).getComplete()){
+        for (int id : project.getActivityIDs()){                        //3
+            for (Employee employee : getActivity(id).getEmployees()){   //4
+                if(getActivity(id).getComplete()){                      //5
                     sumTotal += employee.getTimeUsed(id);
                     sumUsed += employee.getTimeUsed(id);
                 }
             }
-            if(!getActivity(id).getComplete()){
+            if(!getActivity(id).getComplete()){                         //6
                 sumTotal += getActivity(id).getTotalTime();
             }
         }
-        return sumTotal / sumUsed;
+        return sumTotal / sumUsed;                                      //7
     }
 
 

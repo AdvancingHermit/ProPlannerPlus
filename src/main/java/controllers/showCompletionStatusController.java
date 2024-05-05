@@ -2,7 +2,6 @@ package controllers;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,8 +11,6 @@ import model.Activity;
 import model.DataModel;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.stream.Stream;
 
 public class showCompletionStatusController extends StandardController {
     @FXML
@@ -35,7 +32,7 @@ public class showCompletionStatusController extends StandardController {
         statusOfActivities.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         statusOfActivities.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        completionAmount.setText( String.valueOf(proPlannerPlus.getCompletionsStatus(model.getCurrProject())) + "%");
+        completionAmount.setText( String.valueOf(proPlannerPlus.getCompletionStatus(model.getCurrProject())) + "%");
 
         createActivityList();
     }
