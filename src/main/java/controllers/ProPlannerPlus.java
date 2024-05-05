@@ -182,6 +182,7 @@ public class ProPlannerPlus {
     }
 
     public static void addEmployeeToActivity(int activityID, Employee employee) throws OperationNotAllowedException {
+        // Pre-condition
         assert getActivities().stream().anyMatch(p -> p.getActivityID() == activityID) : "No matching activity for the ID";
         if (!getFreeEmployees(getActivity(activityID).getStartDate(), getActivity(activityID).getEndDate()).keySet()
                 .contains(employee)) {
@@ -197,6 +198,7 @@ public class ProPlannerPlus {
                 }
             }
         }
+        // Post-condition
         assert getActivity(activityID).getEmployees().contains(employee);
     }
 
@@ -216,6 +218,7 @@ public class ProPlannerPlus {
         assert !startDate.isAfter(endDate) : "Start date can not be after end date";
         assert activities != null : "Activities list cannot be null";
         assert employees != null : "Employees list cannot be null";
+        assert !activities.isEmpty() : "No activities exist";
 
         Map<Employee, Integer> overlapCounts = new HashMap<Employee, Integer>();
         Map<Employee, Integer> freeEmployeeMap;
@@ -254,7 +257,7 @@ public class ProPlannerPlus {
         project.setProjectLeader(employee);
     }
 
-    public double getCompletionStatus(Project project) throws NullPointerException {
+    public double getCompletionStatus(Project project) throws OperationNotAllowedException {
 
         //Preconditions
         assert project != null : "Project cannot be null";
@@ -262,7 +265,7 @@ public class ProPlannerPlus {
 
 
         if (project.getActivityIDs().size() == 0) {
-            throw new NullPointerException("No activities exists in project");
+            throw new OperationNotAllowedException("No activities exists in project");
         }
         double sumTotal = 0;
         double sumUsed = 0;

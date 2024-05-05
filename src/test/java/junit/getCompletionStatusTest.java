@@ -1,5 +1,6 @@
 package junit;
 
+import controllers.OperationNotAllowedException;
 import controllers.ProPlannerPlus;
 import model.Activity;
 import model.Employee;
@@ -23,7 +24,7 @@ public class getCompletionStatusTest {
     }
 
     @org.junit.Test //
-    public void allActivitiesFinishedWithTimeSpent() {
+    public void allActivitiesFinishedWithTimeSpent() throws OperationNotAllowedException {
         project = new Project("test",1);
         proPlannerPlus.createTestProject(project);
         Activity activity = new Activity("testActivity", 1, null, null, 0);
@@ -35,7 +36,7 @@ public class getCompletionStatusTest {
         assertEquals(proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject(project.getId())), 1.0, 0.0);
     }
     @org.junit.Test //
-    public void allActivitiesFinishedNoTimeSpent() {
+    public void allActivitiesFinishedNoTimeSpent() throws OperationNotAllowedException {
         project = new Project("test",1);
         proPlannerPlus.createTestProject(project);
         Activity activity = new Activity("testActivity", 1, null, null, 0);
@@ -47,7 +48,7 @@ public class getCompletionStatusTest {
         assertEquals(proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject(project.getId())), 1.0, 0.0);
     }
     @org.junit.Test //
-    public void activitiesNotFinishedTotalTime0() {
+    public void activitiesNotFinishedTotalTime0() throws OperationNotAllowedException {
         project = new Project("test",1);
         proPlannerPlus.createTestProject(project);
         Activity activity = new Activity("testActivity", 1, null, null, 0);
@@ -56,7 +57,7 @@ public class getCompletionStatusTest {
         assertEquals(proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject(project.getId())), 0.0, 0.0);
     }
     @org.junit.Test //
-    public void activitiesNotFinishedTotalTime1() {
+    public void activitiesNotFinishedTotalTime1() throws OperationNotAllowedException {
         project = new Project("test",1);
         proPlannerPlus.createTestProject(project);
         Activity activity = new Activity("testActivity", 0, null, null, 0);
@@ -65,13 +66,10 @@ public class getCompletionStatusTest {
         assertEquals(proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject(project.getId())), 1.0, 0.0);
     }
     @org.junit.Test
-    public void noActivitiesInProject() {
+    public void noActivitiesInProject() throws OperationNotAllowedException {
         project = new Project("test",1);
         proPlannerPlus.createTestProject(project);
-
-        expectedEx.expectMessage("Can't have negative time spent");
+        expectedEx.expectMessage("No activities exists in project");
         proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject(project.getId()));
-
-        //assertThrows(NullPointerException.class, ()-> proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject(project.getId())));
     }
 }

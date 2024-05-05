@@ -77,7 +77,7 @@ public class manageProjectSteps {
     public void theEmployeeViewsCompletionStatus() {
         try {
             status = proPlannerPlus.getCompletionStatus(proPlannerPlus.getProject(project.getId()));
-        }catch (NullPointerException e) {
+        }catch (AssertionError | OperationNotAllowedException e) {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
 
