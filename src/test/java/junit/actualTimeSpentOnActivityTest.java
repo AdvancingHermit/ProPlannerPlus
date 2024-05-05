@@ -58,12 +58,17 @@ public class actualTimeSpentOnActivityTest {
 
         ProPlannerPlus.createActivity(activity, project.getId());
 
-        //expectedEx.expect(OperationNotAllowedException.class);
+        Employee employee1 = new Employee("test");
+        proPlannerPlus.addEmployee(employee1);
+
+        activity.addEmployee(employee1);
+
+        employee1.registerTime(1, 0);
+        employee1.setTimeUsed(1, -1);
+
         expectedEx.expectMessage("Can't have negative time spent");
 
         proPlannerPlus.actualTimeSpentOnActivity(activity.getActivityID());
-
-        proPlannerPlus.registerTime(activity.getActivityID(), "abe", -1);
     }
 
     @org.junit.Test // JUnit 4

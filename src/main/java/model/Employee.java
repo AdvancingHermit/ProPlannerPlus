@@ -44,6 +44,11 @@ public class Employee {
         return schedule.get(activityID);
     }
 
+    public void setTimeUsed(int activityID, double time) throws OperationNotAllowedException{
+        if ( !schedule.containsKey(activityID)){ throw new OperationNotAllowedException("Activity isn't registered to employee"); }
+        schedule.put(activityID, time);
+    }
+
     public ArrayList<PersonalActivity> getPersonalActivities() {
         return personalActivities;
     }
