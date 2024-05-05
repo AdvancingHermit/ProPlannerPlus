@@ -48,6 +48,8 @@ public class ViewActivitiesController extends StandardController {
         activitySelector.valueProperty().addListener((observable, oldValue, newValue) -> {
             try {
                 updateEmployeeList();
+                fillActivityModifyForm();
+
             } catch (OperationNotAllowedException e) {
                 throw new RuntimeException(e);
             }
@@ -56,9 +58,6 @@ public class ViewActivitiesController extends StandardController {
         employeeListSelector.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         currentEmployeeSelector.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         activitySelector.setItems(activities);
-        activitySelector.setOnAction(e -> {
-            setActivityDetails(false);
-        });
         employeeListSelector.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         currentEmployeeSelector.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         createEmployeeList();
