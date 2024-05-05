@@ -254,7 +254,7 @@ public class ProPlannerPlus {
         project.setProjectLeader(employee);
     }
 
-    public double getCompletionStatus(Project project) throws NullPointerException {
+    public double getCompletionStatus(Project project) throws OperationNotAllowedException {
 
         //Preconditions
         assert project != null : "Project cannot be null";
@@ -262,7 +262,7 @@ public class ProPlannerPlus {
 
 
         if (project.getActivityIDs().size() == 0) {
-            throw new NullPointerException("No activities exists in project");
+            throw new OperationNotAllowedException("No activities exists in project");
         }
         double sumTotal = 0;
         double sumUsed = 0;
