@@ -85,9 +85,9 @@ public class ProPlannerPlus {
     }
 
     public static void createProject(String name) {
-        long count = projects.stream().filter(p -> p.getName().equals(name)).count();
+        long count = projects.stream().filter(p -> p.getName().hashCode() == (name.hashCode())).count();
         String serialNumber = String.format("%04d", count + 1);
-        int projectID = Integer.parseInt((Year.now().getValue() - 2000) + serialNumber);
+        int projectID = Integer.parseInt( projects.size() + "" + (Year.now().getValue() - 2000) + serialNumber);
         projects.add(new Project(name, projectID));
 
     }
@@ -103,6 +103,7 @@ public class ProPlannerPlus {
         checkActivityDetails(activityName, startDate, endDate, projectID);
         Activity activity = new Activity(activityName, totalTime, startDate, endDate, activityID);
         activities.add(activity);
+
         addActivityToProject(getProject(projectID), activityID);
     }
 
@@ -136,6 +137,9 @@ public class ProPlannerPlus {
 
     public static void modifyActivity(int activityID, String activityName, double totalTime, LocalDate startDate,
             LocalDate endDate, Integer projectID, boolean completed) throws OperationNotAllowedException {
+       if (startDate.isAfter(endDate)){
+            throw new OperationNotAllowedException("Invalid dates");
+        }
         checkActivityDetails(activityName, startDate, endDate, projectID);
         Activity activity = getActivity(activityID);
         activity.setActivityName(activityName);

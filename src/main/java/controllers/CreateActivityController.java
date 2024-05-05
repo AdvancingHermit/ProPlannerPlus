@@ -57,7 +57,6 @@ public class CreateActivityController extends StandardController {
 
         String activityName = createActivityName.getText();
         String activityHours = createActivityHours.getText();
-
         try {
             proPlannerPlus.createActivity(activityName, getNumber(activityHours), start, end, project == null ? null : project.getId());
             App.setRoot("home");
