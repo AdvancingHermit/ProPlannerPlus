@@ -34,6 +34,14 @@ public class ProPlannerPlus {
         }
     }
 
+    public static void setActivities(ArrayList<Activity> activities) {
+        ProPlannerPlus.activities = activities;
+    }
+
+    public static void setEmployees(ArrayList<Employee> employees) {
+        ProPlannerPlus.employees = employees;
+    }
+
     public static void clearEmployees() {
         employees.clear();
     }
@@ -194,13 +202,6 @@ public class ProPlannerPlus {
         return null;
     }
 
-    public static List<Activity> getActivitiesFromProject(Project project) {
-        List<Activity> activities = new ArrayList<>();
-        for (int activityID : project.getActivityIDs()) {
-            activities.add(getActivity(activityID));
-        }
-        return activities;
-    }
 
     public static Map<Employee, Integer> getFreeEmployees(LocalDate startDate, LocalDate endDate)
             throws OperationNotAllowedException {
