@@ -59,7 +59,7 @@
                </GridPane.margin>
             </Button>
 
-            <Label fx:id="errorText" prefHeight="8.0" prefWidth="22.0" textFill="RED" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+            <Label fx:id="errorText" textFill="RED" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets top="25.0" />
                </GridPane.margin>
