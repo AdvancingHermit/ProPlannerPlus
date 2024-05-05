@@ -33,7 +33,7 @@ public class showCompletionStatusController extends StandardController {
         statusOfActivities.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         try {
-            completionAmount.setText( String.valueOf(proPlannerPlus.getCompletionStatus(model.getCurrProject())) + "%");
+            completionAmount.setText( String.valueOf((proPlannerPlus.getCompletionStatus(model.getCurrProject())) * 100 )+ "%");
         } catch (Exception e){
             completionAmount.setText("No activities found");
         }
