@@ -232,15 +232,15 @@ public class ProPlannerPlus {
 
     public double getCompletionStatus(Project project) throws NullPointerException {
 
-        if (project.getActivityIDs().size() == 0) { // 1
+        if (project.getActivityIDs().size() == 0) {                            // 1
             throw new NullPointerException("No activities exists in project"); // 2
         }
         double sumTotal = 0;
         double sumUsed = 0;
 
-        for (int id : project.getActivityIDs()){                            //3
-            if(getActivity(id).getComplete()) {                             //4
-                for (Employee employee : getActivity(id).getEmployees()) {  //5
+        for (int id : project.getActivityIDs()){                                //3
+            if(getActivity(id).getComplete()) {                                 //4
+                for (Employee employee : getEmployees()) {                      //5
                     sumTotal += employee.getTimeUsed(id);
                     sumUsed += employee.getTimeUsed(id);
                 }
@@ -248,10 +248,10 @@ public class ProPlannerPlus {
                 sumTotal += getActivity(id).getTotalTime();
             }
         }
-        if (sumUsed == 0) {                                                 //6
-            return 0;
+        if (sumUsed == 0) {                                                     //6
+            return 0;                                                           //7
         }
-        return sumTotal / sumUsed;                                          //7
+        return sumTotal / sumUsed;                                              //8
     }
 
     public double actualTimeSpentOnActivity(int activityID) throws OperationNotAllowedException {
