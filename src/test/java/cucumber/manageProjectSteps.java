@@ -56,7 +56,7 @@ public class manageProjectSteps {
     }
     @Given("an uncompleted activity with {int} hours expected time is in the project")
     public void anUncompletedActivityWithHoursExpectedTimeIsInTheProject(Integer int1) throws OperationNotAllowedException {
-        proPlannerPlus.registerTime(0, employee.getInitials(), int1);
+        proPlannerPlus.getActivity(0).setTotalTime(int1);
         proPlannerPlus.getActivity(0).setCompletion(false);
     }
     @Given("an activity with id {int} and {int} hours is completed is in the project")
@@ -66,7 +66,7 @@ public class manageProjectSteps {
     }
     @Given("an uncompleted activity with id {int} and {int} hours expected time is in the project")
     public void anUncompletedActivityWithIdAndHoursExpectedTimeIsInTheProject(Integer int1, Integer int2) throws OperationNotAllowedException {
-        proPlannerPlus.registerTime(int1, employee.getInitials(), int2);
+        proPlannerPlus.getActivity(int1).setTotalTime(int2);
         proPlannerPlus.getActivity(int1).setCompletion(false);
     }
     @When("the employee views completion status")
