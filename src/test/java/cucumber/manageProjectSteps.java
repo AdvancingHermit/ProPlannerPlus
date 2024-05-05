@@ -51,31 +51,23 @@ public class manageProjectSteps {
     }
     @Given("an activity with {int} hours is completed is in the project")
     public void anActivityWithHoursIsCompletedIsInTheProject(Integer int1) throws OperationNotAllowedException {
-        proPlannerPlus.modifyActivity(0, "testAct", int1,
-                LocalDate.of(2024, 05, 03),
-                LocalDate.of(2024, 06, 03),
-                project, true);
+        proPlannerPlus.registerTime(0, employee.getInitials(), int1);
+        proPlannerPlus.getActivity(0).setCompletion(true);
     }
     @Given("an uncompleted activity with {int} hours expected time is in the project")
     public void anUncompletedActivityWithHoursExpectedTimeIsInTheProject(Integer int1) throws OperationNotAllowedException {
-        proPlannerPlus.modifyActivity(0, "testAct", int1,
-                LocalDate.of(2024, 05, 03),
-                LocalDate.of(2024, 06, 03),
-                project, true);
+        proPlannerPlus.registerTime(0, employee.getInitials(), int1);
+        proPlannerPlus.getActivity(0).setCompletion(false);
     }
     @Given("an activity with id {int} and {int} hours is completed is in the project")
     public void anActivityWithIdAndHoursIsCompletedIsInTheProject(Integer int1, Integer int2) throws OperationNotAllowedException {
-        proPlannerPlus.modifyActivity(int1, "testAct", int2,
-                LocalDate.of(2024, 05, 03),
-                LocalDate.of(2024, 06, 03),
-                project, true);
+        proPlannerPlus.registerTime(int1, employee.getInitials(), int2);
+        proPlannerPlus.getActivity(int1).setCompletion(true);
     }
     @Given("an uncompleted activity with id {int} and {int} hours expected time is in the project")
     public void anUncompletedActivityWithIdAndHoursExpectedTimeIsInTheProject(Integer int1, Integer int2) throws OperationNotAllowedException {
-        proPlannerPlus.modifyActivity(int1, "testAct", int2,
-                LocalDate.of(2024, 05, 03),
-                LocalDate.of(2024, 06, 03),
-                project, true);
+        proPlannerPlus.registerTime(int1, employee.getInitials(), int2);
+        proPlannerPlus.getActivity(int1).setCompletion(false);
     }
     @When("the employee views completion status")
     public void theEmployeeViewsCompletionStatus() {
