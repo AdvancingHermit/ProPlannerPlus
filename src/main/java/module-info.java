@@ -4,5 +4,7 @@ module hellofx {
     requires io.cucumber.core;
 
     opens controllers to javafx.fxml; // Gives access to fxml files
-    exports controllers; // Exports the class inheriting from javafx.application.Application
+    exports controllers;
+    exports model;
+    opens model to javafx.fxml; // Exports the class inheriting from javafx.application.Application
 }

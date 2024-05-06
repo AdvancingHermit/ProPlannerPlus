@@ -1,9 +1,6 @@
 package controllers;
 
-import model.Activity;
-import model.Employee;
-import model.PersonalActivity;
-import model.Project;
+import model.*;
 
 import java.time.LocalDate;
 import java.time.Year;
@@ -16,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class ProPlannerPlus {
@@ -26,7 +22,8 @@ public class ProPlannerPlus {
     public static boolean loggedIn = false;
 
     public static boolean adminLoggedIn = false;
-
+    
+    //Made by Oliver
     public ProPlannerPlus() {
         employees = new ArrayList<Employee>();
         employees.add(new Employee("tim"));
@@ -52,7 +49,7 @@ public class ProPlannerPlus {
         return employees;
     }
 
-    //This test is mady by Oliver
+    //Made by Oliver
     public static void addEmployee(Employee employee) throws OperationNotAllowedException {
         if (employee.getInitials().length()== 0 ||employee.getInitials().length()>4){
             throw new OperationNotAllowedException("Initials can only be 4 letters long");
@@ -63,7 +60,7 @@ public class ProPlannerPlus {
         employees.add(employee);
     }
 
-    //This test is mady by Oliver
+    //Made by Oliver
     public static void removeEmployee(String initials) throws OperationNotAllowedException {
         List<String> employeeInitials = ProPlannerPlus.getEmployees().stream().map(Employee::getInitials).toList();
         if (!employeeInitials.contains(initials)) {
@@ -72,7 +69,7 @@ public class ProPlannerPlus {
         employees.remove(getEmployees().stream().filter(e -> e.getInitials().equals(initials)).toList().get(0));
 
     }
-    //This test is mady by Oliver and Oscar
+    //Made by Oliver and Oscar
     public static boolean login(String initials) {
         if (initials.equals("admin")){
             adminLoggedIn = true;
@@ -88,6 +85,7 @@ public class ProPlannerPlus {
 
     }
 
+    //Made by Oscar
     public static void createProject(String name) {
         long count = projects.stream().filter(p -> p.getName().hashCode() == (name.hashCode())).count();
         String serialNumber = String.format("%04d", count + 1);
@@ -96,13 +94,14 @@ public class ProPlannerPlus {
 
     }
 
-    //This test is mady by Oliver
+    //Made by Oliver
     public static void createTestProject(Project project) {
         projects.add(project);
 
     }
 
 
+    //Made by Oscar
     public static void createActivity(String activityName, double totalTime, LocalDate startDate, LocalDate endDate,
             Integer projectID, int activityID) throws OperationNotAllowedException {
         checkActivityDetails(activityName, startDate, endDate, projectID);
@@ -112,6 +111,7 @@ public class ProPlannerPlus {
         addActivityToProject(getProject(projectID), activityID);
     }
 
+    //Made by Christian
     public static void createActivity(String activityName, double totalTime, LocalDate startDate, LocalDate endDate,
             Integer projectID) throws OperationNotAllowedException {
         checkActivityDetails(activityName, startDate, endDate, projectID);
@@ -125,11 +125,13 @@ public class ProPlannerPlus {
         addActivityToProject(getProject(projectID), activityID);
     }
 
+    //Made by Oliver
     public static void createActivity(Activity activity, int projectID) {
         activities.add(activity);
         addActivityToProject(getProject(projectID), activity.getActivityID());
     }
 
+    //Made by Oscar
     public static void checkActivityDetails(String activityName, LocalDate startDate, LocalDate endDate,
             Integer projectID) throws OperationNotAllowedException {
         if (activityName.isEmpty() || startDate == null || endDate == null || projectID == null) {
@@ -140,6 +142,7 @@ public class ProPlannerPlus {
         }
     }
 
+    //Made by Oscar
     public static void modifyActivity(int activityID, String activityName, double totalTime, LocalDate startDate,
             LocalDate endDate, Integer projectID, boolean completed) throws OperationNotAllowedException {
        if (startDate.isAfter(endDate)){
@@ -155,7 +158,7 @@ public class ProPlannerPlus {
 
     }
 
-    //This test is mady by Oliver
+    //This test is made by Oliver
     public static void addActivityToProject(Project project, int activityID) {
         project.addActivity(activityID);
     }
@@ -182,7 +185,7 @@ public class ProPlannerPlus {
         return null;
     }
 
-    //This test is mady by Oliver
+    //Made by Oliver
     public static void addEmployeeDirectlyToActivity(int activityID, Employee employee) {
         for (Activity activity : activities) {
             if (activity.getActivityID() == activityID) {
@@ -192,6 +195,7 @@ public class ProPlannerPlus {
         }
     }
 
+    //Made by Martin
     public static void addEmployeeToActivity(int activityID, Employee employee) throws OperationNotAllowedException {
         // Pre-condition
         assert getActivities().stream().anyMatch(p -> p.getActivityID() == activityID) : "No matching activity for the ID";
@@ -222,7 +226,7 @@ public class ProPlannerPlus {
         return null;
     }
 
-    //This method is mady by Oliver
+    //This method is made by Oliver
     public static Map<Employee, Integer> getFreeEmployees(LocalDate startDate, LocalDate endDate)
             throws OperationNotAllowedException {
         // Preconditions
@@ -259,7 +263,7 @@ public class ProPlannerPlus {
         return freeEmployeeMap;
     }
 
-    //This method is mady by Oliver
+    //This method is made by Oliver
     public static List<Employee> getWorkReadyEmployees(LocalDate startDate, LocalDate endDate){
         List<Employee> employeeList = new ArrayList<>(employees);
         List<Employee> removedEmployeeList = new ArrayList<>();
@@ -284,6 +288,7 @@ public class ProPlannerPlus {
         project.setProjectLeader(employee);
     }
 
+    // Made by Oscar with the help of Christian
     public double getCompletionStatus(Project project) throws OperationNotAllowedException {
 
         //Preconditions
@@ -328,6 +333,7 @@ public class ProPlannerPlus {
         return sumUsed / sumTotal;
     }
 
+    //Made by Christian
     public double actualTimeSpentOnActivity(int activityID) throws OperationNotAllowedException {
         // Preconditions
         assert activities != null : "Activities list cannot be null";
@@ -350,13 +356,14 @@ public class ProPlannerPlus {
         return amount;
     }
 
+    //Made by Christian
     public void registerTime(int activityID, String initials, double time) throws OperationNotAllowedException {
         if (time < 0) {
             throw new OperationNotAllowedException("Can't have negative time spent");
         }
         getEmployee(initials).registerTime(activityID, time);
     }
-
+    //Made by Christian
     public void addPersonalActivity(String initials, LocalDate start, LocalDate end, String reason)
             throws OperationNotAllowedException {
         getEmployee(initials).addPersonalActivity(start, end, reason);

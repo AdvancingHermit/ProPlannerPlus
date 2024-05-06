@@ -1,6 +1,6 @@
 package junit;
 
-import controllers.OperationNotAllowedException;
+import model.OperationNotAllowedException;
 import controllers.ProPlannerPlus;
 import model.Activity;
 import model.Employee;
@@ -10,6 +10,8 @@ import org.junit.rules.ExpectedException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
+//Made by Oscar
 public class getCompletionStatusTest {
 
     private Project project;

@@ -3,7 +3,7 @@ package cucumber;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import controllers.OperationNotAllowedException;
+import model.OperationNotAllowedException;
 import controllers.ProPlannerPlus;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

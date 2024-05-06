@@ -1,7 +1,7 @@
 package cucumber;
 
 import controllers.ProPlannerPlus;
-import controllers.OperationNotAllowedException;
+import model.OperationNotAllowedException;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -10,14 +10,13 @@ import model.Employee;
 import model.Project;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
 
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class asignEmployeeSteps {
+//Made by Martin and Oliver
+public class assignEmployeeSteps {
 
     private ErrorMessageHolder errorMessageHolder;
 
@@ -25,7 +24,7 @@ public class asignEmployeeSteps {
 
     ProPlannerPlus proPlannerPlus;
     Activity activity;
-    public asignEmployeeSteps(ErrorMessageHolder errorMessageHolder) {
+    public assignEmployeeSteps(ErrorMessageHolder errorMessageHolder) {
         proPlannerPlus = new ProPlannerPlus();
         this.errorMessageHolder = errorMessageHolder;
     }

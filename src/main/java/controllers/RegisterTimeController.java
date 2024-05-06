@@ -2,20 +2,16 @@ package controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.util.converter.IntegerStringConverter;
-import model.Activity;
-import model.DataModel;
-import model.Employee;
-import model.Project;
+import model.*;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.function.UnaryOperator;
 
+
+// Class made by Oscar
 public class RegisterTimeController extends StandardController {
 
     @FXML
@@ -77,8 +73,6 @@ public class RegisterTimeController extends StandardController {
         });
     }
 
-
-
     @FXML
     private void switchToHome() throws IOException {
         App.setRoot("home");
@@ -105,7 +99,6 @@ public class RegisterTimeController extends StandardController {
     }
 
     private void changeActiveGrid() {
-
         personalGrid.setManaged(!personalGrid.isManaged());
         personalGrid.setVisible(!personalGrid.isVisible());
         projectGrid.setManaged(!projectGrid.isManaged());
@@ -127,8 +120,8 @@ public class RegisterTimeController extends StandardController {
             if  (activity == null) {
                 error = "Please select a valid activity";
             } else  {
-            proPlannerPlus.registerTime(activity.getActivityID(), currentEmployee.getInitials(), Double.parseDouble(hoursText));
-            App.setRoot("home");
+                proPlannerPlus.registerTime(activity.getActivityID(), currentEmployee.getInitials(), Double.parseDouble(hoursText));
+                App.setRoot("home");
             }
             errorText.setText(error);
         } else {

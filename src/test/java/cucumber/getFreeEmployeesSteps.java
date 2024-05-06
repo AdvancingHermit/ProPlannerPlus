@@ -1,6 +1,6 @@
 package cucumber;
 
-import controllers.OperationNotAllowedException;
+import model.OperationNotAllowedException;
 import controllers.ProPlannerPlus;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -8,15 +8,13 @@ import io.cucumber.java.en.When;
 import model.Activity;
 import model.Employee;
 import model.Project;
-import org.junit.Assert;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertTrue;
 
-//This test is mady by Oliver
+//This test is made by Oliver
 public class getFreeEmployeesSteps {
 
     ProPlannerPlus proPlannerPlus;

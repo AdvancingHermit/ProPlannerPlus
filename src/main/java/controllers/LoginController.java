@@ -22,7 +22,7 @@ public class LoginController extends StandardController {
     @FXML
     private Label errorText;
 
-
+    //Made by Oscar and Oliver
     @FXML
     private void switchToHome() throws IOException {
         String initials = initialsField.getText();

@@ -2,9 +2,8 @@ package DesignByContract;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import controllers.OperationNotAllowedException;
+import model.OperationNotAllowedException;
 import controllers.ProPlannerPlus;
-import model.Activity;
 import model.Employee;
 import model.Project;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,7 @@ import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-//This test is mady by Oliver
+//This test is made by Oliver
 public class getFreeEmployeesDBC {
     private ProPlannerPlus proPlannerPlus;
     private Employee employee;

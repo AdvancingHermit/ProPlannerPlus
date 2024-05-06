@@ -2,7 +2,7 @@ package DesignByContract;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import controllers.OperationNotAllowedException;
+import model.OperationNotAllowedException;
 import controllers.ProPlannerPlus;
 import model.Activity;
 import model.Employee;
@@ -15,6 +15,7 @@ import org.junit.rules.ExpectedException;
 
 import java.time.LocalDate;
 
+//Made by Christian
 class ActualTimeDBC {
 
     private ProPlannerPlus proPlannerPlus;

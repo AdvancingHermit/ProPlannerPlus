@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDate;
 
+//Made by Christian
 public class PersonalActivity {
 
     LocalDate start;

@@ -5,7 +5,7 @@ import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalField;
 import java.util.ArrayList;
 import java.util.List;
-
+//Made by Christian with help from all others
 public class Activity {
     ArrayList<Employee> employees = new ArrayList<Employee>();
     String activityName;

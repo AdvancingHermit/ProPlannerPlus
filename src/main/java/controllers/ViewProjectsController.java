@@ -28,6 +28,7 @@ public class ViewProjectsController extends StandardController {
     @FXML
     Label completionText;
 
+    //Made by Oscar
     public void initController(DataModel model, ProPlannerPlus proPlannerPlus) {
         super.initController(model, proPlannerPlus);
         setProjectDetails(false);
@@ -45,6 +46,7 @@ public class ViewProjectsController extends StandardController {
         App.setRoot("home");
     }
 
+    //Made by Christian
     @FXML
     private void viewProjectDetails() throws IOException {
         if (projectSelector.getValue() != null) {

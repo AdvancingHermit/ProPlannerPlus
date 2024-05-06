@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import model.DataModel;
 import model.Employee;
+import model.OperationNotAllowedException;
 
 import java.io.IOException;
 import java.util.List;

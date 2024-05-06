@@ -3,7 +3,7 @@ package DesignByContract;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import controllers.OperationNotAllowedException;
+import model.OperationNotAllowedException;
 import controllers.ProPlannerPlus;
 import model.Activity;
 import model.Employee;
@@ -13,9 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.time.LocalDate;
-import java.util.stream.Collectors;
 
-
+//Made by Martin
 public class addEmployeeToActivityDBC {
     private ProPlannerPlus proPlannerPlus;
     private Employee employee;

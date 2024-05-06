@@ -1,11 +1,10 @@
 package cucumber;
 
-import controllers.OperationNotAllowedException;
+import model.OperationNotAllowedException;
 import controllers.ProPlannerPlus;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import model.Activity;
 import model.Employee;
 import model.Project;
 
@@ -13,7 +12,7 @@ import java.time.LocalDate;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
+//Made by Christian
 public class registerTimeSteps {
 
     private ProPlannerPlus proPlannerPlus;

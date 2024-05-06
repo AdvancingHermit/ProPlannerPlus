@@ -1,21 +1,19 @@
 package cucumber;
 
-import controllers.OperationNotAllowedException;
+import model.OperationNotAllowedException;
 import controllers.ProPlannerPlus;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import model.Activity;
 import model.Project;
-import org.junit.Assert;
 
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+//Made by Christian and Oscar
 public class activitySteps {
 
     ProPlannerPlus proPlannerPlus;

@@ -9,9 +9,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.Activity;
 import model.DataModel;
+import model.OperationNotAllowedException;
 
 import java.io.IOException;
 
+//Class made by Christian
 public class showCompletionStatusController extends StandardController {
     @FXML
     private Label completionAmount;

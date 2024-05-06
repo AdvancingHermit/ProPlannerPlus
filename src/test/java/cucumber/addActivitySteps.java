@@ -1,6 +1,5 @@
 package cucumber;
 
-import controllers.OperationNotAllowedException;
 import controllers.ProPlannerPlus;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -8,7 +7,6 @@ import io.cucumber.java.en.When;
 import model.Activity;
 import model.Employee;
 import model.Project;
-import org.junit.Assert;
 
 import java.time.LocalDate;
 

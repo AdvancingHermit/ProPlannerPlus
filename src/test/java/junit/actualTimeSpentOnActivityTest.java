@@ -1,6 +1,6 @@
 package junit;
 
-import controllers.OperationNotAllowedException;
+import model.OperationNotAllowedException;
 import controllers.ProPlannerPlus;
 import model.Activity;
 import model.Employee;
@@ -12,6 +12,7 @@ import java.time.LocalDate;
 
 import static org.junit.Assert.assertEquals;
 
+//Made by Christian
 public class actualTimeSpentOnActivityTest {
 
     ProPlannerPlus proPlannerPlus;

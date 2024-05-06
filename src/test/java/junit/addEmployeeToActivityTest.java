@@ -1,6 +1,6 @@
 package junit;
 
-import controllers.OperationNotAllowedException;
+import model.OperationNotAllowedException;
 import controllers.ProPlannerPlus;
 import model.Activity;
 import model.Employee;
@@ -19,6 +19,8 @@ import static org.junit.Assert.assertTrue;
  *
  * Remove the tests in your own projects.
  */
+
+//Made by Martin
 public class addEmployeeToActivityTest {
 
 	private Project project;

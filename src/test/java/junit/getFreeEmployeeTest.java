@@ -1,11 +1,9 @@
 package junit;
 
-import controllers.OperationNotAllowedException;
+import model.OperationNotAllowedException;
 import controllers.ProPlannerPlus;
-import model.Activity;
 import model.Employee;
 import model.Project;
-import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 

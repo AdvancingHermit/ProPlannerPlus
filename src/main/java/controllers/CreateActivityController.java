@@ -32,6 +32,7 @@ public class CreateActivityController extends StandardController {
     @FXML
     ComboBox<Project> projectSelector;
 
+    // Made by Oscar
     public void initController(DataModel model, ProPlannerPlus proPlannerPlus) {
         super.initController(model, proPlannerPlus);
         ObservableList<Project> projects = FXCollections.observableList(proPlannerPlus.getProjects());
@@ -48,7 +49,7 @@ public class CreateActivityController extends StandardController {
     private void switchToHome() throws IOException {
         App.setRoot("home");
     }
-
+    // Made by Oscar with the help of Christian
     @FXML
     private void createActivity() throws IOException {
         LocalDate start = createActivityStart.getValue();

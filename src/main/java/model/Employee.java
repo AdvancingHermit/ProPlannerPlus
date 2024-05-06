@@ -1,11 +1,11 @@
 package model;
 
-import controllers.OperationNotAllowedException;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
+//Made by Christian
 public class Employee {
     String initials;
     HashMap<Integer, Double> schedule;

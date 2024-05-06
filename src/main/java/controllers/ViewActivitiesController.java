@@ -10,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import model.Activity;
 import model.DataModel;
 import model.Employee;
+import model.OperationNotAllowedException;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -37,6 +38,8 @@ public class ViewActivitiesController extends StandardController {
     ObservableList<FreeEmployee> freeEmployees;
     ObservableList<FreeEmployee> addedEmployees;
 
+
+    //Made by Oscar and Oliver
     public void initController(DataModel model, ProPlannerPlus proPlannerPlus) {
         super.initController(model, proPlannerPlus);
         setActivityDetails(false);
@@ -82,6 +85,7 @@ public class ViewActivitiesController extends StandardController {
         App.setRoot("home");
     }
 
+    //Made by Oscar
     @FXML
     private void viewActivityDetails() {
         if(activitySelector.getValue() != null){
@@ -96,7 +100,7 @@ public class ViewActivitiesController extends StandardController {
         }
         employeeDetailsButton.setSelected(false);
     }
-
+    //Made by Oscar
     @FXML
     private void viewEmployeeDetails() throws OperationNotAllowedException {
         if(activitySelector.getValue() != null){
@@ -138,7 +142,7 @@ public class ViewActivitiesController extends StandardController {
         }
         updateEmployeeList();
     }
-
+    //Made by Oscar
     @FXML
     private void changeActivity(){
         Activity activity = activitySelector.getValue();
@@ -157,7 +161,7 @@ public class ViewActivitiesController extends StandardController {
             errorText.setVisible(true);
         }
     }
-
+    //Made by Oscar
     private void updateEmployeeList() throws OperationNotAllowedException {
         String projectName = model.getCurrProject().getName();
         Activity activity = activitySelector.getValue();
@@ -182,7 +186,7 @@ public class ViewActivitiesController extends StandardController {
         currentEmployeeSelector.setItems(addedEmployees);
         currentEmployeeSelector.setItems(addedEmployees);
     }
-
+    //Made by Oscar
     @FXML
     private void fillActivityModifyForm() {
         Activity activity = activitySelector.getValue();
@@ -193,7 +197,7 @@ public class ViewActivitiesController extends StandardController {
         completedToggle.selectedProperty().set(activity.getComplete());
 
     }
-
+    //Made by Oscar
     private void createEmployeeList() {
 
         TableColumn<FreeEmployee, String> currentInitialsColumn = new TableColumn<>("Employee");
@@ -211,7 +215,7 @@ public class ViewActivitiesController extends StandardController {
         employeeListSelector.getColumns().addAll(initialsColumn, overlapCountColumn);
 
     }
-
+    //Made by Oscar
     private record FreeEmployee(Employee employee, int overlapCount) {
         @Override
         public String toString() {
