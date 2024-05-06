@@ -80,7 +80,6 @@ public class manageProjectSteps {
         }catch (AssertionError | OperationNotAllowedException e) {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
-
     }
 
     @Then("the status is {double}")

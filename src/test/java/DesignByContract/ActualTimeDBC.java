@@ -41,6 +41,12 @@ class ActualTimeDBC {
         AssertionError assertionError = assertThrows(AssertionError.class, () -> proPlannerPlus.actualTimeSpentOnActivity(0));
         Assertions.assertEquals("Employees list cannot be null", assertionError.getMessage());
     }
+
+    @Test
+    void testActivityDoesntExist() {
+        AssertionError assertionError = assertThrows(AssertionError.class, () -> proPlannerPlus.actualTimeSpentOnActivity(99));
+        Assertions.assertEquals("Activity doesn't exist", assertionError.getMessage());
+    }
     @Test
     void negativeTimeSpent() throws OperationNotAllowedException {
         Project project = new Project("pro", 0);

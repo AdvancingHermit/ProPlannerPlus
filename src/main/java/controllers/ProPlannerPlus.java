@@ -299,8 +299,9 @@ public class ProPlannerPlus {
         // Preconditions
         assert activities != null : "Activities list cannot be null";
         assert employees != null : "Employees list cannot be null";
+        assert !activities.stream().noneMatch(a -> a.getActivityID() == activityID) : "Activity doesn't exist";
 
-        if (activities.stream().noneMatch(p -> p.getActivityID() == activityID)) {
+        if ( activities.stream().noneMatch(a -> a.getActivityID() == activityID) ) {
             throw new OperationNotAllowedException("Activity doesn't exist");
         }
         double amount = 0;
