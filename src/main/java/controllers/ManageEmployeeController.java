@@ -35,10 +35,14 @@ public class ManageEmployeeController extends StandardController {
         if (!proPlannerPlus.adminLoggedIn) {
             App.setRoot("home");
         } else {
-            proPlannerPlus.loggedIn = false;
-            proPlannerPlus.adminLoggedIn = false;
-            App.setRoot("login");
+            logout();
         }
+    }
+
+    private void logout() throws IOException {
+        proPlannerPlus.loggedIn = false;
+        proPlannerPlus.adminLoggedIn = false;
+        App.setRoot("login");
     }
 
     @FXML
@@ -82,7 +86,11 @@ public class ManageEmployeeController extends StandardController {
 
         if (removeButton.isSelected()) {
                 List<String> employeeInitials = ProPlannerPlus.getEmployees().stream().map(Employee::getInitials).toList();
-                if (employeeInitials.contains(employeeText.getText())) {
+                if (employeeText.getText().equals(model.getCurrentEmployee().getInitials())){
+                    ProPlannerPlus.removeEmployee(employeeText.getText());
+                    logout();
+                }
+                else if (employeeInitials.contains(employeeText.getText())) {
                     ProPlannerPlus.removeEmployee(employeeText.getText());
                     switchToAway();
                 } else {
