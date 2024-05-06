@@ -52,6 +52,7 @@ public class ProPlannerPlus {
         return employees;
     }
 
+    //This test is mady by Oliver
     public static void addEmployee(Employee employee) throws OperationNotAllowedException {
         if (employee.getInitials().length()== 0 ||employee.getInitials().length()>4){
             throw new OperationNotAllowedException("Initials can only be 4 letters long");
@@ -62,6 +63,7 @@ public class ProPlannerPlus {
         employees.add(employee);
     }
 
+    //This test is mady by Oliver
     public static void removeEmployee(String initials) throws OperationNotAllowedException {
         List<String> employeeInitials = ProPlannerPlus.getEmployees().stream().map(Employee::getInitials).toList();
         if (!employeeInitials.contains(initials)) {
@@ -70,7 +72,7 @@ public class ProPlannerPlus {
         employees.remove(getEmployees().stream().filter(e -> e.getInitials().equals(initials)).toList().get(0));
 
     }
-
+    //This test is mady by Oliver and Oscar
     public static boolean login(String initials) {
         if (initials.equals("admin")){
             adminLoggedIn = true;
@@ -94,6 +96,7 @@ public class ProPlannerPlus {
 
     }
 
+    //This test is mady by Oliver
     public static void createTestProject(Project project) {
         projects.add(project);
 
@@ -152,6 +155,7 @@ public class ProPlannerPlus {
 
     }
 
+    //This test is mady by Oliver
     public static void addActivityToProject(Project project, int activityID) {
         project.addActivity(activityID);
     }
@@ -178,6 +182,7 @@ public class ProPlannerPlus {
         return null;
     }
 
+    //This test is mady by Oliver
     public static void addEmployeeDirectlyToActivity(int activityID, Employee employee) {
         for (Activity activity : activities) {
             if (activity.getActivityID() == activityID) {
@@ -217,7 +222,7 @@ public class ProPlannerPlus {
         return null;
     }
 
-
+    //This method is mady by Oliver
     public static Map<Employee, Integer> getFreeEmployees(LocalDate startDate, LocalDate endDate)
             throws OperationNotAllowedException {
         // Preconditions
@@ -254,6 +259,7 @@ public class ProPlannerPlus {
         return freeEmployeeMap;
     }
 
+    //This method is mady by Oliver
     public static List<Employee> getWorkReadyEmployees(LocalDate startDate, LocalDate endDate){
         List<Employee> employeeList = new ArrayList<>(employees);
         List<Employee> removedEmployeeList = new ArrayList<>();
