@@ -2,6 +2,7 @@ package controllers;
 
 import model.Activity;
 import model.Employee;
+import model.PersonalActivity;
 import model.Project;
 
 import java.time.LocalDate;
@@ -227,8 +228,7 @@ public class ProPlannerPlus {
 
         Map<Employee, Integer> overlapCounts = new HashMap<Employee, Integer>();
         Map<Employee, Integer> freeEmployeeMap;
-        List<Employee> employeeList = new ArrayList<>(getEmployees().stream().filter(e -> e.getPersonalActivities()
-                .isEmpty()).toList());
+        List<Employee> employeeList = getWorkReadyEmployees(startDate, endDate);
 
         for (Employee employee : employeeList) { // 1
             overlapCounts.put(employee, 0);
@@ -252,6 +252,20 @@ public class ProPlannerPlus {
         //Postconditions
         assert freeEmployeeMap.getClass().equals(LinkedHashMap.class);
         return freeEmployeeMap;
+    }
+
+    public static List<Employee> getWorkReadyEmployees(LocalDate startDate, LocalDate endDate){
+        List<Employee> employeeList = new ArrayList<>();
+
+        for (Employee employee : employees) {
+            for (PersonalActivity activity : employee.getPersonalActivities()) {
+                if (!(startDate.compareTo(activity.getEnd()) <= 0 && endDate.compareTo(activity.getStart()) >= 0)) {
+                    employeeList.add(employee);
+                }
+            }
+        } 
+
+        return employeeList;
     }
 
     public static ArrayList<Activity> getActivities() {
