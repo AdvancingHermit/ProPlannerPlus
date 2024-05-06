@@ -26,6 +26,7 @@ public class App extends Application {
         model = new DataModel();
         proPlannerPlus = new ProPlannerPlus();
         scene = new Scene(loadFXML("login"), 640, 480);
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
 
