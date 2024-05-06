@@ -67,12 +67,12 @@
                </padding>
             </Label>
             <TextField fx:id="createActivityHours" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Label text="Start week:" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Label text="Start date:" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <padding>
                   <Insets bottom="5.0" />
                </padding>
             </Label>
-            <Label text="End week:" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Label text="End date:" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <padding>
                   <Insets bottom="5.0" />
                </padding>

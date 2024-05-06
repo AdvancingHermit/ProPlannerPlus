@@ -60,7 +60,12 @@ public class RegisterTimeController extends StandardController {
             if (newValue != null && workButton.isSelected()) {
                 workGrid.setManaged(true);
                 workGrid.setVisible(true);
+                List<Integer> activitieIDs = newValue.getActivityIDs();
+                List<Activity> activityList = activitieIDs.stream().map(a -> proPlannerPlus.getActivity(a)).toList();
+                ObservableList<Activity>  newActivityList = FXCollections.observableList(activityList);
+                activitySelector.setItems(newActivityList);
             }
+
 
         });
         currentEmployee = model.getCurrentEmployee();

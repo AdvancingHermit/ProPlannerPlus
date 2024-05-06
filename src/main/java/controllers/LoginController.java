@@ -31,6 +31,7 @@ public class LoginController extends StandardController {
             model.setCurrentEmployee(proPlannerPlus.getEmployee(initials));
             App.setRoot("home");
         } else if (proPlannerPlus.adminLoggedIn) {
+            model.setCurrentEmployee(new Employee("Admin"));
             App.setRoot("manageEmployees");
         } else  {
             errorText.setText("Please enter valid initials!");
