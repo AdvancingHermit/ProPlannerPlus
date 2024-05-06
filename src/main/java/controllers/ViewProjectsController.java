@@ -5,9 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import model.DataModel;
-import model.Employee;
-import model.Project;
+import model.*;
 
 import java.io.IOException;
 
@@ -29,8 +27,8 @@ public class ViewProjectsController extends StandardController {
     Label completionText;
 
     //Made by Oscar
-    public void initController(DataModel model, ProPlannerPlus proPlannerPlus) {
-        super.initController(model, proPlannerPlus);
+    public void initController(EmployeeData employeeData, ProjectData projectData, ProPlannerPlus proPlannerPlus) {
+        super.initController(employeeData, projectData,proPlannerPlus);
         setProjectDetails(false);
         ObservableList<Employee> employees = FXCollections.observableList( proPlannerPlus.getEmployees() );
         ObservableList<Project> projects = FXCollections.observableList( proPlannerPlus.getProjects() );
@@ -95,13 +93,13 @@ public class ViewProjectsController extends StandardController {
 
     @FXML
     public void showCompletionStatus() throws IOException {
-        model.setCurrProject(projectSelector.getValue());
+        projectData.setCurrProject(projectSelector.getValue());
         App.setRoot("completionStatus");
     }
 
     @FXML
     private void viewActivityDetails() throws IOException {
-        model.setCurrProject(projectSelector.getValue());
+        projectData.setCurrProject(projectSelector.getValue());
         App.setRoot("viewActivities");
     }
 

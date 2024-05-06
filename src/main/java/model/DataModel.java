@@ -4,7 +4,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 //Made with mob programming
-public class DataModel {
+public class DataModel implements EmployeeData, ProjectData {
 
     Project currProject;
 

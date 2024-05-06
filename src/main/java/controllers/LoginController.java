@@ -28,10 +28,10 @@ public class LoginController extends StandardController {
         String initials = initialsField.getText();
         ProPlannerPlus.login(initials);
         if (proPlannerPlus.loggedIn) {
-            model.setCurrentEmployee(proPlannerPlus.getEmployee(initials));
+            employeeData.setCurrentEmployee(proPlannerPlus.getEmployee(initials));
             App.setRoot("home");
         } else if (proPlannerPlus.adminLoggedIn) {
-            model.setCurrentEmployee(new Employee("Admin"));
+            employeeData.setCurrentEmployee(new Employee("Admin"));
             App.setRoot("manageEmployees");
         } else  {
             errorText.setText("Please enter valid initials!");

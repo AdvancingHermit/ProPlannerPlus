@@ -8,7 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.Activity;
-import model.DataModel;
+import model.*;
 import model.OperationNotAllowedException;
 
 import java.io.IOException;
@@ -24,10 +24,10 @@ public class showCompletionStatusController extends StandardController {
     private ObservableList<Activity> activities = FXCollections.observableArrayList();
 
     @Override
-    public void initController(DataModel model, ProPlannerPlus proPlannerPlus) {
-        super.initController(model, proPlannerPlus);
+    public void initController(EmployeeData employeeData, ProjectData projectData, ProPlannerPlus proPlannerPlus) {
+        super.initController(employeeData, projectData,proPlannerPlus);
 
-        for (int id : model.getCurrProject().getActivityIDs()) {
+        for (int id : projectData.getCurrProject().getActivityIDs()) {
             activities.add(proPlannerPlus.getActivity(id));
         }
 
@@ -35,7 +35,7 @@ public class showCompletionStatusController extends StandardController {
         statusOfActivities.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         try {
-            completionAmount.setText( String.valueOf((proPlannerPlus.getCompletionStatus(model.getCurrProject())) * 100 )+ "%");
+            completionAmount.setText( String.valueOf((proPlannerPlus.getCompletionStatus(projectData.getCurrProject())) * 100 )+ "%");
         } catch (Exception e){
             completionAmount.setText("No activities found");
         }

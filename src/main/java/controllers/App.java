@@ -40,7 +40,7 @@ public class App extends Application {
         fxmlLoader = new FXMLLoader(App.class.getResource("views/" + fxml + ".fxml"));
         Parent temp = fxmlLoader.load();
         StandardController controller = fxmlLoader.getController();
-        controller.initController(model, proPlannerPlus);
+        controller.initController(model,model, proPlannerPlus);
         return temp;
     }
     public static void main(String[] args) {

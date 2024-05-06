@@ -7,10 +7,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import model.Activity;
-import model.DataModel;
-import model.Employee;
-import model.Project;
+import model.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -33,8 +30,8 @@ public class CreateActivityController extends StandardController {
     ComboBox<Project> projectSelector;
 
     // Made by Oscar
-    public void initController(DataModel model, ProPlannerPlus proPlannerPlus) {
-        super.initController(model, proPlannerPlus);
+    public void initController(EmployeeData employeeData, ProjectData projectData, ProPlannerPlus proPlannerPlus) {
+        super.initController(employeeData, projectData,proPlannerPlus);
         ObservableList<Project> projects = FXCollections.observableList(proPlannerPlus.getProjects());
         projectSelector.setItems(projects);
         createActivityHours.setTextFormatter(doubleTextFormatter);

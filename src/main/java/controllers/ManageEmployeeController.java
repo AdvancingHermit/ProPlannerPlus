@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
-import model.DataModel;
+import model.*;
 import model.Employee;
 import model.OperationNotAllowedException;
 
@@ -26,8 +26,8 @@ public class ManageEmployeeController extends StandardController {
     private ToggleButton addButton;
 
 
-    public void initController(DataModel model, ProPlannerPlus proPlannerPlus) {
-        super.initController(model, proPlannerPlus);
+    public void initController(EmployeeData employeeData, ProjectData projectData, ProPlannerPlus proPlannerPlus) {
+        super.initController(employeeData, projectData,proPlannerPlus);
         addButton.setSelected(true);
     }
 
@@ -88,7 +88,7 @@ public class ManageEmployeeController extends StandardController {
 
         if (removeButton.isSelected()) {
                 List<String> employeeInitials = ProPlannerPlus.getEmployees().stream().map(Employee::getInitials).toList();
-                if (employeeText.getText().equals(model.getCurrentEmployee().getInitials())){
+                if (employeeText.getText().equals(employeeData.getCurrentEmployee().getInitials())){
                     ProPlannerPlus.removeEmployee(employeeText.getText());
                     logout();
                 }

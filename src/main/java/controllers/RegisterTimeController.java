@@ -42,8 +42,8 @@ public class RegisterTimeController extends StandardController {
 
 
 
-    public void initController(DataModel model, ProPlannerPlus proPlannerPlus) {
-        super.initController(model, proPlannerPlus);
+    public void initController(EmployeeData employeeData, ProjectData projectData, ProPlannerPlus proPlannerPlus) {
+        super.initController(employeeData, projectData,proPlannerPlus);
         ObservableList<Activity> activities = FXCollections.observableList(proPlannerPlus.getActivities());
         activitySelector.setItems(activities);
         ObservableList<Project> projects = FXCollections.observableList(proPlannerPlus.getProjects());
@@ -64,7 +64,7 @@ public class RegisterTimeController extends StandardController {
 
 
         });
-        currentEmployee = model.getCurrentEmployee();
+        currentEmployee = employeeData.getCurrentEmployee();
         hourInput.setTextFormatter(doubleTextFormatter);
         hourInput.focusedProperty().addListener((obs, oldVal, newVal) -> {
             if (!newVal && hourInput.getText().isEmpty()) {

@@ -7,10 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import model.Activity;
-import model.DataModel;
-import model.Employee;
-import model.OperationNotAllowedException;
+import model.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -40,10 +37,10 @@ public class ViewActivitiesController extends StandardController {
 
 
     //Made by Oscar and Oliver
-    public void initController(DataModel model, ProPlannerPlus proPlannerPlus) {
-        super.initController(model, proPlannerPlus);
+    public void initController(EmployeeData employeeData, ProjectData projectData, ProPlannerPlus proPlannerPlus) {
+        super.initController(employeeData, projectData,proPlannerPlus);
         setActivityDetails(false);
-        List<Integer> activitieIDs = model.getCurrProject().getActivityIDs();
+        List<Integer> activitieIDs = projectData.getCurrProject().getActivityIDs();
         List<Activity> activityList = activitieIDs.stream().map(a -> proPlannerPlus.getActivity(a)).toList();
         ObservableList<Activity> activities = FXCollections.observableList(activityList);
         errorText.setVisible(false);
@@ -148,7 +145,7 @@ public class ViewActivitiesController extends StandardController {
         Activity activity = activitySelector.getValue();
         LocalDate start = activityStartDate.getValue();
         LocalDate end = activityEndDate.getValue();
-        Integer projectID = model.getCurrProject().getId();
+        Integer projectID = projectData.getCurrProject().getId();
         String activityName = activityNameField.getText();
         String activityHours = activityHourField.getText();
         boolean completed = completedToggle.isSelected();
@@ -163,7 +160,7 @@ public class ViewActivitiesController extends StandardController {
     }
     //Made by Oscar
     private void updateEmployeeList() throws OperationNotAllowedException {
-        String projectName = model.getCurrProject().getName();
+        String projectName = projectData.getCurrProject().getName();
         Activity activity = activitySelector.getValue();
         LocalDate startDate = activity.getStartDate();
         LocalDate endDate = activity.getEndDate();
