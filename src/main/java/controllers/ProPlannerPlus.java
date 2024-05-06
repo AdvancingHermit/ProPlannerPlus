@@ -26,12 +26,11 @@ public class ProPlannerPlus {
 
     public ProPlannerPlus() {
         employees = new ArrayList<Employee>();
-        employees.add(new Employee("abe"));
+        employees.add(new Employee("Tim"));
+        employees.add(new Employee("HBB"));
+        employees.add(new Employee("Bob"));
         projects = new ArrayList<Project>();
         activities = new ArrayList<Activity>();
-        for (int i = 0; i < 100; i++) {
-            employees.add(new Employee("Abe " + i));
-        }
     }
 
     public static void setActivities(ArrayList<Activity> activities) {
