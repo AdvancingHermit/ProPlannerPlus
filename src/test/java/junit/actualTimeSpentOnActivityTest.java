@@ -81,7 +81,7 @@ public class actualTimeSpentOnActivityTest {
 
         ProPlannerPlus.createActivity(activity, project.getId());
 
-        proPlannerPlus.registerTime(activity.getActivityID(), "abe", 1);
+        proPlannerPlus.registerTime(activity.getActivityID(), "bob", 1);
         assertEquals(1.0, proPlannerPlus.actualTimeSpentOnActivity(activity.getActivityID()), 0.0);
     }
 

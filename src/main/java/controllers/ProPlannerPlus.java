@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class ProPlannerPlus {
     static ArrayList<Employee> employees;
@@ -287,9 +289,19 @@ public class ProPlannerPlus {
             return 1;
         }
 
-        //post conditions
-        assert sumUsed / sumTotal >= 0 && sumUsed / sumTotal <= 1;
+        //Post conditions
+        assert sumUsed / sumTotal >= 0 && sumUsed / sumTotal <= 1 : "Result of completion status is not between 0 and 1";
 
+        assert Stream.of(project.getActivityIDs().stream()
+                        .filter(id -> getActivity(id).getComplete())
+                        .flatMapToDouble(id -> getEmployees().stream().mapToDouble(employee -> employee.getTimeUsed(id)))
+                        .sum(),project.getActivityIDs().stream()
+                        .filter(id -> !getActivity(id).getComplete())
+                        .mapToDouble(id -> getActivity(id).getTotalTime())
+                        .sum())
+                .mapToDouble(Double::valueOf)
+                .reduce((x, y) -> x / (x + y))
+                .orElse(0.0) == sumUsed / sumTotal : "Calculation of completion status is incorrect.";
 
         return sumUsed / sumTotal;
     }

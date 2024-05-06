@@ -28,15 +28,15 @@ public class getCompletionStatusDBC {
     void setUp() throws OperationNotAllowedException {
         proPlannerPlus = new ProPlannerPlus();
         project = new Project("project",1);
-        emptyProject= new Project("empty",1);
+        emptyProject= new Project("empty",2);
         employee = new Employee("test");
         proPlannerPlus.createTestProject(project);
+        proPlannerPlus.createTestProject(emptyProject);
         proPlannerPlus.clearEmployees();
         proPlannerPlus.addEmployee(employee);
 
         proPlannerPlus.createActivity("testAct", 10, LocalDate.of(2024,05,03),
                 LocalDate.of(2024,05,04), project.getId(), 10);
-        proPlannerPlus.addActivityToProject(project,proPlannerPlus.getActivities().get(0).getActivityID());
 
         proPlannerPlus.addEmployeeDirectlyToActivity(proPlannerPlus.getActivities().get(0).getActivityID(), employee);
         employee.registerTime(10, 1);
