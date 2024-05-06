@@ -26,9 +26,9 @@ public class ProPlannerPlus {
 
     public ProPlannerPlus() {
         employees = new ArrayList<Employee>();
-        employees.add(new Employee("Tim"));
-        employees.add(new Employee("HBB"));
-        employees.add(new Employee("Bob"));
+        employees.add(new Employee("tim"));
+        employees.add(new Employee("hbb"));
+        employees.add(new Employee("bob"));
         projects = new ArrayList<Project>();
         activities = new ArrayList<Activity>();
     }
