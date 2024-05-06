@@ -255,16 +255,18 @@ public class ProPlannerPlus {
     }
 
     public static List<Employee> getWorkReadyEmployees(LocalDate startDate, LocalDate endDate){
-        List<Employee> employeeList = new ArrayList<>();
+        List<Employee> employeeList = new ArrayList<>(employees);
+        List<Employee> removedEmployeeList = new ArrayList<>();
 
         for (Employee employee : employees) {
             for (PersonalActivity activity : employee.getPersonalActivities()) {
-                if (!(startDate.compareTo(activity.getEnd()) <= 0 && endDate.compareTo(activity.getStart()) >= 0)) {
-                    employeeList.add(employee);
+                if ((startDate.compareTo(activity.getEnd()) <= 0 && endDate.compareTo(activity.getStart()) >= 0)) {
+                    removedEmployeeList.add(employee);
                 }
             }
         } 
 
+        employeeList.removeAll(removedEmployeeList);
         return employeeList;
     }
 
