@@ -12,7 +12,7 @@ import java.time.LocalDate;
 
 import static org.junit.Assert.assertTrue;
 
-//This test is mady by Oliver
+//This test is made by Oliver
 public class addActivitySteps {
 
     ProPlannerPlus proPlannerPlus;

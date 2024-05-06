@@ -12,7 +12,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
-//This test is mady by Oliver
+//This test is made by Oliver
 public class getFreeEmployeeTest {
 
     ProPlannerPlus proPlannerPlus;
